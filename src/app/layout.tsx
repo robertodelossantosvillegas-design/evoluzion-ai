@@ -54,7 +54,7 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${jakarta.variable} antialiased`}
     >
-      <body className="bg-primary-900 text-white">{children}</body>
+      <body className="bg-[#0f172a] text-white">{children}</body>
     </html>
   );
 }
