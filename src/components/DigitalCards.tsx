@@ -129,7 +129,7 @@ export default function DigitalCards() {
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-primary-900">{t.name}</h3>
                   <div>
-                    <span className="text-2xl font-extrabold text-primary-900">
+                    <span className="font-mono text-2xl font-bold text-primary-900">
                       {t.price}
                     </span>
                     <span className="text-xs text-slate-500"> MXN</span>

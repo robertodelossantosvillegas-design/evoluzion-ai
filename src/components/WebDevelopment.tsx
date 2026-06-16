@@ -107,7 +107,7 @@ export default function WebDevelopment() {
               <p className="mt-1 text-sm text-slate-400">{p.desc}</p>
               <div className="mt-4">
                 <span className="text-xs text-slate-400">desde </span>
-                <span className="text-3xl font-extrabold text-white">
+                <span className="font-mono text-3xl font-bold text-white">
                   {p.price}
                 </span>
                 <span className="text-sm text-slate-400"> MXN</span>

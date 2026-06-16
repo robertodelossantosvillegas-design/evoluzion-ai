@@ -37,10 +37,69 @@ export default function Navbar() {
       >
         <a
           href="#inicio"
-          className="group flex cursor-pointer items-center gap-1 text-lg font-extrabold tracking-tight text-white"
+          aria-label="Evoluzion"
+          className="group flex cursor-pointer items-center"
         >
-          EVOLUZION
-          <span className="h-2 w-2 rounded-full bg-gradient-to-br from-secondary to-accent transition-transform duration-300 group-hover:scale-125" />
+          <svg
+            width="160"
+            height="36"
+            viewBox="0 0 360 80"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform duration-300 group-hover:scale-[1.03]"
+          >
+            <g>
+              <path
+                d="M 8 18 Q 8 8 18 8 L 52 8"
+                stroke="#5B5BFF"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M 52 8 L 18 52"
+                stroke="url(#navGrad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M 18 52 L 52 52 Q 62 52 62 42"
+                stroke="#00E5C0"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <circle cx="62" cy="36" r="3.5" fill="#00E5C0" />
+              <circle cx="62" cy="36" r="6" fill="#00E5C0" opacity="0.15" />
+              <defs>
+                <linearGradient
+                  id="navGrad"
+                  x1="52"
+                  y1="8"
+                  x2="18"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stopColor="#5B5BFF" />
+                  <stop offset="100%" stopColor="#00E5C0" />
+                </linearGradient>
+              </defs>
+            </g>
+            <text
+              x="84"
+              y="50"
+              fontFamily="Space Grotesk, sans-serif"
+              fontWeight="700"
+              fontSize="38"
+              letterSpacing="-1"
+              fill="white"
+            >
+              Evolu
+              <tspan fill="#5B5BFF">z</tspan>
+              ion
+            </text>
+          </svg>
         </a>
 
         <ul className="hidden items-center gap-1 xl:flex">

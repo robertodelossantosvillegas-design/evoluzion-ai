@@ -97,7 +97,7 @@ export default function AutomationPackages() {
               <p className="mt-1 text-sm text-slate-400">{p.desc}</p>
               <div className="mt-5">
                 <span className="text-xs text-slate-400">{p.prefix}</span>
-                <span className="text-4xl font-extrabold text-white">
+                <span className="font-mono text-4xl font-bold text-white">
                   {p.price}
                 </span>
                 <span className="text-sm text-slate-400"> MXN /mes</span>

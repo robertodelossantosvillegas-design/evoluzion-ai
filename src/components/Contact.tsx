@@ -75,7 +75,7 @@ export default function Contact() {
           whileInView="show"
           viewport={viewportOnce}
         >
-          <span className="mb-3 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent-400">
+          <span className="mb-3 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 font-mono text-xs font-semibold uppercase tracking-widest text-accent-400">
             Contacto
           </span>
           <h2 className="text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
