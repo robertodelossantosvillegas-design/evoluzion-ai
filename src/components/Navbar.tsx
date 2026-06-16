@@ -1,16 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X, CalendarCheck } from "lucide-react";
 import { useScrolled } from "@/lib/hooks";
 
 const links = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Páginas Web", href: "#paginas-web" },
-  { label: "Automatización IA", href: "#automatizacion" },
-  { label: "Tarjetas Digitales", href: "#tarjetas" },
+  { label: "Casos de Uso", href: "#casos-de-uso" },
   { label: "Proceso", href: "#proceso" },
   { label: "Precios", href: "#precios" },
   { label: "FAQ", href: "#faq" },
@@ -20,6 +18,7 @@ const links = [
 export default function Navbar() {
   const scrolled = useScrolled(20);
   const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   return (
     <motion.header
@@ -116,13 +115,28 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <a
+          <motion.a
             href="#contacto"
-            className="hidden cursor-pointer items-center gap-2 rounded-xl bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 hover:shadow-secondary/50 sm:flex"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            animate={
+              reduce
+                ? undefined
+                : {
+                    boxShadow: [
+                      "0 0 0 0 rgba(91,91,255,0.5)",
+                      "0 0 0 10px rgba(91,91,255,0)",
+                    ],
+                  }
+            }
+            transition={{
+              boxShadow: { duration: 1.8, repeat: Infinity, ease: "easeOut" },
+            }}
+            className="hidden cursor-pointer items-center gap-2 rounded-xl bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-colors duration-200 hover:bg-secondary-700 sm:flex"
           >
             <CalendarCheck className="h-4 w-4" />
             Agenda una llamada
-          </a>
+          </motion.a>
           <button
             type="button"
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
