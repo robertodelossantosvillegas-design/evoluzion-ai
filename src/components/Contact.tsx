@@ -9,6 +9,7 @@ import {
   Loader2,
   CheckCircle2,
   Send,
+  Zap,
 } from "lucide-react";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 
@@ -85,6 +86,11 @@ export default function Contact() {
             Cuéntanos qué quieres automatizar y te mostramos exactamente cómo la
             IA puede ayudarte. Sin compromiso.
           </p>
+
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent-400">
+            <Zap className="h-4 w-4" />
+            Tiempo de respuesta: menos de 2 horas
+          </div>
 
           <div className="mt-8 space-y-3">
             <a

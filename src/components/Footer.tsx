@@ -7,15 +7,15 @@ const cols = [
       { label: "Automatización con IA", href: "#servicios" },
       { label: "Chatbots IA", href: "#servicios" },
       { label: "Agentes de Voz", href: "#servicios" },
-      { label: "Páginas Web", href: "#paginas-web" },
-      { label: "Tarjetas Digitales", href: "#tarjetas" },
+      { label: "Páginas Web", href: "#precios" },
+      { label: "Tarjetas Digitales", href: "#precios" },
     ],
   },
   {
     title: "Empresa",
     links: [
       { label: "Proceso", href: "#proceso" },
-      { label: "Casos de uso", href: "#servicios" },
+      { label: "Casos de uso", href: "#casos-de-uso" },
       { label: "Precios", href: "#precios" },
       { label: "FAQ", href: "#faq" },
       { label: "Contacto", href: "#contacto" },
@@ -117,7 +117,10 @@ export default function Footer() {
                 </text>
               </svg>
             </a>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
+            <p className="mt-4 max-w-xs font-mono text-sm font-medium text-gradient-blue">
+              Tu negocio en automático. Tu crecimiento en evolución.
+            </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
               Automatización con inteligencia artificial para que tu negocio
               venda más y trabajes menos.
             </p>
