@@ -235,15 +235,25 @@ Esto es tu activo más valioso: una plantilla de GHL ya armada por industria que
 
 Este es un servicio aparte de la automatización (aunque puedes venderlo combinado). Aquí el desglose completo:
 
-### Estructura de precios
+### Estructura de precios (ajustado a mercado Monterrey)
+
+Monterrey tiene un costo de vida y un mercado de servicios profesionales más alto que el promedio nacional, y además gran parte de tus clientes va a requerir que vayas tú al negocio (no todo se resuelve por llamada/Zoom como en otras ciudades). Eso justifica precios más altos que el promedio genérico de México:
 
 | Tipo de página | Setup (único pago) | Mantenimiento mensual | Días de trabajo (límite) |
 |---|---|---|---|
-| Landing de 1 página | $3,500 MXN | $400 MXN/mes | 3 días hábiles |
-| Sitio de 3-5 páginas | $6,500 MXN | $600 MXN/mes | 5 días hábiles |
-| Sitio con tienda/reservas integradas | $10,000-14,000 MXN | $900 MXN/mes | 8-10 días hábiles |
+| Landing de 1 página | $4,500-5,000 MXN | $800 MXN/mes | 3 días hábiles |
+| Sitio de 3-5 páginas | $8,000-9,000 MXN | $1,300 MXN/mes | 5 días hábiles |
+| Sitio con tienda/reservas integradas | $13,000-16,000 MXN | $2,000-2,300 MXN/mes | 8-10 días hábiles |
 
 **Por qué poner un límite de días:** sin límite, el cliente pide cambios infinitos ("muévele el botón", "cambia el color", "agrega una sección más") y tu margen desaparece. Tu contrato debe decir: *"El setup incluye hasta 2 rondas de revisión. Cambios adicionales después de la entrega se cotizan aparte a $300-500 MXN por ronda."*
+
+### Recargo por visita presencial
+
+Si vas a ir personalmente al negocio (para tomar fotos, capacitar al cliente, instalar NFC, o cualquier reunión que no se pueda hacer por WhatsApp/llamada), agrega esto a tu cotización:
+
+- **1 visita incluida** en el setup de cualquier plan (la primera reunión de levantamiento de información/entrega) — ya está contemplada en el precio de arriba.
+- **Visitas adicionales:** $300-500 MXN por visita dentro del área metropolitana de Monterrey (San Pedro, Santa Catarina, Guadalupe, Apodaca, etc.), para cubrir tu tiempo y gasolina. Si es fuera del área metro, cotiza aparte.
+- Dilo así al cliente desde el inicio: *"El setup incluye una visita para dejar todo funcionando. Visitas adicionales tienen un costo de traslado."* Esto evita que el cliente asuma que vas a estar yendo gratis cada semana.
 
 ### ¿Qué cubre el mantenimiento mensual?
 - Hosting (el servidor donde vive la página)
@@ -336,6 +346,7 @@ NFC (las tarjetitas/stickers que el cliente solo "toca" con el celular para acti
 | Páginas web | No estaba en el modelo de negocio | Sección completa: precios, días límite, SEO básico vs avanzado |
 | Stamps de lealtad | No existía | Nuevo add-on de corto plazo, plan independiente |
 | NFC | No existía | Nuevo complemento de bajo costo / alto margen |
+| Precios de páginas web | Genéricos para México | Ajustados al mercado de Monterrey (más altos) + recargo por visita presencial |
 
 ---
 
