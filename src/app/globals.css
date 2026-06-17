@@ -234,6 +234,15 @@ input[type="range"]::-moz-range-thumb {
   scrollbar-width: none;
 }
 
+@media print {
+  body {
+    background: #ffffff !important;
+  }
+  @page {
+    margin: 0.5in;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
