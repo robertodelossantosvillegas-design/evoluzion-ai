@@ -7,15 +7,15 @@ const cols = [
       { label: "Automatización con IA", href: "#servicios" },
       { label: "Chatbots IA", href: "#servicios" },
       { label: "Agentes de Voz", href: "#servicios" },
-      { label: "Páginas Web", href: "#paginas-web" },
-      { label: "Tarjetas Digitales", href: "#tarjetas" },
+      { label: "Páginas Web", href: "#precios" },
+      { label: "Tarjetas Digitales", href: "#precios" },
     ],
   },
   {
     title: "Empresa",
     links: [
       { label: "Proceso", href: "#proceso" },
-      { label: "Casos de uso", href: "#servicios" },
+      { label: "Casos de uso", href: "#casos-de-uso" },
       { label: "Precios", href: "#precios" },
       { label: "FAQ", href: "#faq" },
       { label: "Contacto", href: "#contacto" },
@@ -54,12 +54,73 @@ export default function Footer() {
           <div>
             <a
               href="#inicio"
-              className="flex cursor-pointer items-center gap-1 text-xl font-extrabold text-white"
+              aria-label="Evoluzion"
+              className="flex cursor-pointer items-center"
             >
-              EVOLUZION
-              <span className="h-2 w-2 rounded-full bg-gradient-to-br from-secondary to-accent" />
+              <svg
+                width="140"
+                height="32"
+                viewBox="0 0 360 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g>
+                  <path
+                    d="M 8 18 Q 8 8 18 8 L 52 8"
+                    stroke="#5B5BFF"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 52 8 L 18 52"
+                    stroke="url(#footGrad)"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M 18 52 L 52 52 Q 62 52 62 42"
+                    stroke="#00E5C0"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <circle cx="62" cy="36" r="3.5" fill="#00E5C0" />
+                  <circle cx="62" cy="36" r="6" fill="#00E5C0" opacity="0.15" />
+                  <defs>
+                    <linearGradient
+                      id="footGrad"
+                      x1="52"
+                      y1="8"
+                      x2="18"
+                      y2="52"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#5B5BFF" />
+                      <stop offset="100%" stopColor="#00E5C0" />
+                    </linearGradient>
+                  </defs>
+                </g>
+                <text
+                  x="84"
+                  y="50"
+                  fontFamily="Space Grotesk, sans-serif"
+                  fontWeight="700"
+                  fontSize="38"
+                  letterSpacing="-1"
+                  fill="white"
+                >
+                  Evolu
+                  <tspan fill="#5B5BFF">z</tspan>
+                  ion
+                </text>
+              </svg>
             </a>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
+            <p className="mt-4 max-w-xs font-mono text-sm font-medium text-gradient-blue">
+              Tu negocio en automático. Tu crecimiento en evolución.
+            </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
               Automatización con inteligencia artificial para que tu negocio
               venda más y trabajes menos.
             </p>

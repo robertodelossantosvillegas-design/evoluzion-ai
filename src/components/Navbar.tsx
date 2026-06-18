@@ -1,16 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Menu, X, CalendarCheck } from "lucide-react";
 import { useScrolled } from "@/lib/hooks";
 
 const links = [
   { label: "Inicio", href: "#inicio" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Páginas Web", href: "#paginas-web" },
-  { label: "Automatización IA", href: "#automatizacion" },
-  { label: "Tarjetas Digitales", href: "#tarjetas" },
+  { label: "Casos de Uso", href: "#casos-de-uso" },
   { label: "Proceso", href: "#proceso" },
   { label: "Precios", href: "#precios" },
   { label: "FAQ", href: "#faq" },
@@ -20,6 +18,7 @@ const links = [
 export default function Navbar() {
   const scrolled = useScrolled(20);
   const [open, setOpen] = useState(false);
+  const reduce = useReducedMotion();
 
   return (
     <motion.header
@@ -37,10 +36,69 @@ export default function Navbar() {
       >
         <a
           href="#inicio"
-          className="group flex cursor-pointer items-center gap-1 text-lg font-extrabold tracking-tight text-white"
+          aria-label="Evoluzion"
+          className="group flex cursor-pointer items-center"
         >
-          EVOLUZION
-          <span className="h-2 w-2 rounded-full bg-gradient-to-br from-secondary to-accent transition-transform duration-300 group-hover:scale-125" />
+          <svg
+            width="160"
+            height="36"
+            viewBox="0 0 360 80"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform duration-300 group-hover:scale-[1.03]"
+          >
+            <g>
+              <path
+                d="M 8 18 Q 8 8 18 8 L 52 8"
+                stroke="#5B5BFF"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M 52 8 L 18 52"
+                stroke="url(#navGrad)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <path
+                d="M 18 52 L 52 52 Q 62 52 62 42"
+                stroke="#00E5C0"
+                strokeWidth="4"
+                strokeLinecap="round"
+                fill="none"
+              />
+              <circle cx="62" cy="36" r="3.5" fill="#00E5C0" />
+              <circle cx="62" cy="36" r="6" fill="#00E5C0" opacity="0.15" />
+              <defs>
+                <linearGradient
+                  id="navGrad"
+                  x1="52"
+                  y1="8"
+                  x2="18"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stopColor="#5B5BFF" />
+                  <stop offset="100%" stopColor="#00E5C0" />
+                </linearGradient>
+              </defs>
+            </g>
+            <text
+              x="84"
+              y="50"
+              fontFamily="Space Grotesk, sans-serif"
+              fontWeight="700"
+              fontSize="38"
+              letterSpacing="-1"
+              fill="white"
+            >
+              Evolu
+              <tspan fill="#5B5BFF">z</tspan>
+              ion
+            </text>
+          </svg>
         </a>
 
         <ul className="hidden items-center gap-1 xl:flex">
@@ -57,13 +115,28 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <a
+          <motion.a
             href="#contacto"
-            className="hidden cursor-pointer items-center gap-2 rounded-xl bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 hover:shadow-secondary/50 sm:flex"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.97 }}
+            animate={
+              reduce
+                ? undefined
+                : {
+                    boxShadow: [
+                      "0 0 0 0 rgba(91,91,255,0.5)",
+                      "0 0 0 10px rgba(91,91,255,0)",
+                    ],
+                  }
+            }
+            transition={{
+              boxShadow: { duration: 1.8, repeat: Infinity, ease: "easeOut" },
+            }}
+            className="hidden cursor-pointer items-center gap-2 rounded-xl bg-secondary px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-colors duration-200 hover:bg-secondary-700 sm:flex"
           >
             <CalendarCheck className="h-4 w-4" />
             Agenda una llamada
-          </a>
+          </motion.a>
           <button
             type="button"
             aria-label={open ? "Cerrar menú" : "Abrir menú"}

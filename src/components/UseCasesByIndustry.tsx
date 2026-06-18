@@ -60,7 +60,7 @@ const industries = [
 
 export default function UseCasesByIndustry() {
   return (
-    <section className="relative bg-white py-24">
+    <section id="casos-de-uso" className="relative bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           light
@@ -105,7 +105,7 @@ export default function UseCasesByIndustry() {
               ))}
             </ul>
             <a
-              href="#contacto"
+              href="#proceso"
               className="mt-5 inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-secondary transition-colors duration-200 hover:text-secondary-700"
             >
               Ver cómo funciona para tu negocio
