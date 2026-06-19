@@ -1,19 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronDown,
-  Clock,
-  Zap,
-  Headphones,
-  Mail,
-  Phone,
-  MessageCircle,
-} from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ChevronDown, Clock, Zap, Headphones } from "lucide-react";
 import { useMousePosition } from "@/lib/hooks";
 import { staggerContainer, fadeUp, buttonMotion } from "@/lib/motion";
+import AIModesWidget from "./AIModesWidget";
 
 const inlineStats = [
   { icon: Clock, label: "IA 24/7" },
@@ -21,84 +12,9 @@ const inlineStats = [
   { icon: Headphones, label: "Soporte continuo" },
 ];
 
-type ChatMsg = {
-  from: "cliente" | "ia";
-  text: string;
-};
-
-type Widget = {
-  type: "chat" | "email" | "voice";
-  label: string;
-  icon: typeof MessageCircle;
-  chat?: ChatMsg[];
-};
-
-const widgets: Widget[] = [
-  {
-    type: "chat",
-    label: "WhatsApp · En línea",
-    icon: MessageCircle,
-    chat: [
-      { from: "cliente", text: "Hola, ¿tienen cita disponible mañana?" },
-      {
-        from: "ia",
-        text: "¡Hola! Sí, tenemos disponibilidad mañana a las 10am, 2pm y 5pm. ¿Cuál prefieres?",
-      },
-      { from: "cliente", text: "Las 2pm perfecto" },
-      {
-        from: "ia",
-        text: "✓ Cita agendada para mañana a las 2:00pm. Te enviaré un recordatorio. ¿Algo más?",
-      },
-    ],
-  },
-  {
-    type: "email",
-    label: "Email · Automatizado",
-    icon: Mail,
-    chat: [
-      { from: "cliente", text: "Seguimiento de cotización #4521" },
-      {
-        from: "ia",
-        text: "Hola Carlos, aquí tu cotización actualizada. ¿Agendamos una llamada esta semana?",
-      },
-      {
-        from: "ia",
-        text: "✓ Email enviado · Abierto hace 2 min",
-      },
-    ],
-  },
-  {
-    type: "voice",
-    label: "Voice AI · Llamando",
-    icon: Phone,
-    chat: [
-      { from: "cliente", text: "🎙️ Llamada entrante..." },
-      {
-        from: "ia",
-        text: "Gracias por llamar, soy el asistente virtual. ¿En qué puedo ayudarte hoy?",
-      },
-      {
-        from: "ia",
-        text: "✓ Cita confirmada y registrada en tu CRM",
-      },
-    ],
-  },
-];
-
 export default function Hero() {
   const reduce = useReducedMotion();
   const { x, y } = useMousePosition();
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    if (reduce) return;
-    const id = setInterval(() => {
-      setActive((i) => (i + 1) % widgets.length);
-    }, 4500);
-    return () => clearInterval(id);
-  }, [reduce]);
-
-  const widget = widgets[active];
 
   const tx = reduce ? 0 : (x - (typeof window !== "undefined" ? window.innerWidth / 2 : 0)) * 0.02;
   const ty = reduce ? 0 : (y - (typeof window !== "undefined" ? window.innerHeight / 2 : 0)) * 0.02;
@@ -218,77 +134,7 @@ export default function Hero() {
             <div className="absolute left-1/2 top-3 z-20 h-5 w-28 -translate-x-1/2 rounded-full bg-[#2A2A40]" />
 
             <div className="overflow-hidden rounded-[2.3rem] bg-primary-950">
-              {/* widget header */}
-              <div className="flex items-center gap-3 border-b border-white/5 bg-primary-900/80 px-4 pb-3 pt-7">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-secondary to-accent text-white">
-                  <widget.icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-sm font-bold text-white">Asistente IA</p>
-                  <AnimatePresence mode="wait">
-                    <motion.p
-                      key={widget.label}
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wide text-accent-400"
-                    >
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-                      </span>
-                      {widget.label}
-                    </motion.p>
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              {/* messages */}
-              <div className="flex min-h-[20rem] flex-col gap-3 px-4 py-5">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={widget.label}
-                    initial={reduce ? false : { opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -16 }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                    className="flex flex-col gap-3"
-                  >
-                    {widget.chat?.map((m, i) => (
-                      <motion.div
-                        key={i}
-                        initial={reduce ? false : { opacity: 0, y: 14, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        transition={{
-                          delay: reduce ? 0 : 0.15 + i * 0.5,
-                          duration: 0.4,
-                          ease: "easeOut",
-                        }}
-                        className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed ${
-                          m.from === "cliente"
-                            ? "ml-auto rounded-br-md bg-secondary text-white"
-                            : "mr-auto rounded-bl-md border-l-2 border-accent bg-primary-800 text-slate-100"
-                        }`}
-                      >
-                        {m.text}
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* widget dots */}
-              <div className="flex items-center justify-center gap-1.5 pb-2">
-                {widgets.map((w, i) => (
-                  <span
-                    key={w.label}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === active ? "w-5 bg-accent" : "w-1.5 bg-white/15"
-                    }`}
-                  />
-                ))}
-              </div>
+              <AIModesWidget />
 
               {/* input bar */}
               <div className="flex items-center gap-2 border-t border-white/5 px-3 py-3">
