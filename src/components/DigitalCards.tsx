@@ -45,12 +45,20 @@ export default function DigitalCards() {
         className="flex justify-center"
       >
         <div className="relative w-full max-w-sm">
-          <div className="absolute -inset-6 rounded-3xl bg-gradient-to-br from-secondary/20 to-accent/20 blur-2xl" />
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl bg-gradient-to-br from-primary-900 to-primary-800 p-7 shadow-2xl">
-            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/20 blur-2xl" />
-            <div className="flex items-start justify-between">
+          <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-secondary/25 to-accent/25 blur-3xl" />
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ rotateX: 4, rotateY: -6, scale: 1.02 }}
+            style={{ transformStyle: "preserve-3d" }}
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl bg-gradient-to-br from-primary-900 via-primary-900 to-secondary-900 p-7 shadow-2xl shadow-secondary/20 ring-1 ring-white/10"
+          >
+            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/25 blur-2xl" />
+            <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-secondary/25 blur-2xl" />
+            <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.08)_45%,transparent_60%)]" />
+            <div className="relative flex items-start justify-between">
               <div>
-                <p className="text-lg font-extrabold text-white">
+                <p className="text-lg font-extrabold tracking-wide text-white">
                   EVOLUZION
                   <span className="ml-1 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" />
                 </p>
@@ -58,16 +66,16 @@ export default function DigitalCards() {
               </div>
               <Nfc className="h-7 w-7 text-accent-400" />
             </div>
-            <div className="mt-8 flex items-end justify-between">
+            <div className="relative mt-8 flex items-end justify-between">
               <div>
                 <p className="text-sm font-semibold text-white">Tu Nombre</p>
                 <p className="text-xs text-slate-400">Director General</p>
               </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-white">
+              <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-white shadow-lg">
                 <QrCode className="h-10 w-10 text-primary-900" />
               </div>
             </div>
-          </div>
+          </motion.div>
           <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-300">
             <span className="flex items-center gap-2">
               <Nfc className="h-4 w-4 text-secondary-400" /> Toca con NFC
@@ -92,12 +100,17 @@ export default function DigitalCards() {
             key={t.name}
             variants={fadeUp}
             whileHover={{ y: -4 }}
-            className={`rounded-2xl border p-5 transition-colors duration-200 ${
+            className={`relative rounded-2xl border p-5 transition-colors duration-200 ${
               t.popular
                 ? "border-accent bg-accent/10 shadow-lg shadow-accent/10"
                 : "glass hover:border-secondary/40"
             }`}
           >
+            {t.popular && (
+              <span className="absolute -top-3 right-5 rounded-full bg-gradient-to-r from-secondary to-accent px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                Más popular
+              </span>
+            )}
             <div className="flex items-center justify-between">
               <h3 className="font-bold text-white">{t.name}</h3>
               <div>

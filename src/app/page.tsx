@@ -7,7 +7,6 @@ import BeforeAfter from "@/components/BeforeAfter";
 import PricingHub from "@/components/PricingHub";
 import HowWeWork from "@/components/HowWeWork";
 import WhyEvoluzion from "@/components/WhyEvoluzion";
-import SocialProof from "@/components/SocialProof";
 import ROICalculator from "@/components/ROICalculator";
 import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
@@ -34,7 +33,6 @@ export default function Home() {
         <PricingHub />
         <HowWeWork />
         <WhyEvoluzion />
-        <SocialProof />
         <ROICalculator />
         <FAQ />
         <Contact />

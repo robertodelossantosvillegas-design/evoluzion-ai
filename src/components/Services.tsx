@@ -19,42 +19,42 @@ const services = [
   {
     icon: Bot,
     title: "Automatización con IA",
-    points: ["Procesos y flujos", "Integraciones", "Optimización continua"],
+    desc: "Procesos y flujos optimizados",
   },
   {
     icon: MessagesSquare,
     title: "Chatbots IA",
-    points: ["WhatsApp y sitio web", "Instagram y Facebook", "Disponibles 24/7"],
+    desc: "WhatsApp, web, Instagram 24/7",
   },
   {
     icon: PhoneCall,
     title: "Agentes de Voz IA",
-    points: ["Contestan llamadas", "Agendan citas", "Califican prospectos"],
+    desc: "Contestan y agendan citas",
   },
   {
     icon: Workflow,
     title: "CRM Inteligente",
-    points: ["Seguimiento y embudos", "Recordatorios", "Pipeline de ventas"],
+    desc: "Pipeline y seguimiento automático",
   },
   {
     icon: MessageCircle,
     title: "Automatización WhatsApp",
-    points: ["Seguimiento y confirmaciones", "Recuperación de clientes", "Ventas asistidas"],
+    desc: "Confirmaciones y recuperación",
   },
   {
     icon: Mail,
     title: "Automatización Email",
-    points: ["Secuencias automáticas", "Nutrición de leads", "Email marketing"],
+    desc: "Secuencias y nutrición de leads",
   },
   {
     icon: Smartphone,
     title: "Automatización SMS",
-    points: ["Recordatorios", "Confirmaciones", "Seguimiento directo"],
+    desc: "Recordatorios y confirmaciones",
   },
   {
     icon: Boxes,
-    title: "Automatizaciones a Medida",
-    points: ["Integraciones entre plataformas", "Flujos personalizados", "Sin límites técnicos"],
+    title: "A Medida",
+    desc: "Integraciones sin límites técnicos",
   },
 ];
 
@@ -79,38 +79,29 @@ export default function Services() {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
         >
           {services.map((s) => (
-            <motion.div
+            <motion.a
               key={s.title}
+              href="#contacto"
               variants={fadeUp}
-              whileHover={{ y: -6 }}
-              className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10"
+              whileHover={{ y: -4 }}
+              className="group flex items-center gap-3.5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10"
             >
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/20">
-                <s.icon className="h-6 w-6" />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-md shadow-secondary/20">
+                <s.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-lg font-bold text-primary-900">{s.title}</h3>
-              <ul className="mt-4 flex-1 space-y-2">
-                {s.points.map((p) => (
-                  <li
-                    key={p}
-                    className="flex items-center gap-2 text-sm text-slate-600"
-                  >
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="#contacto"
-                className="mt-6 inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-secondary transition-colors duration-200 hover:text-secondary-700"
-              >
-                Saber más
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-            </motion.div>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-sm font-bold leading-tight text-primary-900">
+                  {s.title}
+                </h3>
+                <p className="mt-0.5 truncate text-xs text-slate-500">
+                  {s.desc}
+                </p>
+              </div>
+              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 transition-all duration-200 group-hover:translate-x-1 group-hover:text-secondary" />
+            </motion.a>
           ))}
         </motion.div>
       </div>
