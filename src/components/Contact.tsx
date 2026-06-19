@@ -11,7 +11,7 @@ import {
   Send,
   Zap,
 } from "lucide-react";
-import { fadeUp, viewportOnce } from "@/lib/motion";
+import { fadeUp, viewportOnce, buttonMotion, cardHover } from "@/lib/motion";
 
 type FormState = {
   nombre: string;
@@ -93,7 +93,8 @@ export default function Contact() {
           </div>
 
           <div className="mt-8 space-y-3">
-            <a
+            <motion.a
+              {...cardHover}
               href="mailto:hola@evoluzion.mx"
               className="glass group flex cursor-pointer items-center gap-4 rounded-2xl p-4 transition-colors duration-200 hover:border-accent/40"
             >
@@ -104,8 +105,9 @@ export default function Contact() {
                 <p className="text-sm text-slate-400">Correo</p>
                 <p className="font-semibold text-white">hola@evoluzion.mx</p>
               </div>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              {...cardHover}
               href="https://wa.me/521234567890"
               target="_blank"
               rel="noopener noreferrer"
@@ -118,7 +120,7 @@ export default function Contact() {
                 <p className="text-sm text-slate-400">WhatsApp</p>
                 <p className="font-semibold text-white">+52 123 456 7890</p>
               </div>
-            </a>
+            </motion.a>
           </div>
 
           {/* Calendly placeholder */}
@@ -252,7 +254,8 @@ export default function Contact() {
                 )}
               </div>
 
-              <button
+              <motion.button
+                {...buttonMotion}
                 type="submit"
                 disabled={status === "loading"}
                 className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 disabled:cursor-not-allowed disabled:opacity-70"
@@ -268,7 +271,7 @@ export default function Contact() {
                     <Send className="h-4 w-4" />
                   </>
                 )}
-              </button>
+              </motion.button>
             </form>
           )}
         </motion.div>

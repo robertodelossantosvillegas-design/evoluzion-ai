@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Clock, Wallet, UserPlus, ArrowRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
-import { fadeUp, viewportOnce } from "@/lib/motion";
+import { fadeUp, viewportOnce, buttonMotion } from "@/lib/motion";
 
 function formatMXN(n: number) {
   return new Intl.NumberFormat("es-MX", {
@@ -105,13 +105,14 @@ export default function ROICalculator() {
               label="Prospectos recuperados"
               value={`${result.leadsRecovered}`}
             />
-            <a
+            <motion.a
+              {...buttonMotion}
               href="#contacto"
               className="group mt-1 inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700"
             >
               Quiero estos resultados
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
+            </motion.a>
             <p className="text-center text-xs text-slate-500">
               * Estimación aproximada con fines ilustrativos.
             </p>
