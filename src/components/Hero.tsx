@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ChevronDown, Clock, Zap, Headphones } from "lucide-react";
 import { useMousePosition } from "@/lib/hooks";
-import { staggerContainer, fadeUp } from "@/lib/motion";
+import { staggerContainer, fadeUp, buttonMotion } from "@/lib/motion";
 
 const inlineStats = [
   { icon: Clock, label: "IA 24/7" },
@@ -93,19 +93,21 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-9 flex flex-col gap-3 sm:flex-row"
           >
-            <a
+            <motion.a
+              {...buttonMotion}
               href="#contacto"
               className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 hover:shadow-secondary/50"
             >
               Agenda una llamada
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              {...buttonMotion}
               href="#servicios"
               className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/30 hover:bg-white/10"
             >
               Ver servicios
-            </a>
+            </motion.a>
           </motion.div>
 
           {/* inline minimal stats row */}

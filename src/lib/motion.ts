@@ -31,3 +31,31 @@ export const scaleIn: Variants = {
 };
 
 export const viewportOnce = { once: true, amount: 0.2 } as const;
+
+/**
+ * Shared spring used for microinteractions (hover/tap) site-wide.
+ */
+export const springSnappy = {
+  type: "spring",
+  stiffness: 400,
+  damping: 26,
+} as const;
+
+/**
+ * Consistent hover/tap feedback for CTAs/buttons.
+ * Spread onto a motion element: {...buttonMotion}
+ */
+export const buttonMotion = {
+  whileHover: { scale: 1.04 },
+  whileTap: { scale: 0.97 },
+  transition: springSnappy,
+} as const;
+
+/**
+ * Consistent hover lift for cards (grids, pricing, FAQ, testimonials).
+ * Spread onto a motion element: {...cardHover}
+ */
+export const cardHover = {
+  whileHover: { y: -6 },
+  transition: springSnappy,
+} as const;
