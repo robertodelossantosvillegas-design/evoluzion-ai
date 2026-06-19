@@ -9,6 +9,7 @@ type Plan = {
   price: string;
   prefix?: string;
   suffix?: string;
+  setup: string;
   target: string;
   features: string[];
   highlighted?: boolean;
@@ -18,66 +19,53 @@ type Plan = {
 const plans: Plan[] = [
   {
     name: "Starter",
-    price: "$2,990",
+    price: "$2,500",
     suffix: " MXN/mes",
-    target: "E-commerce en Instagram, TikTok Shop, Marketplace",
+    setup: "$4,000 MXN de instalación única",
+    target: "Negocios que apenas van a automatizar su primer proceso",
     features: [
-      "CRM hasta 500 contactos",
-      "1 pipeline de ventas",
-      "Chatbot IA (WhatsApp o Web)",
-      "3 automatizaciones de seguimiento",
-      "Landing page básica incluida",
+      "1 pipeline de ventas (5 etapas)",
+      "Chatbot IA en WhatsApp",
       "Calendario de citas",
+      "1 formulario de captura",
+      "3 automatizaciones clave",
+      "Gestión de reseñas",
+      "Dashboard básico",
       "Soporte por correo",
     ],
   },
   {
     name: "Growth",
-    price: "$6,990",
+    price: "$5,500",
     suffix: " MXN/mes",
+    setup: "$6,000 MXN de instalación única",
     highlighted: true,
-    target: "Negocios locales: clínicas, despachos, gimnasios",
+    target: "Negocios que quieren crecer activamente",
     features: [
       "Todo lo de Starter",
-      "CRM contactos ilimitados",
-      "Chatbot IA multicanal (WhatsApp + Instagram + Web)",
-      "Email + SMS marketing",
-      "8 automatizaciones personalizadas",
-      "Funnel de ventas",
-      "Gestión de reseñas Google",
-      "Reportes mensuales",
-      "Soporte prioritario",
+      "WhatsApp + Instagram + Facebook + Web",
+      "Email + SMS incluidos",
+      "8 automatizaciones específicas para tu industria",
+      "1 landing page de captura",
+      "Reporte mensual + revisión bimestral",
+      "Soporte prioritario (24h)",
     ],
   },
   {
-    name: "Scale",
-    price: "$13,990",
+    name: "Premium",
+    price: "$9,500",
     suffix: " MXN/mes",
-    target: "Empresas en crecimiento",
+    setup: "$9,000 MXN de instalación única",
+    enterprise: true,
+    target: "Negocios que ya facturan bien y quieren máximo apalancamiento",
     features: [
       "Todo lo de Growth",
       "Voice AI (agente de voz)",
-      "Automatizaciones Meta Ads (Facebook + Instagram)",
-      "Integraciones a medida (APIs)",
-      "Dashboard personalizado",
-      "Account manager asignado",
-      "Soporte 24/7",
-    ],
-  },
-  {
-    name: "Enterprise",
-    price: "$25,000",
-    prefix: "Desde ",
-    suffix: " MXN/mes",
-    enterprise: true,
-    target: "Empresas con necesidades avanzadas",
-    features: [
-      "Solución 100% a medida",
-      "Multi-ubicación y multi-marca",
-      "Integración con sistemas existentes",
-      "SLA garantizado",
-      "Onboarding dedicado",
-      "Soporte enterprise",
+      "Hasta 15 automatizaciones",
+      "Funnel de ventas multi-página",
+      "Dashboard avanzado",
+      "Revisión mensual 1 a 1",
+      "Soporte mismo día",
     ],
   },
 ];
@@ -89,7 +77,7 @@ export default function AutomationPackages() {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-4"
+      className="grid items-stretch gap-6 md:grid-cols-3"
     >
       {plans.map((p) => (
         <motion.div
@@ -122,6 +110,7 @@ export default function AutomationPackages() {
               {p.price}
             </span>
             <span className="text-sm text-slate-400">{p.suffix}</span>
+            <p className="mt-1 text-xs text-slate-500">{p.setup}</p>
           </div>
           <ul className="mt-6 flex-1 space-y-3">
             {p.features.map((f) => (

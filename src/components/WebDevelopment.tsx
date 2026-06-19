@@ -7,52 +7,41 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 const packages = [
   {
     name: "Landing Page",
-    price: "$4,990",
+    price: "$4,500",
     desc: "Ideal para campañas y captación.",
     features: [
       "Diseño a medida de 1 página",
       "Optimizada para conversión",
       "Responsive y rápida",
-      "Formulario de contacto",
-      "SEO básico",
+      "SEO básico incluido",
+      "1 visita de entrega incluida",
+      "Mantenimiento: $800 MXN/mes",
     ],
   },
   {
     name: "Sitio Corporativo",
-    price: "$8,990",
+    price: "$8,000",
+    popular: true,
     desc: "Presencia profesional completa.",
     features: [
       "Hasta 5 páginas",
       "Diseño personalizado",
-      "Blog integrado",
-      "SEO optimizado",
-      "Integración con redes",
+      "SEO básico incluido",
+      "Hasta 2 rondas de revisión",
+      "1 visita de entrega incluida",
+      "Mantenimiento: $1,300 MXN/mes",
     ],
   },
   {
-    name: "Sitio Premium",
-    price: "$14,990",
-    popular: true,
-    desc: "Lo mejor en diseño y rendimiento.",
+    name: "Tienda / Reservas",
+    price: "$13,000",
+    desc: "Catálogo, pagos o reservas integradas.",
     features: [
-      "Páginas ilimitadas",
-      "Animaciones avanzadas",
-      "Chatbot IA integrado",
-      "SEO avanzado",
-      "Panel de administración",
-      "Soporte prioritario",
-    ],
-  },
-  {
-    name: "E-commerce",
-    price: "$24,990",
-    desc: "Tu tienda en línea, lista para vender.",
-    features: [
-      "Catálogo de productos",
-      "Pasarela de pagos",
-      "Carrito y checkout",
-      "Gestión de inventario",
-      "Automatización de ventas",
+      "Catálogo de productos o servicios",
+      "Pasarela de pagos o calendario integrado",
+      "SEO básico incluido",
+      "1 visita de entrega incluida",
+      "Mantenimiento: $2,000 MXN/mes",
     ],
   },
 ];
@@ -64,7 +53,7 @@ export default function WebDevelopment() {
       initial="hidden"
       whileInView="show"
       viewport={viewportOnce}
-      className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4"
+      className="grid items-stretch gap-6 md:grid-cols-3"
     >
       {packages.map((p) => (
         <motion.div
