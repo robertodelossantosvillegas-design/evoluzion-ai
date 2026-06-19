@@ -108,7 +108,7 @@ export default function Contact() {
             </motion.a>
             <motion.a
               {...cardHover}
-              href="https://wa.me/521234567890"
+              href="https://wa.me/528127591172"
               target="_blank"
               rel="noopener noreferrer"
               className="glass group flex cursor-pointer items-center gap-4 rounded-2xl p-4 transition-colors duration-200 hover:border-accent/40"
@@ -118,7 +118,7 @@ export default function Contact() {
               </span>
               <div>
                 <p className="text-sm text-slate-400">WhatsApp</p>
-                <p className="font-semibold text-white">+52 123 456 7890</p>
+                <p className="font-semibold text-white">+52 81 2759 1172</p>
               </div>
             </motion.a>
           </div>

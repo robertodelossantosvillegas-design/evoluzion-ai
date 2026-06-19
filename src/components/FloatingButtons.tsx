@@ -23,7 +23,7 @@ export default function FloatingButtons() {
           className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3"
         >
           <a
-            href="tel:+521234567890"
+            href="tel:+528127591172"
             aria-label="Llámanos"
             className="group flex cursor-pointer items-center gap-2 rounded-full bg-secondary px-4 py-3 text-white shadow-lg shadow-secondary/40 transition-all duration-200 hover:bg-secondary-700"
           >
@@ -33,7 +33,7 @@ export default function FloatingButtons() {
             </span>
           </a>
           <a
-            href="https://wa.me/521234567890"
+            href="https://wa.me/528127591172"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Escríbenos por WhatsApp"
