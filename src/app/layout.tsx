@@ -24,6 +24,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://evoluzion.mx"),
   title: "Evoluzion | Automatización con IA para tu negocio",
   description:
     "Implementamos inteligencia artificial, automatizaciones y soluciones digitales que trabajan por ti las 24 horas del día. Chatbots, agentes de voz, CRM, páginas web y más.",
@@ -43,6 +44,17 @@ export const metadata: Metadata = {
       "Automatiza tu negocio. Vende más. Trabaja menos. Soluciones de IA para PYMEs en México.",
     type: "website",
     locale: "es_MX",
+    // TODO: reemplazar con imagen final de marca cuando esté lista
+    // Dimensiones recomendadas: 1200×630 px, formato PNG o JPG
+    // La imagen debe mostrar logo + tagline sobre fondo dark con los colores de marca
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Evoluzion — Automatización con IA para tu negocio",
+      },
+    ],
   },
 };
 

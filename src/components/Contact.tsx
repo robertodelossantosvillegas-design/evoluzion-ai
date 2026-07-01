@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   Mail,
   MessageCircle,
-  CalendarCheck,
   Loader2,
   CheckCircle2,
   Send,
@@ -126,18 +125,30 @@ export default function Contact() {
             </motion.a>
           </div>
 
-          {/* Calendly placeholder */}
-          <div className="glass mt-4 flex items-center gap-4 rounded-2xl border-dashed p-4">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary/20 text-secondary-400">
-              <CalendarCheck className="h-5 w-5" />
+          {/*
+            TODO: Calendly — reemplazar este bloque por el widget de Calendly
+            cuando esté listo. Ejemplo:
+            <div className="mt-4 overflow-hidden rounded-2xl" style={{ minHeight: 400 }}>
+              <InlineWidget url="https://calendly.com/evoluzion/diagnostico" />
+            </div>
+          */}
+          <motion.a
+            {...cardHover}
+            href="https://wa.me/528127591172?text=Hola%2C%20me%20interesa%20agendar%20una%20llamada%20de%20diagn%C3%B3stico"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex cursor-pointer items-center gap-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/8 p-4 transition-colors duration-200 hover:border-emerald-500/50 hover:bg-emerald-500/12"
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
+              <MessageCircle className="h-5 w-5" />
             </span>
             <div>
-              <p className="font-semibold text-white">Agenda una llamada</p>
+              <p className="font-semibold text-white">Agenda por WhatsApp</p>
               <p className="text-sm text-slate-400">
-                Calendly se integrará aquí.
+                Respuesta en menos de 2 horas · Sin compromiso
               </p>
             </div>
-          </div>
+          </motion.a>
         </motion.div>
 
         {/* form */}

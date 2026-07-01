@@ -1,0 +1,16 @@
+OG Image Placeholder
+====================
+Dimensiones recomendadas: 1200 x 630 px
+
+Contenido sugerido:
+- Fondo: #0A0A0F (Obsidian)
+- Logo Evoluzion centrado o esquina superior izquierda
+- Tagline: "Automatiza tu negocio. Vende más. Trabaja menos."
+- Degradado sutil de #5B5BFF (Aurora) a #00E5C0 (Neon) como acento
+
+Herramientas para crear:
+- Figma / Canva / Adobe Express
+- Exportar como PNG a 1200×630 px
+- Colocar en: /public/og-image.png
+
+TODO: Reemplazar este archivo con el og-image.png real antes de lanzar.

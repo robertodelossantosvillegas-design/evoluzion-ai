@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import IntegrationsStrip from "@/components/IntegrationsStrip";
 import TrustSection from "@/components/TrustSection";
 import Services from "@/components/Services";
 import UseCasesByIndustry from "@/components/UseCasesByIndustry";
 import BeforeAfter from "@/components/BeforeAfter";
+import TrustBadge from "@/components/TrustBadge";
 import PricingHub from "@/components/PricingHub";
 import HowWeWork from "@/components/HowWeWork";
 import WhyEvoluzion from "@/components/WhyEvoluzion";
@@ -22,6 +24,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <IntegrationsStrip />
         <TrustSection />
         {/* dark -> light */}
         <WaveDivider fill="#FFFFFF" />
@@ -30,6 +33,7 @@ export default function Home() {
         {/* light -> dark */}
         <WaveDivider fill="#0A0A0F" />
         <BeforeAfter />
+        <TrustBadge />
         <PricingHub />
         <HowWeWork />
         <WhyEvoluzion />

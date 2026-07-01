@@ -12,6 +12,7 @@ type Plan = {
   suffix?: string;
   setup: string;
   target: string;
+  example: string;
   features: string[];
   featureDetails: Record<string, string>;
   highlighted?: boolean;
@@ -25,6 +26,7 @@ const plans: Plan[] = [
     suffix: " MXN/mes",
     setup: "$4,000 MXN de instalación única",
     target: "Negocios que apenas van a automatizar su primer proceso",
+    example: "Ej: recordatorio de cita 24h antes por WhatsApp, automático.",
     features: [
       "1 pipeline de ventas (5 etapas)",
       "Chatbot IA en WhatsApp",
@@ -53,6 +55,7 @@ const plans: Plan[] = [
     setup: "$6,000 MXN de instalación única",
     highlighted: true,
     target: "Negocios que quieren crecer activamente",
+    example: "Ej: reactivación automática de clientes inactivos a los 30 días.",
     features: [
       "Todo lo de Starter",
       "WhatsApp + Instagram + Facebook + Web",
@@ -79,6 +82,7 @@ const plans: Plan[] = [
     setup: "$9,000 MXN de instalación única",
     enterprise: true,
     target: "Negocios que ya facturan bien y quieren máximo apalancamiento",
+    example: "Ej: agente de voz que agenda, confirma y hace seguimiento post-cita.",
     features: [
       "Todo lo de Growth",
       "Voice AI (agente de voz)",
@@ -162,9 +166,12 @@ export default function AutomationPackages() {
                 </li>
               ))}
             </ul>
+            <p className={`mt-5 text-xs italic leading-relaxed ${p.highlighted ? "text-accent-400/80" : "text-slate-500"}`}>
+              {p.example}
+            </p>
             <a
               href="#contacto"
-              className={`group mt-7 inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl px-5 py-3.5 text-sm font-semibold transition-all duration-200 ${
+              className={`group mt-4 inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-xl px-5 py-3.5 text-sm font-semibold transition-all duration-200 ${
                 p.highlighted
                   ? "bg-secondary text-white shadow-lg shadow-secondary/30 hover:bg-secondary-700"
                   : p.enterprise

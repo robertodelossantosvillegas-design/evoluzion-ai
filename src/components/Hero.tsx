@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ChevronDown, Clock, Zap, Headphones } from "lucide-react";
+import { ArrowRight, ChevronDown, Clock, Zap, Headphones, MessageCircle } from "lucide-react";
 import { useMousePosition } from "@/lib/hooks";
 import { staggerContainer, fadeUp, buttonMotion } from "@/lib/motion";
 import AIModesWidget from "./AIModesWidget";
@@ -85,18 +85,21 @@ export default function Hero() {
           >
             <motion.a
               {...buttonMotion}
-              href="#contacto"
-              className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 hover:shadow-secondary/50"
+              href="https://wa.me/528127591172?text=Hola%2C%20me%20interesa%20automatizar%20mi%20negocio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-emerald-500 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-emerald-500/35 transition-all duration-200 hover:bg-emerald-400 hover:shadow-emerald-500/55"
             >
-              Agenda una llamada
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <MessageCircle className="h-4.5 w-4.5" />
+              Escríbenos por WhatsApp
             </motion.a>
             <motion.a
               {...buttonMotion}
-              href="#servicios"
+              href="#contacto"
               className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/30 hover:bg-white/10"
             >
-              Ver servicios
+              Agenda una llamada
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </motion.a>
           </motion.div>
 
