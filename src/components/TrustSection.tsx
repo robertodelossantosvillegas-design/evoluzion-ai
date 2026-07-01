@@ -8,31 +8,27 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 const steps = [
   {
     icon: ClipboardList,
-    badge: "Semana 1",
     title: "Diagnóstico",
-    desc: "Hacemos una llamada de 45 minutos donde analizamos tus procesos actuales. Identificamos los 3 puntos donde más tiempo y dinero se pierden. Al final recibes un plan escrito de lo que vamos a automatizar.",
+    desc: "Hacemos una llamada donde analizamos tu operación e identificamos dónde se está perdiendo tiempo y dinero. Al final tienes claro qué vamos a automatizar y por qué.",
     output: "Entregable: Plan de automatización documentado",
   },
   {
     icon: Rocket,
-    badge: "Semana 2–3",
     title: "Configuración",
     desc: "Construimos tus flujos, configuramos el chatbot con la voz de tu marca, conectamos WhatsApp, CRM, correo y cualquier plataforma que uses. Tú apruebas cada pieza antes de que salga al aire.",
     output: "Entregable: Sistema probado y listo para lanzar",
   },
   {
     icon: TrendingUp,
-    badge: "Semana 3–4",
     title: "Lanzamiento",
-    desc: "Probamos todo con casos reales, corregimos detalles y ponemos en marcha. Desde el primer día: prospectos atendidos al instante, citas agendadas solas y seguimientos automáticos.",
+    desc: "Activamos todo y verificamos que cada flujo funcione correctamente. Desde ese momento tu negocio atiende, agenda y da seguimiento sin que tengas que intervenir.",
     output: "Entregable: Automatización activa y funcionando",
   },
   {
     icon: LifeBuoy,
-    badge: "Mes a mes",
-    title: "Mejora continua",
-    desc: "Revisamos métricas contigo cada mes. Ajustamos flujos, agregamos nuevas automatizaciones y atendemos cualquier incidencia el mismo día. No desaparecemos después de entregar.",
-    output: "Entregable: Reportes mensuales + revisión de estrategia",
+    title: "Soporte activo",
+    desc: "Tu sistema queda monitoreado y en operación. Estamos disponibles para cualquier ajuste o duda según tu plan, y siempre tienes visibilidad de tus resultados en tu dashboard.",
+    output: "Entregable: Dashboard de resultados activo",
   },
 ];
 
@@ -47,7 +43,7 @@ export default function TrustSection() {
         <SectionHeading
           eyebrow="Nuestra Metodología"
           title="Un proceso claro, de principio a fin"
-          subtitle="Así es exactamente cómo trabajamos: qué pasa en cada etapa, cuánto tiempo tarda y qué recibes al final."
+          subtitle="Así trabajamos contigo: de la primera llamada hasta que tu negocio opera en automático."
         />
 
         <motion.div
@@ -73,10 +69,6 @@ export default function TrustSection() {
               {/* step number — large muted watermark */}
               <span className="pointer-events-none absolute right-4 top-3 select-none font-mono text-[3.5rem] font-black leading-none text-white/[0.04]">
                 {i + 1}
-              </span>
-
-              <span className="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-accent-400">
-                {s.badge}
               </span>
 
               <div className="relative mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/25">

@@ -2,33 +2,33 @@
 
 import { motion } from "framer-motion";
 import {
-  HeartHandshake,
+  MessageCircle,
   Gauge,
-  ShieldCheck,
+  LayoutDashboard,
   TrendingUp,
 } from "lucide-react";
 import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const pillars = [
   {
-    icon: HeartHandshake,
-    text: "Atención 1 a 1",
-    sub: "Cada cliente tiene asignado un responsable directo",
+    icon: MessageCircle,
+    text: "Comunicación directa",
+    sub: "Siempre sabes con quién hablas y cómo contactarnos",
   },
   {
     icon: Gauge,
     text: "Implementación rápida",
-    sub: "Sistema funcionando en 3–4 semanas",
+    sub: "Sistema en operación en 2–3 semanas",
   },
   {
-    icon: ShieldCheck,
-    text: "Sin contratos forzosos",
-    sub: "Te quedas por resultados, no por letra chica",
+    icon: LayoutDashboard,
+    text: "Dashboard de resultados",
+    sub: "Visibilidad en tiempo real de prospectos y automatizaciones activas",
   },
   {
     icon: TrendingUp,
-    text: "Mejora continua",
-    sub: "Ajustamos y optimizamos mes a mes",
+    text: "Soporte activo",
+    sub: "Disponibles para cualquier ajuste o duda según tu plan",
   },
 ];
 
