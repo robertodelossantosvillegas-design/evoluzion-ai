@@ -216,7 +216,6 @@ export default function Contact() {
                     Selecciona una opción
                   </option>
                   {[
-                    "Despacho / Abogados",
                     "Clínica / Médico",
                     "Restaurante",
                     "E-commerce",
@@ -224,6 +223,7 @@ export default function Contact() {
                     "Agencia de Marketing",
                     "Constructora",
                     "Coach / Consultor",
+                    "Salón / Barbería / Spa",
                     "Otro",
                   ].map((o) => (
                     <option key={o} value={o} className="bg-primary-900">

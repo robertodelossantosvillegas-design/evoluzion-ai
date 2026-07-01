@@ -8,23 +8,31 @@ import { fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 const steps = [
   {
     icon: ClipboardList,
-    title: "Planeación",
-    desc: "Analizamos tu negocio y diseñamos la estrategia de automatización ideal.",
+    badge: "Semana 1",
+    title: "Diagnóstico",
+    desc: "Hacemos una llamada de 45 minutos donde analizamos tus procesos actuales. Identificamos los 3 puntos donde más tiempo y dinero se pierden. Al final recibes un plan escrito de lo que vamos a automatizar.",
+    output: "Entregable: Plan de automatización documentado",
   },
   {
     icon: Rocket,
-    title: "Implementación",
-    desc: "Construimos e integramos las soluciones de IA en tus procesos actuales.",
+    badge: "Semana 2–3",
+    title: "Configuración",
+    desc: "Construimos tus flujos, configuramos el chatbot con la voz de tu marca, conectamos WhatsApp, CRM, correo y cualquier plataforma que uses. Tú apruebas cada pieza antes de que salga al aire.",
+    output: "Entregable: Sistema probado y listo para lanzar",
   },
   {
     icon: TrendingUp,
-    title: "Optimización",
-    desc: "Medimos resultados y afinamos cada flujo para maximizar su rendimiento.",
+    badge: "Semana 3–4",
+    title: "Lanzamiento",
+    desc: "Probamos todo con casos reales, corregimos detalles y ponemos en marcha. Desde el primer día: prospectos atendidos al instante, citas agendadas solas y seguimientos automáticos.",
+    output: "Entregable: Automatización activa y funcionando",
   },
   {
     icon: LifeBuoy,
-    title: "Soporte",
-    desc: "Acompañamiento continuo para que todo siga funcionando sin problemas.",
+    badge: "Mes a mes",
+    title: "Mejora continua",
+    desc: "Revisamos métricas contigo cada mes. Ajustamos flujos, agregamos nuevas automatizaciones y atendemos cualquier incidencia el mismo día. No desaparecemos después de entregar.",
+    output: "Entregable: Reportes mensuales + revisión de estrategia",
   },
 ];
 
@@ -39,7 +47,7 @@ export default function TrustSection() {
         <SectionHeading
           eyebrow="Nuestra Metodología"
           title="Un proceso claro, de principio a fin"
-          subtitle="Cuatro etapas pensadas para que la tecnología trabaje para ti sin complicaciones."
+          subtitle="Así es exactamente cómo trabajamos: qué pasa en cada etapa, cuánto tiempo tarda y qué recibes al final."
         />
 
         <motion.div
@@ -60,22 +68,30 @@ export default function TrustSection() {
               key={s.title}
               variants={fadeUp}
               whileHover={{ y: -6, borderColor: "rgba(0,229,192,0.3)" }}
-              className="glass-card group relative rounded-2xl p-6 transition-all duration-300"
+              className="glass-card group relative flex flex-col rounded-2xl p-6 transition-all duration-300"
             >
               {/* step number — large muted watermark */}
               <span className="pointer-events-none absolute right-4 top-3 select-none font-mono text-[3.5rem] font-black leading-none text-white/[0.04]">
                 {i + 1}
               </span>
 
-              <div className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/25">
+              <span className="mb-3 self-start rounded-full border border-accent/25 bg-accent/8 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-accent-400">
+                {s.badge}
+              </span>
+
+              <div className="relative mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/25">
                 <s.icon className="h-6 w-6" />
-                {/* glow ring on hover */}
                 <div className="absolute inset-0 rounded-xl opacity-0 ring-2 ring-accent/40 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
               <h3 className="text-base font-bold text-white">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
                 {s.desc}
               </p>
+              <div className="mt-4 rounded-lg border border-secondary/15 bg-secondary/5 px-3 py-2">
+                <p className="text-[11px] font-medium text-secondary-300">
+                  {s.output}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
