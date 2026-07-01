@@ -118,10 +118,10 @@ const services: Service[] = [
     includes: [
       "Secuencias de bienvenida para nuevos leads",
       "Correos de seguimiento post-cotización",
-      "Campañas de reactivación de clientes",
-      "Newsletter mensual automatizado",
+      "Campañas de reactivación de clientes inactivos",
       "Seguimiento post-compra y solicitud de reseña",
-      "Segmentación por tipo de cliente",
+      "Segmentación básica por tipo de cliente",
+      // TODO: Newsletter mensual — servicio adicional, no incluido en planes base
     ],
     forWho: "Para negocios con base de datos de contactos que quieren sacarle más valor a su lista.",
   },
