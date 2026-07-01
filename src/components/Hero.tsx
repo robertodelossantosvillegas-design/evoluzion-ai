@@ -75,8 +75,8 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-6 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg"
           >
-            Implementamos inteligencia artificial, automatizaciones y soluciones
-            digitales que trabajan por ti las 24 horas del día.
+            Tu negocio responde a cada cliente en segundos, agenda citas y da
+            seguimiento solo — las 24 horas, sin contratar más gente.
           </motion.p>
 
           <motion.div

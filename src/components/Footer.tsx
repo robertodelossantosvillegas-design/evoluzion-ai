@@ -117,6 +117,9 @@ export default function Footer() {
               Automatización con inteligencia artificial para que tu negocio
               venda más y trabajes menos.
             </p>
+            <p className="mt-2 text-xs text-slate-500">
+              Monterrey, Nuevo León · Atendemos todo México
+            </p>
             <div className="mt-5 flex gap-3">
               {socials.map((s) => (
                 <a

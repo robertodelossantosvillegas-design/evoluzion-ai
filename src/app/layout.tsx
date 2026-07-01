@@ -25,23 +25,23 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://evoluzion.mx"),
-  title: "Evoluzion | Automatización con IA para tu negocio",
+  title: "Evoluzion | Automatización con IA para negocios en México",
   description:
-    "Implementamos inteligencia artificial, automatizaciones y soluciones digitales que trabajan por ti las 24 horas del día. Chatbots, agentes de voz, CRM, páginas web y más.",
+    "Chatbots de WhatsApp, agentes de voz y CRM inteligente para PyMEs en Monterrey y todo México. Tu negocio responde, agenda y da seguimiento en automático, 24/7.",
   keywords: [
-    "automatización con IA",
-    "chatbots",
+    "automatización con IA Monterrey",
+    "chatbot WhatsApp para negocios México",
+    "agencia de IA para PyMEs",
     "agentes de voz IA",
     "CRM inteligente",
     "automatización WhatsApp",
-    "agencia de IA México",
-    "páginas web",
+    "automatización de negocios Monterrey",
   ],
   authors: [{ name: "Evoluzion" }],
   openGraph: {
-    title: "Evoluzion | Automatización con IA para tu negocio",
+    title: "Evoluzion | Automatización con IA para negocios en México",
     description:
-      "Automatiza tu negocio. Vende más. Trabaja menos. Soluciones de IA para PYMEs en México.",
+      "Automatiza tu negocio. Vende más. Trabaja menos. Chatbots, agentes de voz y CRM con IA para PyMEs en Monterrey y todo México.",
     type: "website",
     locale: "es_MX",
     // TODO: reemplazar con imagen final de marca cuando esté lista
@@ -56,6 +56,32 @@ export const metadata: Metadata = {
       },
     ],
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Evoluzion",
+  description:
+    "Agencia de automatización con inteligencia artificial para PyMEs: chatbots de WhatsApp, agentes de voz, CRM inteligente y páginas web.",
+  url: "https://evoluzion.mx",
+  email: "hola@evoluzion.mx",
+  telephone: "+52-81-2759-1172",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Monterrey",
+    addressRegion: "Nuevo León",
+    addressCountry: "MX",
+  },
+  areaServed: "MX",
+  priceRange: "$$",
+  sameAs: ["https://wa.me/528127591172"],
+  makesOffer: [
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chatbots con IA para WhatsApp" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Agentes de voz con IA" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "CRM inteligente y automatización de ventas" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Desarrollo de páginas web" } },
+  ],
 };
 
 export const viewport: Viewport = {
@@ -74,7 +100,13 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${spaceGrotesk.variable} ${spaceMono.variable} antialiased`}
     >
-      <body className="bg-[#0A0A0F] text-[#F0F0F8]">{children}</body>
+      <body className="bg-[#0A0A0F] text-[#F0F0F8]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

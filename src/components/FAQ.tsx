@@ -16,6 +16,10 @@ const faqs = [
     a: "Para nada. Nosotros nos encargamos de toda la parte técnica. Tú solo nos cuentas tu negocio y te entregamos todo funcionando.",
   },
   {
+    q: "¿Qué pasa si mi negocio es pequeño?",
+    a: "Justamente ahí es donde la automatización más se nota: haces el trabajo de un equipo sin contratar más gente. El plan Starter está diseñado para negocios que apenas empiezan a automatizar.",
+  },
+  {
     q: "¿Puedo integrar WhatsApp con mis procesos?",
     a: "Sí. WhatsApp es uno de nuestros canales principales: chatbots, seguimientos, confirmaciones, recuperación de clientes y ventas asistidas.",
   },

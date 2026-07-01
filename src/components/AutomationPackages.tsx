@@ -175,7 +175,7 @@ export default function AutomationPackages() {
                 p.highlighted
                   ? "bg-secondary text-white shadow-lg shadow-secondary/30 hover:bg-secondary-700"
                   : p.enterprise
-                    ? "bg-gradient-to-r from-secondary to-accent text-white hover:opacity-90"
+                    ? "bg-gradient-to-r from-secondary to-secondary-700 text-white shadow-lg shadow-secondary/25 hover:opacity-90"
                     : "border border-white/15 text-white hover:bg-white/10"
               }`}
             >
