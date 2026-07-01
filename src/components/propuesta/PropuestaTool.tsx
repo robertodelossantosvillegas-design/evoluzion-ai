@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Building2,
   Dumbbell,
-  Gavel,
   HeartPulse,
   Home,
   Printer,
@@ -46,7 +45,7 @@ const INDUSTRIES: Industry[] = [
   },
   {
     id: "spa",
-    label: "Nail Salon / Spa",
+    label: "Barbería / Nail Salon / Spa",
     icon: Scissors,
     defaultClientValue: 600,
     pitch: "agenda siempre llena y clientas que no se te olvidan",
@@ -67,14 +66,6 @@ const INDUSTRIES: Industry[] = [
     defaultClientValue: 1200,
     pitch: "limpiezas que se agendan solas cada 6 meses",
     automations: ["Recordatorio de cita", "Recordatorio de limpieza semestral", "Reactivación de pacientes"],
-  },
-  {
-    id: "abogados",
-    label: "Despacho de abogados",
-    icon: Gavel,
-    defaultClientValue: 5000,
-    pitch: "ningún prospecto se queda sin respuesta",
-    automations: ["Respuesta inmediata a consultas", "Calificación de prospectos", "Seguimiento a 48h"],
   },
   {
     id: "inmobiliaria",
@@ -163,7 +154,11 @@ export default function PropuestaTool() {
   }, [leadsPerdidos, clientValue, noShows, inactivos]);
 
   const plan = useMemo(() => recommendPlan(moneyLost), [moneyLost]);
-  const annualGain = useMemo(() => moneyLost * 12 - plan.price * 12 - plan.setup, [moneyLost, plan]);
+  // Escenario conservador: recuperar solo la mitad de la fuga estimada
+  const annualGain = useMemo(
+    () => Math.round(moneyLost * 0.5 * 12 - plan.price * 12 - plan.setup),
+    [moneyLost, plan]
+  );
 
   const steps = ["Negocio", "Diagnóstico", "Propuesta"];
 
@@ -346,6 +341,9 @@ export default function PropuestaTool() {
                     <MiniStat label="No-shows/mes" value={noShows.toString()} />
                     <MiniStat label="Inactivos recuperables" value={inactivos.toString()} />
                   </div>
+                  <p className="mt-3 text-[10px] leading-relaxed text-[#8888AA] print:text-gray-500">
+                    * Estimación conservadora calculada con los datos que ingresaste. Los resultados reales varían por negocio.
+                  </p>
                 </div>
 
                 {/* Recommended plan */}
@@ -387,20 +385,59 @@ export default function PropuestaTool() {
 
                 {/* ROI */}
                 <div className="mt-6 rounded-2xl border border-[#00E5C0]/30 bg-[#00E5C0]/10 p-6 print:border-gray-300 print:bg-gray-50">
-                  <p className="text-sm font-medium text-[#F0F0F8] print:text-black">
-                    Si recuperas aunque sea la mitad de eso, tu ganancia estimada en 12 meses sería de
+                  {annualGain > 0 ? (
+                    <>
+                      <p className="text-sm font-medium text-[#F0F0F8] print:text-black">
+                        Recuperando solo la mitad de esa fuga, tu ganancia estimada en 12 meses sería de
+                      </p>
+                      <p className="mt-1 font-mono text-3xl font-bold text-white print:text-black">
+                        {currency(annualGain)}
+                      </p>
+                      <p className="text-xs text-[#8888AA] print:text-gray-500">
+                        (ya descontando la mensualidad anual y la instalación)
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-sm font-medium text-[#F0F0F8] print:text-black">
+                        Con estos números, lo ideal es platicar qué plan se ajusta al tamaño de tu operación
+                      </p>
+                      <p className="mt-1 text-xs text-[#8888AA] print:text-gray-500">
+                        Cada negocio tiene fugas distintas — la llamada de diagnóstico es gratis.
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                {/* Contacto — visible también en el PDF impreso */}
+                <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5 print:border-gray-300 print:bg-white">
+                  <p className="text-xs font-bold uppercase tracking-wide text-[#00E5C0] print:text-black">
+                    Siguiente paso
                   </p>
-                  <p className="mt-1 font-mono text-3xl font-bold text-white print:text-black">
-                    {currency(Math.max(annualGain, 0))}
-                  </p>
-                  <p className="text-xs text-[#8888AA] print:text-gray-500">
-                    (después de restar mensualidad anual + instalación)
-                  </p>
+                  <div className="mt-2 flex flex-col gap-1 text-sm text-[#F0F0F8] print:text-black sm:flex-row sm:gap-6">
+                    <span>
+                      WhatsApp: <strong className="font-mono">+52 81 2759 1172</strong>
+                    </span>
+                    <span>
+                      Correo: <strong className="font-mono">hola@evoluzion.mx</strong>
+                    </span>
+                    <span className="font-mono">evoluzion.mx</span>
+                  </div>
                 </div>
 
                 <div className="mt-8 flex flex-col items-center gap-3 text-center print:hidden">
                   <p className="text-sm text-[#8888AA]">¿Empezamos? Agenda tu instalación hoy mismo.</p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-wrap justify-center gap-3">
+                    <a
+                      href={`https://wa.me/528127591172?text=${encodeURIComponent(
+                        `Hola, soy de ${businessName || "un negocio"} (${industry.label}). Vi mi propuesta y me interesa el plan ${plan.name}.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-400"
+                    >
+                      Empezar por WhatsApp <ArrowRight className="h-4 w-4" />
+                    </a>
                     <button
                       onClick={() => window.print()}
                       className="flex items-center gap-2 rounded-xl border border-white/15 px-5 py-2.5 text-sm font-medium text-white hover:bg-white/5"
