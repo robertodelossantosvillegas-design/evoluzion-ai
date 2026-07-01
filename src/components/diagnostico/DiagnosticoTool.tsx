@@ -41,6 +41,7 @@ export default function DiagnosticoTool() {
   // Sección 3 — inputs de la solución
   const [costoImplementacion, setCostoImplementacion] = useState(6000);
   const [mensualidad, setMensualidad] = useState(3500);
+  const [pctRecuperacion, setPctRecuperacion] = useState(70);
 
   // ---------- Sección 2: Diagnóstico de pérdidas ----------
   const perdidaClientes = useMemo(() => clientesPerdidos * ticketPromedio, [clientesPerdidos, ticketPromedio]);
@@ -69,7 +70,7 @@ export default function DiagnosticoTool() {
   const perdidaAnual = perdidaMensual * 12;
 
   // ---------- Sección 3: Proyección con Evoluzion AI ----------
-  const ahorroMensual = perdidaMensual * 0.7;
+  const ahorroMensual = perdidaMensual * (clamp(pctRecuperacion, 0, 100) / 100);
   const ahorroAnual = ahorroMensual * 12;
   const gananciaNetaMensual = ahorroMensual - mensualidad;
   const gananciaNetaAnual = gananciaNetaMensual * 12 - costoImplementacion;
@@ -114,9 +115,10 @@ export default function DiagnosticoTool() {
               <NumField label="Sueldo promedio por empleado" value={sueldoPromedioEmpleado} onChange={setSueldoPromedioEmpleado} prefix="$" />
             </Card>
 
-            <Card title="3 · Tu propuesta Evoluzion AI" icon={TrendingUp} accent="#00E5C0">
+            <Card title="Tu propuesta Evoluzion AI" icon={TrendingUp} accent="#00E5C0">
               <NumField label="Costo de implementación (setup)" value={costoImplementacion} onChange={setCostoImplementacion} prefix="$" />
               <NumField label="Mensualidad del servicio" value={mensualidad} onChange={setMensualidad} prefix="$" />
+              <NumField label="% de fugas que se recuperan (estimado)" value={pctRecuperacion} onChange={setPctRecuperacion} />
             </Card>
 
             <button
@@ -153,21 +155,25 @@ export default function DiagnosticoTool() {
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 <Stat label="Ahorro mensual estimado" value={currency(ahorroMensual)} color="#00E5C0" />
                 <Stat label="Ahorro anual estimado" value={currency(ahorroAnual)} color="#00E5C0" />
-                <Stat label="Ganancia neta mensual" value={currency(gananciaNetaMensual)} color="#00E5C0" />
-                <Stat label="Ganancia neta anual" value={currency(gananciaNetaAnual)} color="#00E5C0" />
-                <Stat label="ROI a 12 meses" value={pct(roi)} color="#00E5C0" />
+                <Stat label="Ganancia neta mensual" value={currency(gananciaNetaMensual)} color={gananciaNetaMensual >= 0 ? "#00E5C0" : "#FF4D5E"} />
+                <Stat label="Ganancia neta anual" value={currency(gananciaNetaAnual)} color={gananciaNetaAnual >= 0 ? "#00E5C0" : "#FF4D5E"} />
+                <Stat label="ROI a 12 meses" value={pct(roi)} color={roi >= 0 ? "#00E5C0" : "#FF4D5E"} />
                 <Stat
                   label="Recuperación de inversión"
                   value={paybackMeses ? `${paybackMeses.toFixed(1)} meses` : "N/A"}
                   color="#00E5C0"
                 />
               </div>
+              <p className="mt-3 text-[11px] leading-relaxed text-[#8888AA]">
+                * Proyección estimada asumiendo la recuperación del {Math.round(clamp(pctRecuperacion, 0, 100))}% de
+                las fugas identificadas. Los resultados reales dependen de cada negocio.
+              </p>
             </Card>
 
             {/* Sección 4 — resultado ejecutivo */}
             <div className="rounded-3xl border-2 border-[#5B5BFF] bg-gradient-to-br from-[#1C1C2E] via-[#12121A] to-[#1C1C2E] p-6 shadow-2xl shadow-[#5B5BFF]/20 print:border-gray-400">
-              <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-[#8888AA]">
-                Resultado del diagnóstico
+              <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-[#8888AA] print:text-gray-600">
+                4 · Resultado del diagnóstico
               </p>
               <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
                 <BigStat label="Pierde al mes" value={currency(perdidaMensual)} color="#FF4D5E" />
@@ -190,11 +196,16 @@ export default function DiagnosticoTool() {
                 <strong className="text-[#FF4D5E]">{currency(perdidaMensual)}</strong>
                 {" cada mes debido a procesos manuales, falta de seguimiento y tiempo operativo. Si esta situación continúa, la pérdida anual superará los "}
                 <strong className="text-[#FF4D5E]">{currency(perdidaAnual)}</strong>
-                {". La implementación de Evoluzion AI podría recuperar la inversión en aproximadamente "}
-                <strong className="text-[#00E5C0]">
-                  {paybackMeses ? `${paybackMeses.toFixed(1)} meses` : "pocos meses"}
-                </strong>
-                {" y comenzar a generar beneficios económicos desde ese momento."}
+                {"."}
+                {paybackMeses ? (
+                  <>
+                    {" La implementación de Evoluzion AI podría recuperar la inversión en aproximadamente "}
+                    <strong className="text-[#00E5C0]">{`${paybackMeses.toFixed(1)} meses`}</strong>
+                    {" y comenzar a generar beneficios económicos desde ese momento."}
+                  </>
+                ) : (
+                  " Con los números actuales conviene revisar juntos qué plan se ajusta mejor al tamaño de la operación."
+                )}
               </p>
             </Card>
 
@@ -228,6 +239,26 @@ export default function DiagnosticoTool() {
                 </div>
               </div>
             </Card>
+
+            {/* Siguiente paso + contacto (queda en el PDF impreso) */}
+            <div className="rounded-2xl border border-[#00E5C0]/30 bg-[#00E5C0]/5 p-5 print:border-gray-300 print:bg-white">
+              <p className="text-sm font-bold uppercase tracking-wide text-[#00E5C0] print:text-black">
+                Siguiente paso
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-[#F0F0F8] print:text-black">
+                Agenda tu llamada de diagnóstico sin costo y te mostramos exactamente
+                cómo recuperar estas fugas en tu negocio.
+              </p>
+              <div className="mt-3 flex flex-col gap-1 text-sm text-[#F0F0F8] print:text-black sm:flex-row sm:gap-6">
+                <span>
+                  WhatsApp: <strong className="font-mono">+52 81 2759 1172</strong>
+                </span>
+                <span>
+                  Correo: <strong className="font-mono">hola@evoluzion.mx</strong>
+                </span>
+                <span className="font-mono">evoluzion.mx</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
