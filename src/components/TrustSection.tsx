@@ -47,26 +47,33 @@ export default function TrustSection() {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="relative mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          className="relative mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-4"
         >
-          <div className="pointer-events-none absolute left-0 right-0 top-10 hidden h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent lg:block" />
+          {/* connecting glow line */}
+          <div className="pointer-events-none absolute left-8 right-8 top-6 hidden h-px lg:block">
+            <div className="h-full bg-gradient-to-r from-transparent via-secondary/50 to-transparent" />
+            <div className="absolute inset-0 h-full bg-gradient-to-r from-transparent via-accent/30 to-transparent blur-[2px]" />
+          </div>
+
           {steps.map((s, i) => (
             <motion.div
               key={s.title}
               variants={fadeUp}
-              whileHover={{ y: -6 }}
-              className="glass group relative rounded-2xl p-6 transition-colors duration-200 hover:border-accent/40"
+              whileHover={{ y: -6, borderColor: "rgba(0,229,192,0.3)" }}
+              className="glass-card group relative rounded-2xl p-6 transition-all duration-300"
             >
-              <div className="mb-5 flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white">
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <span className="text-4xl font-extrabold text-white/10">
-                  0{i + 1}
-                </span>
+              {/* step number — large muted watermark */}
+              <span className="pointer-events-none absolute right-4 top-3 select-none font-mono text-[3.5rem] font-black leading-none text-white/[0.04]">
+                {i + 1}
+              </span>
+
+              <div className="relative mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/25">
+                <s.icon className="h-6 w-6" />
+                {/* glow ring on hover */}
+                <div className="absolute inset-0 rounded-xl opacity-0 ring-2 ring-accent/40 transition-opacity duration-300 group-hover:opacity-100" />
               </div>
-              <h3 className="text-lg font-bold text-white">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              <h3 className="text-base font-bold text-white">{s.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-400">
                 {s.desc}
               </p>
             </motion.div>

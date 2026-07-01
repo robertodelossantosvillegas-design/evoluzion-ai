@@ -195,7 +195,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-slate-500 sm:flex-row">
-          <p>© 2024 Evoluzion. Todos los derechos reservados.</p>
+          <p>© 2026 Evoluzion. Todos los derechos reservados.</p>
           <div className="flex gap-5">
             <a
               href="#"

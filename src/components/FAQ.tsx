@@ -94,7 +94,11 @@ export default function FAQ() {
               <motion.div
                 key={item.q}
                 variants={fadeUp}
-                className="glass overflow-hidden rounded-2xl"
+                className={`overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                  isOpen
+                    ? "border-accent/25 bg-gradient-to-b from-white/[0.05] to-white/[0.02]"
+                    : "glass"
+                }`}
               >
                 <button
                   type="button"
@@ -102,13 +106,15 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                   className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left transition-colors duration-200 hover:bg-white/5"
                 >
-                  <span className="text-sm font-semibold text-white sm:text-base">
+                  <span className={`text-sm font-semibold sm:text-base transition-colors duration-200 ${isOpen ? "text-white" : "text-slate-200"}`}>
                     {item.q}
                   </span>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent-400"
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
+                      isOpen ? "bg-accent/15 text-accent-400" : "bg-white/10 text-slate-400"
+                    }`}
                   >
                     <Plus className="h-4 w-4" />
                   </motion.span>

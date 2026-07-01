@@ -87,8 +87,11 @@ export default function Contact() {
             IA puede ayudarte. Sin compromiso.
           </p>
 
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-sm font-medium text-accent-400">
-            <Zap className="h-4 w-4" />
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/8 px-4 py-2 text-sm font-medium text-accent-400">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
             Tiempo de respuesta: menos de 2 horas
           </div>
 
@@ -205,8 +208,8 @@ export default function Contact() {
                   id="negocio"
                   value={form.negocio}
                   onChange={(e) => update("negocio", e.target.value)}
-                  className={`w-full cursor-pointer rounded-xl border bg-white/5 px-4 py-3 text-white outline-none transition-colors duration-200 focus:border-accent/60 ${
-                    errors.negocio ? "border-rose-500/60" : "border-white/10"
+                  className={`w-full cursor-pointer rounded-xl border bg-white/[0.06] px-4 py-3 text-white outline-none transition-all duration-200 focus:border-accent/50 focus:bg-white/[0.08] focus:ring-2 focus:ring-accent/15 ${
+                    errors.negocio ? "border-rose-500/60 bg-rose-500/5" : "border-white/10"
                   }`}
                 >
                   <option value="" className="bg-primary-900">
@@ -245,8 +248,8 @@ export default function Contact() {
                   value={form.mensaje}
                   onChange={(e) => update("mensaje", e.target.value)}
                   placeholder="¿Qué te gustaría automatizar?"
-                  className={`w-full resize-none rounded-xl border bg-white/5 px-4 py-3 text-white outline-none transition-colors duration-200 placeholder:text-slate-500 focus:border-accent/60 ${
-                    errors.mensaje ? "border-rose-500/60" : "border-white/10"
+                  className={`w-full resize-none rounded-xl border bg-white/[0.06] px-4 py-3 text-white outline-none transition-all duration-200 placeholder:text-slate-600 focus:border-accent/50 focus:bg-white/[0.08] focus:ring-2 focus:ring-accent/15 ${
+                    errors.mensaje ? "border-rose-500/60 bg-rose-500/5" : "border-white/10"
                   }`}
                 />
                 {errors.mensaje && (
@@ -311,8 +314,8 @@ function Field({
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-full rounded-xl border bg-white/5 px-4 py-3 text-white outline-none transition-colors duration-200 placeholder:text-slate-500 focus:border-accent/60 ${
-          error ? "border-rose-500/60" : "border-white/10"
+        className={`w-full rounded-xl border bg-white/[0.06] px-4 py-3 text-white outline-none transition-all duration-200 placeholder:text-slate-600 focus:border-accent/50 focus:bg-white/[0.08] focus:ring-2 focus:ring-accent/15 ${
+          error ? "border-rose-500/60 bg-rose-500/5" : "border-white/10"
         }`}
       />
       {error && <p className="mt-1 text-xs text-rose-400">{error}</p>}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Clock4, UserX, FileWarning, Zap, Users, TrendingUp } from "lucide-react";
+import { Clock4, UserX, FileWarning, Zap, Users, TrendingUp, X, Check } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { fadeUp, viewportOnce } from "@/lib/motion";
 
@@ -33,23 +33,29 @@ export default function BeforeAfter() {
 
         {/* toggle */}
         <div className="mt-10 flex justify-center">
-          <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur">
-            {(["antes", "despues"] as const).map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => setSide(s)}
-                className={`cursor-pointer rounded-full px-6 py-2 text-sm font-semibold capitalize transition-all duration-200 ${
-                  side === s
-                    ? s === "antes"
-                      ? "bg-rose-500/90 text-white"
-                      : "bg-gradient-to-r from-secondary to-accent text-white"
-                    : "text-slate-300 hover:text-white"
-                }`}
-              >
-                {s === "antes" ? "Antes" : "Después"}
-              </button>
-            ))}
+          <div className="inline-flex gap-1 rounded-2xl border border-white/10 bg-white/[0.04] p-1.5 backdrop-blur">
+            <button
+              type="button"
+              onClick={() => setSide("antes")}
+              className={`cursor-pointer rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-250 ${
+                side === "antes"
+                  ? "bg-rose-500/80 text-white shadow-lg shadow-rose-500/20"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Sin automatización
+            </button>
+            <button
+              type="button"
+              onClick={() => setSide("despues")}
+              className={`cursor-pointer rounded-xl px-6 py-2.5 text-sm font-semibold transition-all duration-250 ${
+                side === "despues"
+                  ? "bg-gradient-to-r from-secondary to-accent text-white shadow-lg shadow-secondary/25"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              Con Evoluzion
+            </button>
           </div>
         </div>
 
@@ -117,22 +123,28 @@ function Panel({
           {subtitle}
         </span>
       </div>
-      <ul className="mt-6 space-y-4">
+      <ul className="mt-6 space-y-3.5">
         {items.map((it) => (
           <li key={it.text} className="flex items-start gap-3">
             <span
-              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
                 isAfter
-                  ? "bg-gradient-to-br from-secondary to-accent text-white"
-                  : "bg-rose-500/20 text-rose-300"
+                  ? "bg-gradient-to-br from-secondary to-accent text-white shadow-md shadow-secondary/25"
+                  : "bg-rose-500/15 text-rose-400"
               }`}
             >
-              <it.icon className="h-5 w-5" />
+              <it.icon className="h-4 w-4" />
             </span>
             <span
-              className={`pt-1.5 text-sm ${isAfter ? "text-slate-200" : "text-rose-100/80"}`}
+              className={`flex-1 pt-1 text-sm leading-relaxed ${isAfter ? "text-slate-200" : "text-rose-100/75"}`}
             >
               {it.text}
+            </span>
+            {/* status indicator */}
+            <span className={`mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+              isAfter ? "bg-emerald-500/15 text-emerald-400" : "bg-rose-500/10 text-rose-400"
+            }`}>
+              {isAfter ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
             </span>
           </li>
         ))}

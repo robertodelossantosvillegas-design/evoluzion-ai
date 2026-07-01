@@ -66,23 +66,26 @@ export default function HowWeWork() {
               <motion.div
                 variants={fadeUp}
                 whileHover={{ y: -6 }}
-                className="glass group relative flex flex-col items-center rounded-3xl p-7 text-center transition-colors duration-200 hover:border-accent/40"
+                className="glass-card group relative flex flex-col items-center rounded-3xl p-7 text-center transition-all duration-300"
               >
-                <span className="absolute right-5 top-5 font-mono text-3xl font-bold text-white/10">
-                  0{i + 1}
+                <span className="pointer-events-none absolute right-5 top-5 select-none font-mono text-[3rem] font-black leading-none text-white/[0.04]">
+                  {i + 1}
                 </span>
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary to-accent text-white shadow-lg shadow-secondary/30">
+                <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary to-accent text-white shadow-xl shadow-secondary/30 transition-shadow duration-300 group-hover:shadow-accent/30">
                   <s.icon className="h-7 w-7" />
+                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-secondary/30 to-accent/30 blur-md opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-white">{s.title}</h3>
-                <p className="mt-2 text-sm text-slate-300">{s.desc}</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.desc}</p>
               </motion.div>
               {i < mainSteps.length - 1 && (
                 <motion.div
                   variants={fadeUp}
-                  className="flex items-center justify-center text-accent-400"
+                  className="flex items-center justify-center"
                 >
-                  <ArrowRight className="h-7 w-7 rotate-90 lg:rotate-0" />
+                  <div className="flex h-8 w-8 rotate-90 items-center justify-center rounded-full border border-white/10 bg-white/5 text-accent-400 lg:rotate-0">
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
                 </motion.div>
               )}
             </div>
@@ -103,14 +106,14 @@ export default function HowWeWork() {
           >
             Dentro de cada fase
           </motion.p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {detailSteps.map((d) => (
+          <div className="flex flex-wrap items-center justify-center gap-2.5">
+            {detailSteps.map((d, i) => (
               <motion.span
                 key={d.title}
                 variants={fadeUp}
-                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-gradient-to-r from-white/5 to-white/[0.03] px-4 py-2 text-sm font-medium text-slate-300 backdrop-blur"
               >
-                <d.icon className="h-4 w-4 text-accent-400" />
+                <d.icon className={`h-4 w-4 ${i % 2 === 0 ? "text-secondary-400" : "text-accent-400"}`} />
                 {d.title}
               </motion.span>
             ))}
@@ -130,10 +133,13 @@ export default function HowWeWork() {
           </h3>
           <a
             href="#contacto"
-            className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-secondary px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-secondary/30 transition-all duration-200 hover:bg-secondary-700 hover:shadow-secondary/50"
+            className="group relative inline-flex cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-secondary to-secondary-700 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-secondary/35 transition-all duration-300 hover:shadow-secondary/55 animate-glow-pulse"
           >
-            Agenda tu diagnóstico gratis
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            <span className="relative z-10 flex items-center gap-2">
+              Agenda tu diagnóstico gratis
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </span>
+            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
           </a>
         </motion.div>
       </div>
