@@ -1,0 +1,16 @@
+<svg width="360" height="80" viewBox="0 0 360 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="52" y1="8" x2="18" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B5BFF"/>
+      <stop offset="100%" stop-color="#00E5C0"/>
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <path d="M 8 18 Q 8 8 18 8 L 52 8" stroke="#5B5BFF" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 52 8 L 18 52" stroke="url(#grad)" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 18 52 L 52 52 Q 62 52 62 42" stroke="#00E5C0" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <circle cx="62" cy="36" r="3.5" fill="#00E5C0"/>
+  <circle cx="62" cy="36" r="6" fill="#00E5C0" opacity="0.20"/>
+  <!-- Wordmark dark text for light backgrounds -->
+  <text x="84" y="50" font-family="Space Grotesk, system-ui, sans-serif" font-weight="700" font-size="38" letter-spacing="-1" fill="#0A0A0F">Evolu<tspan fill="#5B5BFF">z</tspan>ion</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg width="240" height="200" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="108" y1="20" x2="72" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B5BFF"/>
+      <stop offset="100%" stop-color="#00E5C0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 66 38 Q 66 20 84 20 L 144 20" stroke="#5B5BFF" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M 144 20 L 78 104" stroke="url(#grad)" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M 78 104 L 138 104 Q 156 104 156 86" stroke="#00E5C0" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <circle cx="156" cy="72" r="5" fill="#00E5C0"/>
+  <circle cx="156" cy="72" r="9" fill="#00E5C0" opacity="0.20"/>
+  <text x="120" y="150" font-family="Space Grotesk, system-ui, sans-serif" font-weight="700" font-size="34" letter-spacing="-1" fill="#0A0A0F" text-anchor="middle">Evolu<tspan fill="#5B5BFF">z</tspan>ion</text>
+  <text x="120" y="175" font-family="system-ui, sans-serif" font-weight="400" font-size="11" letter-spacing="2" fill="#555577" text-anchor="middle">AUTOMATIZACIÓN CON IA</text>
+</svg>

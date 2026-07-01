@@ -1,0 +1,24 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- WhatsApp uses a circular crop, so we fill within a circle-safe zone -->
+  <rect width="400" height="400" fill="#0A0A0F"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="400" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1C1C2E"/>
+      <stop offset="100%" stop-color="#0A0A0F"/>
+    </linearGradient>
+    <linearGradient id="grad" x1="160" y1="80" x2="240" y2="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B5BFF"/>
+      <stop offset="100%" stop-color="#00E5C0"/>
+    </linearGradient>
+    <clipPath id="circle">
+      <circle cx="200" cy="200" r="200"/>
+    </clipPath>
+  </defs>
+  <circle cx="200" cy="200" r="200" fill="url(#bg)"/>
+  <!-- Z icon centered, large for profile legibility -->
+  <path d="M 80 130 Q 80 80 130 80 L 310 80" stroke="#5B5BFF" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <path d="M 310 80 L 90 320" stroke="url(#grad)" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <path d="M 90 320 L 272 320 Q 320 320 320 272" stroke="#00E5C0" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <circle cx="320" cy="222" r="14" fill="#00E5C0"/>
+  <circle cx="320" cy="222" r="26" fill="#00E5C0" opacity="0.12"/>
+</svg>

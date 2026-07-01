@@ -1,0 +1,33 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#12121A"/>
+      <stop offset="100%" stop-color="#0A0A0F"/>
+    </linearGradient>
+    <linearGradient id="grad" x1="180" y1="180" x2="360" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B5BFF"/>
+      <stop offset="100%" stop-color="#00E5C0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Subtle grid lines -->
+  <line x1="0" y1="315" x2="1200" y2="315" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+  <line x1="600" y1="0" x2="600" y2="630" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+  <!-- Glow blob -->
+  <ellipse cx="180" cy="315" rx="200" ry="200" fill="#5B5BFF" opacity="0.05"/>
+  <ellipse cx="380" cy="315" rx="180" ry="180" fill="#00E5C0" opacity="0.04"/>
+  <!-- Icon large -->
+  <path d="M 80 220 Q 80 160 140 160 L 380 160" stroke="#5B5BFF" stroke-width="16" stroke-linecap="round" fill="none" filter="url(#glow)"/>
+  <path d="M 380 160 L 100 470" stroke="url(#grad)" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M 100 470 L 340 470 Q 400 470 400 410" stroke="#00E5C0" stroke-width="16" stroke-linecap="round" fill="none" filter="url(#glow)"/>
+  <circle cx="400" cy="340" r="11" fill="#00E5C0"/>
+  <circle cx="400" cy="340" r="20" fill="#00E5C0" opacity="0.12"/>
+  <!-- Wordmark -->
+  <text x="460" y="360" font-family="Space Grotesk, system-ui, sans-serif" font-weight="700" font-size="120" letter-spacing="-3" fill="white">Evolu<tspan fill="#5B5BFF">z</tspan>ion</text>
+  <!-- Tagline -->
+  <text x="462" y="420" font-family="system-ui, sans-serif" font-weight="400" font-size="24" letter-spacing="4" fill="#8888AA">AUTOMATIZACIÓN CON INTELIGENCIA ARTIFICIAL</text>
+</svg>
