@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+/*
+ * Cafeto — sistema visual
+ * Cálido, editorial, photography-first. Ver design-system/cafeto/MASTER.md
+ */
+
+:root {
+  --crema: #faf6ee;
+  --crema-2: #f3ecdd;
+  --lienzo: #fffcf5;
+  --espresso: #241a12;
+  --espresso-2: #4e3d2f;
+  --humo: #74604e;
+  --terracota: #b65327;
+  --terracota-2: #9c4318;
+  --terracota-tinte: #f6e3d7;
+  --bosque: #33523b;
+  --bosque-tinte: #e9efe6;
+  --oro: #6e5316;
+  --oro-tinte: #f2e7ce;
+  --linea: #e8dfcc;
+}
+
+@theme {
+  --color-crema: #faf6ee;
+  --color-crema-2: #f3ecdd;
+  --color-lienzo: #fffcf5;
+  --color-espresso: #241a12;
+  --color-espresso-2: #4e3d2f;
+  --color-humo: #74604e;
+  --color-terracota: #b65327;
+  --color-terracota-2: #9c4318;
+  --color-terracota-tinte: #f6e3d7;
+  --color-bosque: #33523b;
+  --color-bosque-tinte: #e9efe6;
+  --color-oro: #6e5316;
+  --color-oro-tinte: #f2e7ce;
+  --color-linea: #e8dfcc;
+
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+
+  --shadow-taza: 0 1px 2px rgba(36, 26, 18, 0.05), 0 8px 24px rgba(36, 26, 18, 0.07);
+  --shadow-taza-lg: 0 2px 4px rgba(36, 26, 18, 0.06), 0 16px 48px rgba(36, 26, 18, 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--crema);
+  color: var(--espresso);
+  font-family: var(--font-instrument), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--terracota-tinte);
+  color: var(--espresso);
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracota);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Filas horizontales editoriales sin barra de scroll visible */
+.sin-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sin-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Espacio para la barra de navegación inferior en móvil */
+.con-tabbar {
+  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .con-tabbar {
+    padding-bottom: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

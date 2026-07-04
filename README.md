@@ -1,5 +1,27 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+Este repositorio contiene dos productos, cada uno con su propia identidad (grupos de rutas con root layouts separados):
+
+- **Evoluzion** — sitio de la agencia: `/`, `/propuesta`, `/diagnostico` (`src/app/(evoluzion)/`)
+- **Cafeto** — app de descubrimiento de cafés en Monterrey, en español: todo bajo `/cafeto` (`src/app/(cafeto)/`)
+
+## Cafeto
+
+App photography-first para descubrir cafés (MVP con datos semilla en `src/lib/cafeto/data.ts`):
+
+| Ruta | Qué es |
+|------|--------|
+| `/cafeto` | Descubrimiento editorial: colecciones curadas y todos los cafés |
+| `/cafeto/cafes/[slug]` | Perfil premium de cada café (sin reseñas ni estrellas, por diseño) |
+| `/cafeto/ruleta` | Ruleta de café: azar con filtros de plan y zona |
+| `/cafeto/rutas` | Rutas curadas de varias paradas, con progreso |
+| `/cafeto/retos` | Retos ligeros con insignias (progreso vía visitas/guardados) |
+| `/cafeto/favoritos` | Cafés guardados (localStorage) |
+| `/cafeto/negocios` | Propuesta de valor y planes para dueños de cafeterías |
+| `/cafeto/negocios/panel` | Panel demo del dueño: métricas, perfil y suscripción |
+
+Documentación de producto: `docs/cafeto/` (CONTEXT, PRD, BRAND) · Sistema de diseño: `design-system/cafeto/MASTER.md`.
+
 ## Getting Started
 
 First, run the development server:

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, Space_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
