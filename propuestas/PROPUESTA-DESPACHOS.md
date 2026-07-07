@@ -88,3 +88,5 @@ Sin plazos forzosos. Confidencialidad absoluta en la configuración y los datos.
 
 **Evoluzion** — Automatización con IA para su despacho · Monterrey
 [TU NOMBRE] · WhatsApp [NÚMERO] · [CORREO]
+
+<!-- Uso interno: las 15 automatizaciones de este giro por plan están en ../automatizaciones/DESPACHOS.md -->

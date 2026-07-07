@@ -89,3 +89,5 @@ Sin plazos forzosos. La información de sus pacientes es suya y se maneja con co
 
 **Evoluzion** — Automatización con IA para su consulta · Monterrey
 [TU NOMBRE] · WhatsApp [NÚMERO] · [CORREO]
+
+<!-- Uso interno: las 15 automatizaciones de este giro por plan están en ../automatizaciones/CLINICAS.md -->

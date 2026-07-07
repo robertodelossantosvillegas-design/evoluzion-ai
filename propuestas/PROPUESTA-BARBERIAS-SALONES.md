@@ -88,3 +88,5 @@ Sin plazos forzosos. Si un mes no te sirve, cancelas y ya.
 
 **Evoluzion** — Automatización con IA para tu negocio · Monterrey
 [TU NOMBRE] · WhatsApp [NÚMERO] · [CORREO]
+
+<!-- Uso interno: las 15 automatizaciones de este giro por plan están en ../automatizaciones/BARBERIAS-SALONES.md -->

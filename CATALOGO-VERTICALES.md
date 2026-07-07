@@ -522,4 +522,4 @@ llamadas (Voice AI) o la operación lo piden a gritos.
 ---
 
 *Documento interno Evoluzion — Julio 2026. Precios de referencia: `MODELO-DE-NEGOCIO.md`.*
-*Menú de automatizaciones por plan: `AUTOMATIZACIONES-GHL.md` · Plantillas listas para mandar: carpeta `propuestas/`.*
+*15 automatizaciones por vertical (distribuidas por plan): carpeta `automatizaciones/` · Plantillas listas para mandar: carpeta `propuestas/`.*

@@ -15,7 +15,8 @@ Una plantilla por giro, lista para llenar y mandar al prospecto después de la p
 
 - **No agregues automatizaciones fuera de cuota.** Cada plan tiene su cantidad
   (Starter 3 · Growth 8 · Premium 15). Si el cliente quiere más, eso es upgrade de plan,
-  no un favor. El detalle de cada automatización (A1–A15) está en `../AUTOMATIZACIONES-GHL.md`.
+  no un favor. Las 15 automatizaciones de cada giro (numeradas #1–#15 por plan) están en
+  `../automatizaciones/` — un archivo por vertical.
 - **No regatees el setup.** Si hay que ceder algo, cede una automatización extra del
   siguiente nivel por 3 meses — nunca precio.
 - Los precios vienen de `../MODELO-DE-NEGOCIO.md`. Si cambian ahí, cambia aquí.
