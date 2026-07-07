@@ -1,7 +1,13 @@
 # Automatizaciones GHL — Gimnasios / Fitness
 
-15 automatizaciones diseñadas para este giro, distribuidas por plan.
-**Cuota:** Starter instala #1–#3 · Growth #1–#8 · Premium las 15.
+**15 automatizaciones + 2 extras recomendados (17 en total).**
+
+**Qué instalar según el plan que aceptó el cliente:**
+- ✅ **Starter** ($2,500/mes) → **#1, #2 y #3**
+- ✅ **Growth** ($5,500/mes) → **#1 a #8**
+- ✅ **Premium** ($9,500/mes) → **#1 a #15** (las 15 completas)
+- ⭐ **Extras #16 y #17** → recomiéndalos a cualquier cliente como add-on, gancho o cobro aparte
+
 Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
@@ -93,6 +99,23 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
 
+## ⭐ EXTRAS RECOMENDADOS — #16 y #17
+
+*Fuera de la cuota de los planes. Son tu guion de recomendación: ofrécelos como add-on,
+gancho para cerrar o cobro aparte. Ideales para subir el ticket o sembrar la próxima venta.*
+
+**16. Retos con inscripción (challenges)**
+- Qué hace: inscribe, recuerda y premia retos (reto de 30 días, operación verano) de forma automática
+- Cuándo recomendarlo: para picos de captación y reenganche de socios
+- GHL: Landing de reto → recordatorios diarios/semanales → premio al completar
+
+**17. Cross-sell de suplementos / plan nutricional**
+- Qué hace: recomienda producto o plan con liga de compra según el objetivo del socio
+- Cuándo recomendarlo: gimnasios que venden suplementos o asesoría nutricional
+- GHL: *Trigger* objetivo/etiqueta → WhatsApp con oferta relacionada
+
+---
+
 ## Resumen
 
 | # | Automatización | Plan |
@@ -112,3 +135,5 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 | 13 | Winback de ex-socios | 🟪 |
 | 14 | Voice AI | 🟪 |
 | 15 | Reporte + alertas | 🟪 |
+| 16 | Retos con inscripción | ⭐ Extra |
+| 17 | Cross-sell suplementos | ⭐ Extra |

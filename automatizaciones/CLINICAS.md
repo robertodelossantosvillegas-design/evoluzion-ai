@@ -1,7 +1,13 @@
 # Automatizaciones GHL — Clínicas / Médicos / Dentistas
 
-15 automatizaciones diseñadas para este giro, distribuidas por plan.
-**Cuota:** Starter instala #1–#3 · Growth #1–#8 · Premium las 15.
+**15 automatizaciones + 2 extras recomendados (17 en total).**
+
+**Qué instalar según el plan que aceptó el cliente:**
+- ✅ **Starter** ($2,500/mes) → **#1, #2 y #3**
+- ✅ **Growth** ($5,500/mes) → **#1 a #8**
+- ✅ **Premium** ($9,500/mes) → **#1 a #15** (las 15 completas)
+- ⭐ **Extras #16 y #17** → recomiéndalos a cualquier cliente como add-on, gancho o cobro aparte
+
 Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
@@ -93,6 +99,23 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
 
+## ⭐ EXTRAS RECOMENDADOS — #16 y #17
+
+*Fuera de la cuota de los planes. Son tu guion de recomendación: ofrécelos como add-on,
+gancho para cerrar o cobro aparte. Ideales para subir el ticket o sembrar la próxima venta.*
+
+**16. Membresía de chequeo anual**
+- Qué hace: paquete prepagado de revisiones con recordatorios automáticos de cada estudio del año
+- Cuándo recomendarlo: pacientes recurrentes o clínicas con enfoque de medicina preventiva
+- GHL: Membership/Recurring payment + recordatorios de recall programados
+
+**17. Convenios con empresas (medicina laboral)**
+- Qué hace: landing + secuencia B2B para captar consultas de colaboradores de empresas cercanas
+- Cuándo recomendarlo: clínicas que buscan volumen constante de pacientes nuevos
+- GHL: Landing B2B → Workflow de seguimiento corporativo
+
+---
+
 ## Resumen
 
 | # | Automatización | Plan |
@@ -112,3 +135,5 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 | 13 | Referidos | 🟪 |
 | 14 | Voice AI | 🟪 |
 | 15 | Reporte + alertas | 🟪 |
+| 16 | Membresía de chequeo anual | ⭐ Extra |
+| 17 | Convenios con empresas | ⭐ Extra |

@@ -1,7 +1,13 @@
 # Automatizaciones GHL — Barberías / Salones / Nail salons
 
-15 automatizaciones diseñadas para este giro, distribuidas por plan.
-**Cuota:** Starter instala #1–#3 · Growth #1–#8 · Premium las 15.
+**15 automatizaciones + 2 extras recomendados (17 en total).**
+
+**Qué instalar según el plan que aceptó el cliente:**
+- ✅ **Starter** ($2,500/mes) → **#1, #2 y #3**
+- ✅ **Growth** ($5,500/mes) → **#1 a #8**
+- ✅ **Premium** ($9,500/mes) → **#1 a #15** (las 15 completas)
+- ⭐ **Extras #16 y #17** → recomiéndalos a cualquier cliente como add-on, gancho o cobro aparte
+
 Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
@@ -93,6 +99,23 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
 
+## ⭐ EXTRAS RECOMENDADOS — #16 y #17
+
+*Fuera de la cuota de los planes. Son tu guion de recomendación: ofrécelos como add-on,
+gancho para cerrar o cobro aparte. Ideales para subir el ticket o sembrar la próxima venta.*
+
+**16. Suscripción de cortes (membresía)**
+- Qué hace: cobra una mensualidad y agenda solo el mismo servicio cada mes, con recordatorios incluidos
+- Cuándo recomendarlo: a la clienta que viene siempre — la conviertes en ingreso fijo y predecible
+- GHL: Membership/Recurring payment + Recurring Appointment + recordatorios
+
+**17. Venta de producto post-servicio**
+- Qué hace: 1 día después del servicio recomienda el producto que se usó (pomada, shampoo, kit) con liga de compra o apartado
+- Cuándo recomendarlo: barberías y salones que venden producto en mostrador
+- GHL: *Trigger* Wait 1d after Showed → WhatsApp con link de producto
+
+---
+
 ## Resumen
 
 | # | Automatización | Plan |
@@ -112,3 +135,5 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 | 13 | Post-servicio + recompra | 🟪 |
 | 14 | Voice AI | 🟪 |
 | 15 | Reporte + alertas | 🟪 |
+| 16 | Suscripción de cortes | ⭐ Extra |
+| 17 | Venta de producto post-servicio | ⭐ Extra |

@@ -1,7 +1,13 @@
 # Automatizaciones GHL — E-commerce
 
-15 automatizaciones diseñadas para este giro, distribuidas por plan.
-**Cuota:** Starter instala #1–#3 · Growth #1–#8 · Premium las 15.
+**15 automatizaciones + 2 extras recomendados (17 en total).**
+
+**Qué instalar según el plan que aceptó el cliente:**
+- ✅ **Starter** ($2,500/mes) → **#1, #2 y #3**
+- ✅ **Growth** ($5,500/mes) → **#1 a #8**
+- ✅ **Premium** ($9,500/mes) → **#1 a #15** (las 15 completas)
+- ⭐ **Extras #16 y #17** → recomiéndalos a cualquier cliente como add-on, gancho o cobro aparte
+
 Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 *Nota: para e-commerce el punto de entrada recomendado es Growth (necesita #4–#8 desde el día uno).*
 
@@ -94,6 +100,23 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
 
+## ⭐ EXTRAS RECOMENDADOS — #16 y #17
+
+*Fuera de la cuota de los planes. Son tu guion de recomendación: ofrécelos como add-on,
+gancho para cerrar o cobro aparte. Ideales para subir el ticket o sembrar la próxima venta.*
+
+**16. Programa de afiliados / embajadores**
+- Qué hace: registra quién refiere cada venta y calcula su comisión automáticamente
+- Cuándo recomendarlo: marcas con comunidad, creadores o clientas que ya recomiendan
+- GHL: link de referido con owner/UTM → registro de conversión → cálculo de comisión
+
+**17. Encuesta NPS + activación de promotores**
+- Qué hace: mide satisfacción y convierte a los fans (9–10) en reseñas y referidos automáticos
+- Cuándo recomendarlo: tiendas que quieren crecer con boca a boca y reputación
+- GHL: Survey NPS → If ≥9 → pide reseña/referido; If ≤6 → soporte
+
+---
+
 ## Resumen
 
 | # | Automatización | Plan |
@@ -113,3 +136,5 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 | 13 | Pago fallido | 🟪 |
 | 14 | Voice AI | 🟪 |
 | 15 | Reporte + alertas | 🟪 |
+| 16 | Afiliados / embajadores | ⭐ Extra |
+| 17 | NPS + promotores | ⭐ Extra |

@@ -1,7 +1,13 @@
 # Automatizaciones GHL — Coaches / Consultores
 
-15 automatizaciones diseñadas para este giro, distribuidas por plan.
-**Cuota:** Starter instala #1–#3 · Growth #1–#8 · Premium las 15.
+**15 automatizaciones + 2 extras recomendados (17 en total).**
+
+**Qué instalar según el plan que aceptó el cliente:**
+- ✅ **Starter** ($2,500/mes) → **#1, #2 y #3**
+- ✅ **Growth** ($5,500/mes) → **#1 a #8**
+- ✅ **Premium** ($9,500/mes) → **#1 a #15** (las 15 completas)
+- ⭐ **Extras #16 y #17** → recomiéndalos a cualquier cliente como add-on, gancho o cobro aparte
+
 Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 *Nota: punto de entrada recomendado Growth (landing + email + secuencias SON el negocio).*
 
@@ -94,6 +100,23 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 
 ---
 
+## ⭐ EXTRAS RECOMENDADOS — #16 y #17
+
+*Fuera de la cuota de los planes. Son tu guion de recomendación: ofrécelos como add-on,
+gancho para cerrar o cobro aparte. Ideales para subir el ticket o sembrar la próxima venta.*
+
+**16. Accountability grupal**
+- Qué hace: recordatorios y check-ins automáticos al grupo entre sesiones para no perder el ritmo
+- Cuándo recomendarlo: programas grupales — sube el porcentaje de finalización y los resultados
+- GHL: Workflow por cohorte → recordatorios de tarea/check-in programados
+
+**17. Programa de afiliados de alumnos**
+- Qué hace: da a cada alumno un enlace de referido con comisión y le da seguimiento automático
+- Cuándo recomendarlo: coaches con base de exalumnos satisfechos que ya recomiendan
+- GHL: link de referido por alumno → registro de conversión → cálculo de comisión
+
+---
+
 ## Resumen
 
 | # | Automatización | Plan |
@@ -113,3 +136,5 @@ Reglas y precios: `README.md` · `../MODELO-DE-NEGOCIO.md`.
 | 13 | Referidos | 🟪 |
 | 14 | Voice AI / cierre | 🟪 |
 | 15 | Reporte + alertas | 🟪 |
+| 16 | Accountability grupal | ⭐ Extra |
+| 17 | Afiliados de alumnos | ⭐ Extra |
