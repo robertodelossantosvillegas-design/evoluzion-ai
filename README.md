@@ -22,6 +22,11 @@ App photography-first para descubrir cafés (MVP con datos semilla en `src/lib/c
 
 Documentación de producto: `docs/cafeto/` (CONTEXT, PRD, BRAND) · Sistema de diseño: `design-system/cafeto/MASTER.md`.
 
+Además, en `docs/cafeto/` hay dos HTML autocontenidos que se abren con doble clic (sin servidor):
+
+- `plan-de-negocio-cafeto.html` — plan de negocio detallado (modelo, mercado, unit economics, proyección a 12 meses).
+- `cafeto-demo.html` — demo portátil de la app en un solo archivo (descubre, ruleta, rutas, retos y guardados).
+
 ## Getting Started
 
 First, run the development server:

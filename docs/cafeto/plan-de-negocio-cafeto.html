@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cafeto — Plan de negocio</title>
+</head>
+<body>
+<style>
+  :root {
+    --crema: #faf6ee;
+    --lienzo: #fffcf5;
+    --crema-2: #f3ecdd;
+    --espresso: #241a12;
+    --espresso-2: #4e3d2f;
+    --humo: #74604e;
+    --terracota: #b65327;
+    --terracota-2: #9c4318;
+    --terracota-tinte: #f6e3d7;
+    --bosque: #33523b;
+    --bosque-tinte: #e9efe6;
+    --oro: #6e5316;
+    --oro-tinte: #f2e7ce;
+    --linea: #e8dfcc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --crema: #1b130c;
+      --lienzo: #251b12;
+      --crema-2: #2e2216;
+      --espresso: #f2e9da;
+      --espresso-2: #d9c8b2;
+      --humo: #b7a28e;
+      --terracota: #d97a46;
+      --terracota-2: #e8905d;
+      --terracota-tinte: #3a2416;
+      --bosque: #8fb89b;
+      --bosque-tinte: #22301f;
+      --oro: #d9b45e;
+      --oro-tinte: #33290f;
+      --linea: #3a2d20;
+    }
+  }
+  :root[data-theme="dark"] {
+    --crema: #1b130c;
+    --lienzo: #251b12;
+    --crema-2: #2e2216;
+    --espresso: #f2e9da;
+    --espresso-2: #d9c8b2;
+    --humo: #b7a28e;
+    --terracota: #d97a46;
+    --terracota-2: #e8905d;
+    --terracota-tinte: #3a2416;
+    --bosque: #8fb89b;
+    --bosque-tinte: #22301f;
+    --oro: #d9b45e;
+    --oro-tinte: #33290f;
+    --linea: #3a2d20;
+  }
+  :root[data-theme="light"] {
+    --crema: #faf6ee;
+    --lienzo: #fffcf5;
+    --crema-2: #f3ecdd;
+    --espresso: #241a12;
+    --espresso-2: #4e3d2f;
+    --humo: #74604e;
+    --terracota: #b65327;
+    --terracota-2: #9c4318;
+    --terracota-tinte: #f6e3d7;
+    --bosque: #33523b;
+    --bosque-tinte: #e9efe6;
+    --oro: #6e5316;
+    --oro-tinte: #f2e7ce;
+    --linea: #e8dfcc;
+  }
+
+  body {
+    margin: 0;
+    background: var(--crema);
+    color: var(--espresso);
+    font-family: "Instrument Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .doc {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3rem 1.4rem 5rem;
+  }
+  h1, h2, h3 {
+    font-family: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    line-height: 1.15;
+  }
+  h1 { font-size: clamp(2.1rem, 6vw, 3rem); margin: 0.6rem 0 0.8rem; }
+  h2 { font-size: 1.55rem; margin: 0 0 0.9rem; }
+  h3 { font-size: 1.12rem; margin: 1.4rem 0 0.4rem; }
+  p { margin: 0 0 1rem; }
+  .doc > section p, .doc > section li { color: var(--espresso-2); }
+  strong { color: var(--espresso); }
+
+  .marca {
+    display: flex; align-items: baseline; gap: 0.45rem;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em;
+  }
+  .marca::after {
+    content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%;
+    background: var(--terracota); transform: translateY(-0.05rem);
+  }
+  .ceja {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--terracota);
+  }
+  .cabecera { padding-bottom: 2.4rem; border-bottom: 1px solid var(--linea); }
+  .cabecera .bajada { font-size: 1.13rem; max-width: 34rem; }
+  .meta-doc { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; margin-top: 1.2rem; font-size: 0.83rem; color: var(--humo); }
+
+  section { padding: 2.4rem 0; border-bottom: 1px solid var(--linea); }
+  section:last-of-type { border-bottom: none; }
+  .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 1.9rem; height: 1.9rem; padding: 0 0.4rem;
+    border-radius: 999px; background: var(--terracota-tinte);
+    color: var(--terracota); font-family: "Fraunces", Georgia, serif;
+    font-weight: 600; font-size: 0.95rem; margin-right: 0.6rem;
+    transform: translateY(-0.12rem);
+  }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 0.8rem; margin: 1.4rem 0 0.4rem; }
+  .tile {
+    background: var(--lienzo); border: 1px solid var(--linea);
+    border-radius: 1.2rem; padding: 1rem 1.1rem;
+  }
+  .tile .valor {
+    font-family: "Fraunces", Georgia, serif; font-weight: 600;
+    font-size: 1.7rem; letter-spacing: -0.02em; line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tile .etiqueta { font-size: 0.8rem; color: var(--humo); margin-top: 0.25rem; line-height: 1.4; }
+
+  ul { padding-left: 1.2rem; margin: 0 0 1rem; }
+  li { margin-bottom: 0.45rem; }
+  li::marker { color: var(--terracota); }
+
+  .tabla-envoltura { overflow-x: auto; border: 1px solid var(--linea); border-radius: 1rem; background: var(--lienzo); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--linea); }
+  tbody tr:last-child td { border-bottom: none; }
+  th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--humo); font-weight: 600; }
+  td { color: var(--espresso-2); }
+  td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; }
+  td:first-child { color: var(--espresso); font-weight: 500; }
+
+  .tarjeta {
+    background: var(--lienzo); border: 1px solid var(--linea);
+    border-radius: 1.4rem; padding: 1.4rem 1.5rem; margin: 1.2rem 0;
+  }
+  .tarjeta.acento { background: var(--terracota-tinte); border-color: transparent; }
+  .tarjeta.acento p { color: var(--espresso); margin: 0; }
+  .nota { font-size: 0.83rem; color: var(--humo); }
+
+  .grafica-caja { background: var(--lienzo); border: 1px solid var(--linea); border-radius: 1.4rem; padding: 1.3rem 1.4rem 0.9rem; margin: 1.4rem 0; }
+  .grafica-caja h3 { margin: 0 0 0.2rem; }
+  .grafica-caja .nota { margin: 0 0 0.6rem; }
+  .grafica-caja svg { width: 100%; height: auto; display: block; }
+  .g-linea { stroke: var(--terracota); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .g-area { fill: var(--terracota); opacity: 0.12; }
+  .g-grid { stroke: var(--linea); stroke-width: 1; }
+  .g-be { stroke: var(--bosque); stroke-width: 1.5; stroke-dasharray: 5 5; }
+  .g-txt { font-family: "Instrument Sans", -apple-system, sans-serif; font-size: 11px; fill: var(--humo); }
+  .g-txt-fin { font-size: 12px; font-weight: 700; fill: var(--espresso); }
+  .g-txt-be { font-size: 11px; fill: var(--bosque); font-weight: 600; }
+  .g-punto { fill: var(--terracota); stroke: var(--lienzo); stroke-width: 2.5; }
+
+  .dos-col { display: grid; gap: 0.9rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .riesgo { background: var(--lienzo); border: 1px solid var(--linea); border-radius: 1.1rem; padding: 0.95rem 1.1rem; }
+  .riesgo b { display: block; margin-bottom: 0.2rem; }
+  .riesgo p { font-size: 0.88rem; margin: 0; }
+  .etq { display: inline-block; border-radius: 999px; padding: 0.15rem 0.7rem; font-size: 0.75rem; font-weight: 700; }
+  .etq.verde { background: var(--bosque-tinte); color: var(--bosque); }
+  .etq.oro { background: var(--oro-tinte); color: var(--oro); }
+
+  .fases { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 0.8rem; }
+  .fase { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; background: var(--lienzo); border: 1px solid var(--linea); border-radius: 1.2rem; padding: 1rem 1.15rem; }
+  .fase .cuando { font-family: "Fraunces", Georgia, serif; font-weight: 600; color: var(--terracota); white-space: nowrap; }
+  .fase p { margin: 0.15rem 0 0; font-size: 0.92rem; }
+  .fase b { color: var(--espresso); }
+
+  .pie { margin-top: 2.5rem; padding-top: 1.4rem; border-top: 1px solid var(--linea); font-size: 0.82rem; color: var(--humo); }
+  .pie .marca { font-size: 1.1rem; margin-bottom: 0.4rem; }
+  @media print { body { background: #fff; } section { break-inside: avoid; } }
+</style>
+
+<div class="doc">
+  <header class="cabecera">
+    <div class="marca">Cafeto</div>
+    <p class="ceja" style="margin-top:1.6rem">Plan de negocio · Confidencial</p>
+    <h1>El mejor café de Monterrey, escogido uno por uno</h1>
+    <p class="bajada">Cafeto es la app de descubrimiento de cafeterías que la gente abre por antojo, no por necesidad — y la plataforma de marketing por la que las cafeterías pagan cada mes.</p>
+    <div class="meta-doc">
+      <span>Julio 2026</span>
+      <span>Ciudad de lanzamiento: Monterrey, N.L.</span>
+      <span>Versión 1.0</span>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="num">1</span>Resumen ejecutivo</h2>
+    <p>Descubrir una buena cafetería hoy significa escarbar en Google Maps entre reseñas contradictorias y fotos de mala calidad. <strong>Cafeto lo convierte en un momento de antojo:</strong> una app editorial, photography-first, donde cada café de la ciudad está curado uno por uno — sin estrellitas, sin listas infinitas.</p>
+    <p>El modelo es <strong>suscripción B2B</strong>: las cafeterías pagan una membresía mensual ($490 o $890 MXN) por una presencia premium, apariciones en las experiencias de descubrimiento (Ruleta, Rutas, Colecciones) y métricas claras de cuánta gente las descubre. Para el consumidor, Cafeto es y será gratis.</p>
+    <p><strong>El MVP ya existe:</strong> app de consumidor completa (feed editorial, perfiles, Ruleta, Rutas, Retos, guardados) y panel para dueños con métricas y suscripción. Este plan cubre los primeros 12–18 meses: validar en Monterrey, llegar a 66 cafeterías suscritas y dejar lista la expansión a una segunda ciudad.</p>
+    <div class="tiles">
+      <div class="tile"><div class="valor">66</div><div class="etiqueta">cafeterías suscritas — meta a 12 meses</div></div>
+      <div class="tile"><div class="valor">$610</div><div class="etiqueta">ARPU mensual mixto (70% Esencial / 30% Destacado)</div></div>
+      <div class="tile"><div class="valor">Mes 7</div><div class="etiqueta">punto de equilibrio (~33 cafeterías pagando)</div></div>
+      <div class="tile"><div class="valor">8:1</div><div class="etiqueta">LTV : CAC estimado con venta directa</div></div>
+    </div>
+    <p class="nota">Cifras del escenario base; supuestos detallados en las secciones 6 y 9.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">2</span>El problema y la oportunidad</h2>
+    <h3>Para quien busca café</h3>
+    <ul>
+      <li>Google Maps es una herramienta de utilidad, no de inspiración: denso, transaccional y lleno de reseñas de calidad dudosa.</li>
+      <li>Instagram inspira pero no organiza: no hay horarios, zonas ni forma de decidir rápido.</li>
+      <li>La decisión de "¿a dónde vamos por café?" se toma varias veces por semana y hoy no tiene un buen lugar donde tomarse.</li>
+    </ul>
+    <h3>Para la cafetería independiente</h3>
+    <ul>
+      <li>Compite en los mismos canales saturados: anuncios, influencers y el azar del algoritmo.</li>
+      <li>No tiene forma de saber cuánta gente la descubre ni de dónde viene.</li>
+      <li>Un directorio más no le sirve; una vitrina premium con métricas, sí.</li>
+    </ul>
+    <p><strong>La oportunidad:</strong> Monterrey vive un auge de café de especialidad y cultura de "tercer lugar". Nadie es dueño del momento del antojo. El que lo capture concentra la atención de los consumidores — y el presupuesto de marketing de las cafeterías.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">3</span>El producto (ya construido)</h2>
+    <p>Cafeto no es un plan en papel: el MVP está desarrollado y funcionando, en español, con la identidad visual completa de la marca.</p>
+    <h3>Lado consumidor — gratis</h3>
+    <ul>
+      <li><strong>Descubre:</strong> feed editorial photography-first con colecciones curadas ("Nuevos este mes", "Joyas escondidas", "Para una cita").</li>
+      <li><strong>Perfiles tipo revista:</strong> fotografía, voz editorial, horarios, amenidades y cómo llegar. Sin reseñas públicas ni estrellas — la curaduría es el filtro.</li>
+      <li><strong>Ruleta de café:</strong> el azar con buen gusto — filtra por plan y zona, gira y decide.</li>
+      <li><strong>Rutas:</strong> itinerarios curados de 3–4 paradas con horarios sugeridos y tips.</li>
+      <li><strong>Retos y guardados:</strong> gamificación ligera e insignias; el mapa personal de cada usuario.</li>
+    </ul>
+    <h3>Lado negocio — de pago</h3>
+    <ul>
+      <li><strong>Perfil premium</strong> redactado por el equipo editorial, con sesión fotográfica en el plan Destacado.</li>
+      <li><strong>Panel del dueño:</strong> vistas del perfil, guardados, apariciones en Ruleta y Rutas, edición del perfil y gestión de la suscripción.</li>
+      <li><strong>Prioridad de descubrimiento</strong> para el plan Destacado (colecciones de portada y doble boleto en la Ruleta).</li>
+    </ul>
+    <p class="nota">Decisión de producto protegida: sin reseñas públicas. La curaduría es el diferenciador frente a Maps y el argumento de venta frente a la cafetería (nadie la exhibe, Cafeto la presenta).</p>
+  </section>
+
+  <section>
+    <h2><span class="num">4</span>Mercado</h2>
+    <div class="tabla-envoltura">
+      <table>
+        <thead><tr><th>Nivel</th><th>Definición</th><th class="n">Estimado</th></tr></thead>
+        <tbody>
+          <tr><td>TAM</td><td>Cafeterías independientes y de especialidad en México</td><td class="n">~25,000+</td></tr>
+          <tr><td>SAM</td><td>Cafeterías con perfil "Cafeto" en la zona metropolitana de Monterrey</td><td class="n">600–900</td></tr>
+          <tr><td>SOM (año 1)</td><td>Cafeterías suscritas en Monterrey al mes 12</td><td class="n">66 (≈8–10% del SAM)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem"><strong>Supuestos a validar en campo</strong> durante la fase fundadores: densidad real de cafeterías por zona (San Pedro, Centro, Cumbres, Tec), disposición de pago y sensibilidad al precio. La arquitectura ya trata la ciudad como un dato, no una constante: agregar una segunda ciudad no requiere rediseño.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">5</span>Modelo de ingresos</h2>
+    <div class="tabla-envoltura">
+      <table>
+        <thead><tr><th>Plan</th><th>Qué incluye</th><th class="n">Precio</th></tr></thead>
+        <tbody>
+          <tr><td>Esencial</td><td>Perfil editorial con galería · aparición en descubrimiento y Ruleta · métricas básicas</td><td class="n">$490 MXN/mes</td></tr>
+          <tr><td>Destacado</td><td>Todo lo de Esencial · colecciones de portada · prioridad en Ruleta y Rutas · métricas completas · sesión fotográfica anual</td><td class="n">$890 MXN/mes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem">Sin plazos forzosos ni comisiones por cliente: la relación es simple y el churn es la métrica de verdad. <strong>ARPU mixto estimado: $610</strong> (mezcla 70/30). Ingresos futuros no incluidos en este plan (upside): colecciones patrocinadas por marcas de café, eventos y rutas de temporada, y expansión multi-ciudad.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">6</span>Unidad económica</h2>
+    <div class="tiles">
+      <div class="tile"><div class="valor">$610</div><div class="etiqueta">ARPU mensual por cafetería</div></div>
+      <div class="tile"><div class="valor">4%</div><div class="etiqueta">churn mensual objetivo (~25 meses de vida)</div></div>
+      <div class="tile"><div class="valor">~$15,250</div><div class="etiqueta">LTV por cafetería (610 × 25)</div></div>
+      <div class="tile"><div class="valor">$1,200–1,800</div><div class="etiqueta">CAC estimado (venta directa en persona)</div></div>
+    </div>
+    <p>El alta de cada café cuesta además <strong>$700–1,200 únicos</strong> (visita, fotografía, redacción editorial) — es inversión en el foso competitivo: el catálogo curado no se copia con un scraper.</p>
+    <div class="tarjeta acento">
+      <p><strong>La retención se gana con el reporte mensual.</strong> El panel muestra vistas, guardados y apariciones en Ruleta/Rutas: si el dueño ve cada mes cuánta gente lo descubrió, renovar es la decisión fácil. El producto de retención no es la app — es la métrica.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">7</span>Go-to-market</h2>
+    <ol class="fases">
+      <li class="fase"><span class="cuando">Mes 1–3</span><span><b>Fase fundadores.</b> 20 cafeterías seleccionadas a mano entran gratis 90 días: catálogo inicial con curaduría impecable, testimoniales y métricas reales para vender con evidencia. Meta de conversión al cobro: 70%.<p></p></span></li>
+      <li class="fase"><span class="cuando">Mes 3–6</span><span><b>Venta directa por zonas.</b> Recorridos semanales (San Pedro, Centro/Barrio Antiguo, Cumbres, Tec) con demo en el teléfono y el panel de ejemplo. Meta: +6 cafeterías netas al mes.<p></p></span></li>
+      <li class="fase"><span class="cuando">Mes 4–12</span><span><b>Demanda del consumidor.</b> Contenido editorial en Instagram/TikTok (las rutas y colecciones SON contenido), colaboración con creadores locales de café y lanzamiento público de Retos. El tráfico del consumidor se vuelve el argumento de venta B2B.<p></p></span></li>
+      <li class="fase"><span class="cuando">Mes 12+</span><span><b>Playbook de segunda ciudad.</b> Documentar el proceso (curaduría, alta, venta) para replicar en Guadalajara o CDMX con un equipo local pequeño.<p></p></span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="num">8</span>Competencia y foso</h2>
+    <div class="tabla-envoltura">
+      <table>
+        <thead><tr><th>Alternativa</th><th>Qué hace bien</th><th>Dónde no compite con Cafeto</th></tr></thead>
+        <tbody>
+          <tr><td>Google Maps</td><td>Utilidad: llegar, horarios, todo</td><td>No inspira; reseñas ruidosas; el café es un pin más</td></tr>
+          <tr><td>Instagram / TikTok</td><td>Antojo visual</td><td>No organiza ni decide; el algoritmo manda, no la curaduría</td></tr>
+          <tr><td>Guías y blogs locales</td><td>Curaduría editorial</td><td>Estáticos, sin producto, sin modelo de negocio recurrente</td></tr>
+          <tr><td>Apps de delivery</td><td>Transacción</td><td>Cafeto vende la visita y la experiencia, no el envío</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:1rem"><strong>El foso:</strong> (1) catálogo curado a mano con fotografía y voz propias — caro de copiar, imposible de scrapear con calidad; (2) relación directa de cobro mensual con cada cafetería; (3) marca con punto de vista: sin reseñas, sin ruido, con gusto. Los agregadores ganan por volumen; Cafeto gana por selección.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">9</span>Proyección financiera — 12 meses</h2>
+    <div class="grafica-caja">
+      <h3>MRR proyectado (escenario base)</h3>
+      <p class="nota">Pesos mexicanos. Fundadores gratis los primeros 90 días; conversión al cobro en el mes 3.</p>
+      <svg viewBox="0 0 720 240" role="img" aria-label="MRR mensual proyectado: cero en meses 1 y 2 durante la fase fundadores gratuita, 8,540 pesos en el mes 3, crecimiento sostenido hasta 40,260 pesos en el mes 12; el punto de equilibrio de 20,000 pesos se cruza alrededor del mes 7">
+        <line class="g-grid" x1="50" y1="200" x2="699" y2="200"></line>
+        <line class="g-grid" x1="50" y1="120" x2="699" y2="120"></line>
+        <line class="g-grid" x1="50" y1="40" x2="699" y2="40"></line>
+        <text class="g-txt" x="44" y="204" text-anchor="end">$0</text>
+        <text class="g-txt" x="44" y="124" text-anchor="end">$20k</text>
+        <text class="g-txt" x="44" y="44" text-anchor="end">$40k</text>
+        <line class="g-be" x1="50" y1="120" x2="699" y2="120"></line>
+        <text class="g-txt-be" x="54" y="112">punto de equilibrio ≈ $20,000/mes</text>
+        <path class="g-area" d="M50,200 L109,200 L168,166 L227,151 L286,137 L345,122 L404,107 L463,93 L522,78 L581,66 L640,54 L699,39 L699,200 L50,200 Z"></path>
+        <path class="g-linea" d="M50,200 L109,200 L168,166 L227,151 L286,137 L345,122 L404,107 L463,93 L522,78 L581,66 L640,54 L699,39"></path>
+        <circle class="g-punto" cx="699" cy="39" r="4.5"></circle>
+        <text class="g-txt-fin" x="694" y="24" text-anchor="end">$40,260 · mes 12</text>
+        <text class="g-txt" x="50" y="222" text-anchor="middle">M1</text>
+        <text class="g-txt" x="168" y="222" text-anchor="middle">M3</text>
+        <text class="g-txt" x="345" y="222" text-anchor="middle">M6</text>
+        <text class="g-txt" x="522" y="222" text-anchor="middle">M9</text>
+        <text class="g-txt" x="699" y="222" text-anchor="middle">M12</text>
+      </svg>
+    </div>
+    <div class="tabla-envoltura">
+      <table>
+        <thead><tr><th>Mes</th><th class="n">Cafeterías pagando</th><th class="n">MRR (MXN)</th><th>Hito</th></tr></thead>
+        <tbody>
+          <tr><td>M1–M2</td><td class="n">0 (20 fundadores gratis)</td><td class="n">$0</td><td>Catálogo inicial curado</td></tr>
+          <tr><td>M3</td><td class="n">14</td><td class="n">$8,540</td><td>Conversión de fundadores (70%)</td></tr>
+          <tr><td>M6</td><td class="n">32</td><td class="n">$19,520</td><td>Lanzamiento público + Retos</td></tr>
+          <tr><td>M7</td><td class="n">38</td><td class="n">$23,180</td><td><span class="etq verde">Punto de equilibrio</span></td></tr>
+          <tr><td>M9</td><td class="n">50</td><td class="n">$30,500</td><td>Cobertura de 4 zonas clave</td></tr>
+          <tr><td>M12</td><td class="n">66</td><td class="n">$40,260</td><td>Playbook de 2.ª ciudad listo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Costos operativos estimados</h3>
+    <ul>
+      <li>Equipo (editorial + ventas, medio tiempo al inicio): ~$14,000/mes</li>
+      <li>Marketing y contenido: ~$4,000/mes</li>
+      <li>Infraestructura, dominio y herramientas: ~$2,000/mes</li>
+      <li>Alta de cafés nuevos (foto + redacción): $700–1,200 por café, una vez</li>
+    </ul>
+    <p><strong>Base de costos ≈ $20,000/mes</strong> → el punto de equilibrio llega con ~33 cafeterías pagando (mes 7 del escenario base). Ingreso acumulado del año 1: ≈ $247,000 MXN. La necesidad de capital para llegar ahí es baja: ~$120,000–150,000 MXN de colchón para los primeros 6 meses.</p>
+    <p class="nota">Escenario conservador (+4 cafés/mes en lugar de +6): el equilibrio se recorre al mes 9–10 y el año cierra con ~50 suscritas. El modelo aguanta.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">10</span>Métricas que importan</h2>
+    <div class="dos-col">
+      <div class="riesgo"><b>Lado consumidor</b><p>% de sesiones que terminan en un guardado, una ruleta girada o una ruta iniciada · tasa de regreso semanal · cafés guardados por usuario activo.</p></div>
+      <div class="riesgo"><b>Lado negocio</b><p>Cafeterías suscritas · retención/renovación mensual (la métrica reina) · vistas y guardados por perfil como indicador adelantado de renovación.</p></div>
+    </div>
+    <p style="margin-top:1rem" class="nota">Regla del producto: cada métrica que importa al negocio debe ser visible para el dueño en su panel. Lo que el cliente ve, lo renueva.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">11</span>Roadmap 18 meses</h2>
+    <ol class="fases">
+      <li class="fase"><span class="cuando">T1</span><span><b>Fundadores y pulido.</b> 20 cafés curados, fotografía propia, app en App Store / Google Play vía Capacitor.<p></p></span></li>
+      <li class="fase"><span class="cuando">T2</span><span><b>Cobro y venta directa.</b> Pasarela de suscripciones, panel en producción, primeras 30 pagando.<p></p></span></li>
+      <li class="fase"><span class="cuando">T3</span><span><b>Crecimiento de demanda.</b> Contenido editorial, Retos públicos, rutas de temporada; 50 suscritas.<p></p></span></li>
+      <li class="fase"><span class="cuando">T4</span><span><b>Consolidación MTY.</b> 66+ suscritas, churn &lt;4%, colecciones patrocinadas piloto.<p></p></span></li>
+      <li class="fase"><span class="cuando">T5–T6</span><span><b>Segunda ciudad.</b> Réplica del playbook con curador local; la marca viaja, la curaduría se hace en casa.<p></p></span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="num">12</span>Riesgos y mitigación</h2>
+    <div class="dos-col">
+      <div class="riesgo"><b>Huevo y gallina (usuarios ↔ cafés)</b><p>La fase fundadores resuelve la oferta antes de pedir dinero; el contenido editorial trae a los primeros usuarios sin depender de volumen.</p></div>
+      <div class="riesgo"><b>Churn de cafeterías</b><p>Reporte mensual con métricas visibles + sin plazos forzosos (la confianza vende) + curaduría que el café no quiere perder.</p></div>
+      <div class="riesgo"><b>Copia de un jugador grande</b><p>El foso es la curaduría local y la relación directa; un agregador no puede fingir gusto ni presencia en la ciudad.</p></div>
+      <div class="riesgo"><b>Costo de curaduría al escalar</b><p>Playbook de alta estandarizado ($700–1,200/café) y calendario editorial por lotes; la calidad es el producto, no un gasto a recortar.</p></div>
+      <div class="riesgo"><b>Dependencia de una sola ciudad</b><p>La arquitectura ya es multi-ciudad (la ciudad es un dato); el plan valida el playbook antes de replicarlo.</p></div>
+      <div class="riesgo"><b>Precio mal calibrado</b><p>La fase fundadores mide disposición de pago real antes del lanzamiento; dos planes simples permiten ajustar sin matriz de precios.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">13</span>Siguientes pasos inmediatos</h2>
+    <ul>
+      <li>Cerrar la lista de 20 cafeterías fundadoras (mezcla de zonas: San Pedro, Centro/Barrio Antiguo, poniente y sur).</li>
+      <li>Calendario de sesiones fotográficas y redacción editorial (4 cafés por semana).</li>
+      <li>Integrar pasarela de suscripciones (Stripe) al panel de negocios.</li>
+      <li>Empaquetar la app con Capacitor y enviar a App Store / Google Play.</li>
+      <li>Guion de venta B2B con el panel de ejemplo como demo (ya construido).</li>
+    </ul>
+  </section>
+
+  <footer class="pie">
+    <div class="marca">Cafeto</div>
+    <p>Plan de negocio · Julio 2026 · Monterrey, Nuevo León.<br>
+    Documentos de producto: CONTEXT, PRD y BRAND en <code>docs/cafeto/</code> del repositorio · App (MVP): rutas <code>/cafeto</code> · Demo portátil: <code>cafeto-demo.html</code>.</p>
+  </footer>
+</div>
+
+</body>
+</html>
