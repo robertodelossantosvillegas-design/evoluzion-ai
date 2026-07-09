@@ -155,6 +155,47 @@
   .titulo-pantalla { font-size: 1.85rem; line-height: 1.08; margin: 0.7rem 0 0.25rem; text-wrap: balance; }
   .bajada-pantalla { margin: 0 0 1.1rem; color: var(--p-texto2); font-size: 0.9rem; line-height: 1.45; }
 
+  /* ====== Buscador visual ====== */
+  .buscador {
+    display: flex; align-items: center; gap: 0.6rem; width: calc(100% - 2.6rem);
+    margin: 0.75rem 1.3rem 0.2rem; border: 1px solid var(--p-linea); cursor: pointer;
+    background: var(--p-sup); color: var(--p-humo); font: inherit; font-size: 0.88rem;
+    border-radius: 999px; padding: 0.85rem 1.1rem; text-align: left;
+    box-shadow: 0 5px 16px rgba(24,14,6,0.06); transition: transform 0.12s;
+  }
+  .buscador:active { transform: scale(0.98); }
+  .buscador svg { width: 1.05rem; height: 1.05rem; color: var(--terracota); flex: none; }
+
+  /* ====== Círculos de rumbos ====== */
+  .zonas { display: flex; gap: 0.9rem; overflow-x: auto; padding: 0.55rem 1.3rem 0.4rem; scrollbar-width: none; }
+  .zonas::-webkit-scrollbar { display: none; }
+  .zona-circ {
+    appearance: none; border: 0; background: none; cursor: pointer; font: inherit; color: inherit;
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    width: 4rem; flex: none; padding: 0; transition: transform 0.12s;
+  }
+  .zona-circ:active { transform: scale(0.92); }
+  .zona-circ .circ {
+    width: 3.7rem; height: 3.7rem; border-radius: 50%; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Fraunces", Georgia, serif; font-weight: 650; font-size: 0.98rem; letter-spacing: 0.04em; color: #fff;
+    box-shadow: 0 6px 16px rgba(24,14,6,0.18), inset 0 0 0 2px rgba(255,251,242,0.35);
+    text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+  }
+  .zona-circ .circ::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 60% at 30% 25%, rgba(255,255,255,0.32), transparent 60%); }
+  .zona-circ .nom { font-size: 0.62rem; font-weight: 700; color: var(--p-texto2); line-height: 1.15; text-align: center; }
+  .zona-circ .cant { font-size: 0.56rem; font-weight: 700; color: var(--p-humo); margin-top: -0.2rem; }
+  .zona-circ.prox .circ { background: var(--p-sup2) !important; color: var(--p-humo); box-shadow: inset 0 0 0 2px var(--p-linea); text-shadow: none; }
+  .zona-circ.prox .circ::after { display: none; }
+  .zona-circ.prox .nom { color: var(--p-humo); }
+
+  /* ====== Tarjeta destacada compacta ====== */
+  .destacada { display: block; width: calc(100% - 2.6rem); margin: 0.3rem 1.3rem 0; cursor: pointer; text-align: left; }
+  .destacada .foto { aspect-ratio: 16 / 9.6; border-radius: 1.6rem; box-shadow: 0 14px 32px rgba(24,14,6,0.18); }
+  .destacada .foto .contenido { padding: 1rem 1.1rem; }
+  .destacada .foto .contenido .eti { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; color: var(--oro); }
+  .destacada .foto .contenido .n { font-size: 1.35rem; margin-top: 0.12rem; }
+
   /* ====== Fotos (gradientes con material) ====== */
   .foto {
     position: relative; overflow: hidden; border-radius: 1.5rem;
@@ -179,6 +220,7 @@
   }
   .foto .contenido .n { font-family: "Fraunces", Georgia, serif; font-weight: 650; font-size: 1.06rem; line-height: 1.15; text-shadow: 0 1px 8px rgba(0,0,0,0.3); }
   .foto .contenido .z { font-size: 0.72rem; font-weight: 600; color: rgba(255,251,242,0.85); margin-top: 0.15rem; display: flex; align-items: center; gap: 0.55rem; }
+  .foto .contenido .z span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
   .foto .contenido .z .pts { color: var(--oro); font-weight: 700; }
   .insignia-nuevo {
     position: absolute; left: 0.7rem; top: 0.7rem; z-index: 3;
@@ -198,46 +240,19 @@
   .btn-fav.activo { background: rgba(255, 252, 245, 0.95); color: var(--terracota); }
   .btn-fav svg { width: 1.05rem; height: 1.05rem; }
 
-  /* ====== Hero deslizable ====== */
-  .heroes { display: flex; gap: 0.8rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0.2rem 1.3rem 0.2rem; scrollbar-width: none; }
-  .heroes::-webkit-scrollbar { display: none; }
-  .heroe { flex: 0 0 calc(100% - 2.6rem); scroll-snap-align: center; cursor: pointer; text-align: left; }
-  .heroe .foto { aspect-ratio: 4 / 4.4; border-radius: 1.9rem; box-shadow: 0 18px 40px rgba(24,14,6,0.22); }
-  .heroe .foto .contenido { padding: 1.15rem 1.2rem; }
-  .heroe .foto .contenido .eti { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--oro); }
-  .heroe .foto .contenido .n { font-size: 1.65rem; margin-top: 0.2rem; }
-  .heroe .foto .contenido .f { font-size: 0.82rem; color: rgba(255,251,242,0.88); margin-top: 0.3rem; line-height: 1.4; }
-  .puntos { display: flex; gap: 0.35rem; justify-content: center; padding: 0.7rem 0 0.2rem; }
-  .puntos span { width: 0.38rem; height: 0.38rem; border-radius: 999px; background: var(--p-linea); transition: background-color 0.25s, width 0.25s; }
-  .puntos span.activo { background: var(--terracota); width: 1.05rem; }
+  .seccion { display: flex; align-items: baseline; justify-content: space-between; padding: 1.25rem 1.3rem 0.55rem; }
+  .seccion h2 { font-size: 1.08rem; margin: 0; }
+  .seccion .sub { font-size: 0.68rem; font-weight: 700; color: var(--p-humo); letter-spacing: 0.04em; }
 
-  .seccion { display: flex; align-items: baseline; justify-content: space-between; padding: 1.4rem 1.3rem 0.65rem; }
-  .seccion h2 { font-size: 1.22rem; margin: 0; }
-  .seccion .sub { font-size: 0.72rem; font-weight: 700; color: var(--p-humo); letter-spacing: 0.04em; }
-
-  .carril { display: flex; gap: 0.75rem; overflow-x: auto; padding: 0.1rem 1.3rem 0.5rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .carril { display: flex; gap: 0.65rem; overflow-x: auto; padding: 0.1rem 1.3rem 0.45rem; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .carril::-webkit-scrollbar { display: none; }
-  .carril .celda { flex: 0 0 10.2rem; scroll-snap-align: start; }
+  .carril .celda { flex: 0 0 8.5rem; scroll-snap-align: start; }
+  .carril .celda .foto .contenido { padding: 0.7rem 0.75rem; }
+  .carril .celda .foto .contenido .n { font-size: 0.92rem; }
 
   .celda { position: relative; cursor: pointer; border: 0; background: none; padding: 0; font: inherit; color: inherit; text-align: left; }
-  .celda .foto { aspect-ratio: 4 / 5.1; }
-  .cuadricula { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; padding: 0 1.3rem; }
-
-  .accesos { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.6rem; padding: 0.9rem 1.3rem 0.2rem; }
-  .acceso {
-    appearance: none; border: 1px solid var(--p-linea); cursor: pointer; font: inherit;
-    background: var(--p-sup); color: var(--p-texto);
-    border-radius: 1.25rem; padding: 0.85rem 0.5rem 0.75rem;
-    display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
-    font-size: 0.72rem; font-weight: 700; transition: transform 0.12s;
-    box-shadow: 0 6px 18px rgba(24,14,6,0.07);
-  }
-  .acceso:active { transform: scale(0.94); }
-  .acceso .circ { width: 2.3rem; height: 2.3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-  .acceso .circ svg { width: 1.15rem; height: 1.15rem; }
-  .acceso.a1 .circ { background: rgba(182,83,39,0.14); color: var(--terracota); }
-  .acceso.a2 .circ { background: rgba(51,82,59,0.14); color: var(--bosque); }
-  .acceso.a3 .circ { background: rgba(201,161,90,0.2); color: #8a6117; }
+  .celda .foto { aspect-ratio: 4 / 4.9; }
+  .cuadricula { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; padding: 0 1.3rem; }
 
   /* ====== Perfil (hoja sobre hero) ====== */
   .perfil-hero { position: relative; height: 46vh; min-height: 300px; max-height: 400px; border-radius: 0; }
@@ -512,13 +527,25 @@ const CAFES = [
     a:["Wifi","Postres","Cierra tarde","Estacionamiento"], m:["con-amigos","tranquilo"],
     h:[["Lun – Dom","12:00 – 23:00"]] },
 ];
-const MOODS = [["para-trabajar","Para trabajar"],["para-una-cita","Para una cita"],["con-amigos","Con amigos"],["tranquilo","Tranquilo"],["al-aire-libre","Al aire libre"]];
+const MOODS = [["para-trabajar","Para chambear"],["para-una-cita","Para una cita"],["con-amigos","Con la banda"],["tranquilo","En calma"],["al-aire-libre","Al aire libre"]];
 const SECTORES = [["centro","Centro y B. Antiguo"],["valle","San Pedro y el Valle"],["poniente","Al poniente"],["sur","Al sur"]];
-const HEROES = ["obsidiana","casa-almendra","la-vereda","jardin-cuatro"];
+const DESTACADA = "obsidiana";
+/* Rumbos: la ciudad se navega por barrio, como se recomienda un café en la vida real. */
+const ZONAS = [
+  { id:"barrio-antiguo", n:"Barrio Antiguo", ab:"BA", c:["la-vereda","el-solar"], g:0 },
+  { id:"san-pedro", n:"San Pedro", ab:"SP", c:["casa-almendra","jardin-cuatro","alba-y-grano"], g:2 },
+  { id:"centro", n:"Centro", ab:"CE", c:["norte-tostadores","madrugada"], g:3 },
+  { id:"cumbres", n:"Cumbres", ab:"CU", c:["cerro-verde"], g:1 },
+  { id:"san-jeronimo", n:"San Jerónimo", ab:"SJ", c:["obsidiana"], g:0 },
+  { id:"purisima", n:"La Purísima", ab:"LP", c:["la-tejedora"], g:2 },
+  { id:"tec", n:"Tec", ab:"TEC", c:["punto-y-coma"], g:3 },
+  { id:"contry", n:"Contry", ab:"CO", c:["faro-sur"], g:1 },
+  { id:"san-nicolas", n:"San Nicolás", ab:"SN", c:[], g:0, prox:true },
+  { id:"guadalupe", n:"Guadalupe", ab:"GP", c:[], g:1, prox:true },
+];
 const COLECCIONES = [
-  { t:"Para trabajar toda la mañana", b:"wifi + enchufes", c:["punto-y-coma","bruma","norte-tostadores","alba-y-grano"] },
-  { t:"Joyas escondidas", b:"de boca en boca", c:["jardin-cuatro","la-tejedora","cerro-verde","faro-sur"] },
-  { t:"Donde van los regulares", b:"sin poses", c:["madrugada","cerro-verde","el-solar","punto-y-coma"] },
+  { t:"De estreno", b:"recién abiertos", c:["obsidiana","jardin-cuatro","alba-y-grano"] },
+  { t:"Los infalibles", b:"nunca fallan", c:["madrugada","cerro-verde","el-solar","punto-y-coma","la-vereda"] },
 ];
 const RUTAS = [
   { s:"sabado-en-san-pedro", t:"Sábado en San Pedro", b:"Tres cafés para una mañana lenta.", z:"San Pedro", dur:"Una mañana", g:2,
@@ -556,7 +583,7 @@ function escribir(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } cat
 const K = { f:"cafeto-demo:favoritos", v:"cafeto-demo:visitados", r:"cafeto-demo:rutas" };
 function alternar(k, valor){ const l = leer(k); escribir(k, l.includes(valor) ? l.filter(x => x !== valor) : [...l, valor]); }
 
-const S = { vista:"descubre", cafe:null, ruta:null, desde:null, mood:"todos", rMood:null, rSector:null };
+const S = { vista:"descubre", cafe:null, ruta:null, zona:null, desde:null, mood:"todos", rMood:null, rSector:null };
 let girando = false, ruedaCandidatos = [], anguloRueda = 0;
 const menosMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -586,45 +613,70 @@ function vDescubre(){
   const chipsMood = [chip(S.mood === "todos", "mood", 'data-m="todos"', "Todos")]
     .concat(MOODS.map(([id, tx]) => chip(S.mood === id, "mood", `data-m="${id}"`, tx))).join("");
   const visibles = S.mood === "todos" ? CAFES : CAFES.filter(c => c.m.includes(S.mood));
+  const dest = cafeDe(DESTACADA);
   return `
     <div class="top">
       <span class="marca">Cafeto</span>
       <span class="pin-ciudad">${I.pin} Monterrey</span>
     </div>
     <div class="lado">
-      <h1 class="titulo-pantalla">¿A dónde vamos por café hoy?</h1>
-      <p class="bajada-pantalla">Escogidos uno por uno. Sin listas infinitas, sin estrellitas.</p>
+      <h1 class="titulo-pantalla" style="font-size:1.6rem">¿A dónde vamos por café?</h1>
     </div>
-    <div class="heroes" id="heroes">
-      ${HEROES.map(s => { const c = cafeDe(s); return `
-        <div class="heroe" role="button" tabindex="0" data-a="ver-cafe" data-s="${c.s}" data-desde="descubre">
-          <div class="foto" style="background:${FONDOS[c.g]}">
-            <svg class="marca-agua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4.5 9h12v5.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5V9z"/><path d="M16.5 10h1.5a2.5 2.5 0 0 1 0 5h-1.7"/><path d="M8 5.5v1.2M11 4.5v2.2M14 5.5v1.2"/></svg>
-            <div class="velo"></div>
-            ${c.nuevo ? '<span class="insignia-nuevo">Nuevo</span>' : ""}
-            ${botonFav(c)}
-            <div class="contenido">
-              <div class="eti">Selección de la semana</div>
-              <div class="n">${c.n}</div>
-              <div class="f">${c.f}</div>
-            </div>
-          </div>
-        </div>`; }).join("")}
+    <button class="buscador" data-a="ir-todos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>
+      ¿Qué se te antoja hoy?
+    </button>
+
+    <div class="seccion"><h2>Por el rumbo</h2><span class="sub">tu barrio primero</span></div>
+    <div class="zonas">
+      ${ZONAS.map(z => z.prox
+        ? `<div class="zona-circ prox" aria-disabled="true"><span class="circ">${z.ab}</span><span class="nom">${z.n}</span><span class="cant">pronto</span></div>`
+        : `<button class="zona-circ" data-a="ver-zona" data-z="${z.id}">
+            <span class="circ" style="background:${FONDOS[z.g]}">${z.ab}</span>
+            <span class="nom">${z.n}</span>
+            <span class="cant">${z.c.length} ${z.c.length === 1 ? "café" : "cafés"}</span>
+          </button>`).join("")}
     </div>
-    <div class="puntos" id="puntos" aria-hidden="true">${HEROES.map((_, i) => `<span class="${i === 0 ? "activo" : ""}"></span>`).join("")}</div>
-    <div class="accesos">
-      <button class="acceso a1" data-a="ir" data-v="ruleta"><span class="circ">${I.rueda}</span>Ruleta</button>
-      <button class="acceso a2" data-a="ir" data-v="rutas"><span class="circ">${I.mapa}</span>Rutas</button>
-      <button class="acceso a3" data-a="ir" data-v="retos"><span class="circ">${I.premio}</span>Retos</button>
-    </div>
+
+    ${dest ? `
+    <div class="seccion"><h2>La selección de la semana</h2></div>
+    <div class="destacada" role="button" tabindex="0" data-a="ver-cafe" data-s="${dest.s}" data-desde="descubre">
+      <div class="foto" style="background:${FONDOS[dest.g]}">
+        <svg class="marca-agua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4.5 9h12v5.5a4.5 4.5 0 0 1-4.5 4.5H9a4.5 4.5 0 0 1-4.5-4.5V9z"/><path d="M16.5 10h1.5a2.5 2.5 0 0 1 0 5h-1.7"/><path d="M8 5.5v1.2M11 4.5v2.2M14 5.5v1.2"/></svg>
+        <div class="velo"></div>
+        ${dest.nuevo ? '<span class="insignia-nuevo">Nuevo</span>' : ""}
+        ${botonFav(dest)}
+        <div class="contenido">
+          <div class="eti">El favorito de la semana</div>
+          <div class="n">${dest.n}</div>
+          <div class="z"><span>${dest.z}</span><span class="pts">${dest.p}</span></div>
+        </div>
+      </div>
+    </div>` : ""}
+
     ${COLECCIONES.map(col => `
       <div class="seccion"><h2>${col.t}</h2><span class="sub">${col.b}</span></div>
       <div class="carril">${col.c.map(s => celda(cafeDe(s), "descubre")).join("")}</div>
     `).join("")}
-    <div class="seccion"><h2>Todos los cafés</h2><span class="sub">${CAFES.length} lugares</span></div>
+    <div class="seccion" id="todos"><h2>Todos los cafés</h2><span class="sub">${CAFES.length} lugares</span></div>
     <div class="fila-chips">${chipsMood}</div>
     <div class="cuadricula">${visibles.map(c => celda(c, "descubre")).join("")}</div>
     <p class="pie-demo">Demo de Cafeto — un solo archivo, sin instalación. La app completa (Next.js) vive en el repositorio bajo /cafeto. © 2026 Cafeto · Hecho en Monterrey.</p>`;
+}
+
+function vZona(){
+  const z = ZONAS.find(x => x.id === S.zona); if (!z) { S.vista = "descubre"; return vDescubre(); }
+  const cafes = z.c.map(cafeDe).filter(Boolean);
+  return `
+    <div class="top">
+      <button class="chip" data-a="ir" data-v="descubre" style="display:inline-flex;align-items:center;gap:0.25rem">${I.atras} Rumbos</button>
+      <span class="pin-ciudad">${I.pin} ${cafes.length} ${cafes.length === 1 ? "café" : "cafés"}</span>
+    </div>
+    <div class="lado">
+      <h1 class="titulo-pantalla" style="font-size:1.6rem">${z.n}</h1>
+      <p class="bajada-pantalla">Lo que vale la pena por este rumbo, escogido uno por uno.</p>
+    </div>
+    <div class="cuadricula">${cafes.map(c => celda(c, "zona")).join("")}</div>`;
 }
 
 function vCafe(){
@@ -914,7 +966,7 @@ function vGuardados(){
 }
 
 /* ============ Render y eventos ============ */
-const VISTAS = { descubre: vDescubre, cafe: vCafe, ruleta: vRuleta, rutas: vRutas, ruta: vRuta, retos: vRetos, guardados: vGuardados };
+const VISTAS = { descubre: vDescubre, zona: vZona, cafe: vCafe, ruleta: vRuleta, rutas: vRutas, ruta: vRuta, retos: vRetos, guardados: vGuardados };
 const TABS = [
   ["descubre", "Descubre", "brujula"], ["ruleta", "Ruleta", "rueda"], ["rutas", "Rutas", "mapa"],
   ["retos", "Retos", "premio"], ["guardados", "Guardados", "marcador"],
@@ -926,18 +978,11 @@ const telefono = document.getElementById("telefono");
 function render(subir = true, animar = true){
   telefono.dataset.v = S.vista;
   principal.innerHTML = `<div class="${animar ? "vista-anim" : ""}">${VISTAS[S.vista]()}</div>`;
-  const tabActiva = S.vista === "cafe" ? (S.desde === "ruleta" ? "ruleta" : S.desde === "ruta" ? "rutas" : S.desde || "descubre")
-    : S.vista === "ruta" ? "rutas" : S.vista;
+  const tabActiva = S.vista === "cafe" ? (S.desde === "ruleta" ? "ruleta" : S.desde === "ruta" ? "rutas" : S.desde === "guardados" ? "guardados" : "descubre")
+    : S.vista === "ruta" ? "rutas" : S.vista === "zona" ? "descubre" : S.vista;
   barraTabs.innerHTML = TABS.map(([v, tx, ic]) =>
     `<button class="tab ${tabActiva === v ? "activa" : ""}" data-a="ir" data-v="${v}" ${tabActiva === v ? 'aria-current="page"' : ""}>${I[ic]}${tx}</button>`).join("");
   if (subir) principal.scrollTop = 0;
-  const heroes = document.getElementById("heroes");
-  if (heroes) {
-    heroes.addEventListener("scroll", () => {
-      const i = Math.round(heroes.scrollLeft / heroes.clientWidth);
-      document.querySelectorAll("#puntos span").forEach((p, j) => p.classList.toggle("activo", j === i));
-    }, { passive: true });
-  }
 }
 
 document.addEventListener("click", e => {
@@ -945,6 +990,8 @@ document.addEventListener("click", e => {
   if (el) {
     const a = el.dataset.a;
     if (a === "ir") { cerrarResultado(); girando = false; S.vista = el.dataset.v; render(); }
+    else if (a === "ver-zona") { S.zona = el.dataset.z; S.vista = "zona"; render(); }
+    else if (a === "ir-todos") { const t = document.getElementById("todos"); if (t) t.scrollIntoView({ behavior: menosMovimiento ? "auto" : "smooth" }); }
     else if (a === "ver-cafe") { cerrarResultado(); S.cafe = el.dataset.s; S.desde = el.dataset.desde || "descubre"; S.vista = "cafe"; render(); }
     else if (a === "ver-ruta") { S.ruta = el.dataset.s; S.vista = "ruta"; render(); }
     else if (a === "fav") { alternar(K.f, el.dataset.s); render(false, false); }
