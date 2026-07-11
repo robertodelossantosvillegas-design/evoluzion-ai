@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TopBar } from "@/components/cafeto/CafetoNav";
 import RuletaClient from "@/components/cafeto/RuletaClient";
 
 export const metadata: Metadata = {
@@ -9,22 +10,20 @@ export const metadata: Metadata = {
 
 export default function PaginaRuleta() {
   return (
-    <main className="mx-auto max-w-6xl px-5 pb-20 pt-10 md:px-8 md:pt-14">
-      <header className="max-w-xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-terracota-2">
-          Ruleta de café
-        </p>
-        <h1 className="mt-3 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-          ¿No sabes a dónde? Perfecto.
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-espresso-2">
-          Dinos qué plan traes y por dónde andas. La ruleta hace el resto — y
-          tiene buen gusto.
-        </p>
-      </header>
-
-      <div className="mt-10">
-        <RuletaClient />
+    <main className="pb-20">
+      <TopBar />
+      <div className="mx-auto max-w-3xl px-5 pt-4 md:px-8 md:pt-10">
+        <header>
+          <h1 className="font-serif text-3xl font-semibold tracking-tight md:text-4xl">
+            La ruleta decide
+          </h1>
+          <p className="mt-1 text-espresso-2">
+            Tu plan, tu zona — y una vuelta con buen gusto.
+          </p>
+        </header>
+        <div className="mt-6">
+          <RuletaClient />
+        </div>
       </div>
     </main>
   );

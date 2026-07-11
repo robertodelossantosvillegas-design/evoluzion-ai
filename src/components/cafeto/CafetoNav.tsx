@@ -3,35 +3,37 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  Award,
   Bookmark,
   Compass,
-  Dices,
   Map,
-  Store,
+  MapPin,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { useScrolled } from "@/lib/hooks";
+import { RuedaIcono } from "./iconos";
 
 interface Enlace {
   href: string;
   etiqueta: string;
-  icono: LucideIcon;
+  icono: LucideIcon | typeof RuedaIcono;
   exacto?: boolean;
 }
 
 const ENLACES: Enlace[] = [
   { href: "/cafeto/", etiqueta: "Descubre", icono: Compass, exacto: true },
-  { href: "/cafeto/ruleta/", etiqueta: "Ruleta", icono: Dices },
-  { href: "/cafeto/rutas/", etiqueta: "Rutas", icono: Map },
-  { href: "/cafeto/retos/", etiqueta: "Retos", icono: Award },
+  { href: "/cafeto/mapa/", etiqueta: "Mapa", icono: Map },
+  { href: "/cafeto/ruleta/", etiqueta: "Ruleta", icono: RuedaIcono },
+  { href: "/cafeto/comunidad/", etiqueta: "Comunidad", icono: Users },
   { href: "/cafeto/favoritos/", etiqueta: "Guardados", icono: Bookmark },
 ];
 
 function esActivo(pathname: string, href: string, exacto?: boolean) {
   const limpio = pathname.replace(/\/+$/, "") || "/";
   const objetivo = href.replace(/\/+$/, "");
-  return exacto ? limpio === objetivo : limpio.startsWith(objetivo);
+  if (exacto) return limpio === objetivo || limpio.startsWith("/cafeto/rumbos");
+  if (objetivo.endsWith("/mapa")) return limpio.startsWith(objetivo) || limpio.startsWith("/cafeto/rutas");
+  return limpio.startsWith(objetivo);
 }
 
 export function CafetoNav() {
@@ -40,7 +42,7 @@ export function CafetoNav() {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-colors duration-300 ${
+      className={`sticky top-0 z-40 hidden transition-colors duration-300 md:block ${
         conFondo
           ? "border-b border-linea bg-crema/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
@@ -59,7 +61,7 @@ export function CafetoNav() {
           />
         </Link>
 
-        <nav aria-label="Principal" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Principal" className="flex items-center gap-1">
           {ENLACES.map(({ href, etiqueta, exacto }) => {
             const activo = esActivo(pathname, href, exacto);
             return (
@@ -85,14 +87,6 @@ export function CafetoNav() {
             Para cafeterías
           </Link>
         </nav>
-
-        <Link
-          href="/cafeto/negocios/"
-          aria-label="Para cafeterías"
-          className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-espresso-2 transition-colors duration-200 hover:bg-crema-2 md:hidden"
-        >
-          <Store className="h-5 w-5" aria-hidden />
-        </Link>
       </div>
     </header>
   );
@@ -102,32 +96,50 @@ export function BarraInferior() {
   const pathname = usePathname();
 
   return (
-    <nav
-      aria-label="Navegación inferior"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-linea bg-lienzo/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
-    >
-      <div className="mx-auto grid h-16 max-w-md grid-cols-5">
-        {ENLACES.map(({ href, etiqueta, icono: Icono, exacto }) => {
-          const activo = esActivo(pathname, href, exacto);
-          return (
-            <Link
-              key={href}
-              href={href}
-              aria-current={activo ? "page" : undefined}
-              className={`flex cursor-pointer flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors duration-200 ${
-                activo ? "text-terracota-2" : "text-humo hover:text-espresso"
-              }`}
-            >
-              <Icono
-                className="h-5 w-5"
-                strokeWidth={activo ? 2.2 : 1.8}
-                aria-hidden
-              />
-              {etiqueta}
-            </Link>
-          );
-        })}
-      </div>
+    <nav aria-label="Navegación inferior" className="dock-cafeto md:hidden">
+      {ENLACES.map(({ href, etiqueta, icono: Icono, exacto }) => {
+        const activo = esActivo(pathname, href, exacto);
+        return (
+          <Link
+            key={href}
+            href={href}
+            aria-current={activo ? "page" : undefined}
+            className={`flex w-[3.7rem] cursor-pointer flex-col items-center justify-center gap-0.5 rounded-full py-2 text-[0.58rem] font-bold transition-all duration-200 active:scale-90 ${
+              activo
+                ? "bg-terracota-tinte text-terracota-2"
+                : "text-humo hover:text-espresso"
+            }`}
+          >
+            <Icono
+              className="h-[1.3rem] w-[1.3rem]"
+              strokeWidth={activo ? 2.1 : 1.8}
+              aria-hidden
+            />
+            {etiqueta}
+          </Link>
+        );
+      })}
     </nav>
+  );
+}
+
+export function TopBar({ derecha }: { derecha?: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between px-5 pt-3 md:hidden">
+      <Link
+        href="/cafeto/"
+        className="flex items-baseline gap-1.5 font-serif text-xl font-semibold tracking-tight"
+        aria-label="Cafeto, inicio"
+      >
+        Cafeto
+        <span aria-hidden className="mb-0.5 inline-block h-1.5 w-1.5 rounded-full bg-terracota" />
+      </Link>
+      {derecha ?? (
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-linea bg-lienzo px-3 py-1.5 text-xs font-bold text-espresso-2">
+          <MapPin className="h-3.5 w-3.5 text-terracota" aria-hidden />
+          Monterrey
+        </span>
+      )}
+    </div>
   );
 }

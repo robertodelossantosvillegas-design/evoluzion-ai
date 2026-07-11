@@ -89,13 +89,121 @@ h4 {
 
 /* Espacio para la barra de navegación inferior en móvil */
 .con-tabbar {
-  padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  padding-bottom: calc(6rem + env(safe-area-inset-bottom));
 }
 @media (min-width: 768px) {
   .con-tabbar {
     padding-bottom: 0;
   }
 }
+
+/* ---------- Escena oscura (Ruleta): la interfaz se tuesta ---------- */
+body {
+  transition: background-color 0.5s ease;
+}
+body[data-escena="oscura"] {
+  --crema: #1a110a;
+  --crema-2: #2e2015;
+  --lienzo: #241811;
+  --espresso: #f4ead9;
+  --espresso-2: #cbb59d;
+  --humo: #9b8570;
+  --linea: rgba(244, 234, 217, 0.12);
+  background: #1a110a;
+  color: #f4ead9;
+}
+body[data-escena="oscura"] .bg-crema { background-color: #1a110a; }
+body[data-escena="oscura"] .text-espresso { color: #f4ead9; }
+
+/* ---------- Dock flotante (móvil) ---------- */
+.dock-cafeto {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(0.9rem + env(safe-area-inset-bottom));
+  z-index: 40;
+  display: flex;
+  gap: 0.15rem;
+  align-items: center;
+  background: rgba(255, 252, 245, 0.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(60, 42, 26, 0.09);
+  border-radius: 999px;
+  padding: 0.32rem;
+  box-shadow: 0 10px 34px rgba(24, 14, 6, 0.22), 0 1px 2px rgba(24, 14, 6, 0.08);
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+body[data-escena="oscura"] .dock-cafeto {
+  background: rgba(36, 24, 17, 0.75);
+  border-color: rgba(244, 234, 217, 0.12);
+}
+
+/* ---------- Mapa Cafeto ---------- */
+.m-calle { stroke: #e2d7c0; stroke-width: 3; fill: none; stroke-linecap: round; }
+.m-avenida { stroke: #d8cbb0; stroke-width: 5; fill: none; stroke-linecap: round; }
+.m-rio { stroke: #b8c9c4; stroke-width: 9; fill: none; stroke-linecap: round; opacity: 0.85; }
+.m-parque { fill: #dde4d2; }
+.m-cerro { fill: #d8cfba; }
+.m-etiqueta {
+  font-family: var(--font-instrument), sans-serif;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  fill: #a08a72;
+  text-transform: uppercase;
+}
+.m-rio-txt { font-size: 8.5px; fill: #8fa39d; font-style: italic; letter-spacing: 0.06em; }
+.pin-mapa { cursor: pointer; transition: transform 0.18s; transform-box: fill-box; transform-origin: center bottom; }
+.pin-mapa:hover { transform: scale(1.08); }
+.pin-mapa.activo { transform: scale(1.22); }
+.pin-mapa .gota { fill: var(--terracota); stroke: #fffcf5; stroke-width: 2; filter: drop-shadow(0 3px 4px rgba(24, 14, 6, 0.3)); }
+.pin-mapa.activo .gota { fill: var(--espresso); }
+.m-trazo { stroke: var(--espresso); stroke-width: 2.6; stroke-dasharray: 1 7; fill: none; stroke-linecap: round; opacity: 0.75; }
+
+/* ---------- Rueda de la ruleta ---------- */
+.g-rueda { transform-origin: 150px 150px; }
+.g-rueda.girando { transition: transform 3.4s cubic-bezier(0.12, 0.72, 0.1, 1); }
+
+/* ---------- Escáner QR ---------- */
+.visor-qr {
+  position: relative;
+  width: 11rem;
+  height: 11rem;
+  margin: 0.8rem auto;
+  border-radius: 1.4rem;
+  background: repeating-conic-gradient(#241a12 0% 25%, #3a2a1c 0% 50%) 50% / 1.1rem 1.1rem;
+  overflow: hidden;
+}
+.visor-qr::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 3px #c9a15a, inset 0 0 3rem rgba(0, 0, 0, 0.55);
+  border-radius: 1.4rem;
+  z-index: 2;
+}
+.laser-qr {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  height: 3px;
+  background: var(--terracota);
+  border-radius: 999px;
+  box-shadow: 0 0 14px rgba(182, 83, 39, 0.9);
+  top: 8%;
+  animation: barrer-qr 1.15s ease-in-out infinite alternate;
+  z-index: 3;
+}
+@keyframes barrer-qr {
+  from { top: 8%; }
+  to { top: 88%; }
+}
+
+/* ---------- Sellos del pasaporte ---------- */
+.sello-cafeto { transform: rotate(-4deg); }
+.sello-cafeto:nth-child(2n) { transform: rotate(3deg); }
+.sello-cafeto:nth-child(3n) { transform: rotate(-2deg); }
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -107,5 +215,9 @@ h4 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .laser-qr {
+    animation: none;
+    top: 48%;
   }
 }

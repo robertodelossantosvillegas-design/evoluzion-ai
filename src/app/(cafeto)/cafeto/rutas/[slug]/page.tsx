@@ -50,11 +50,11 @@ export default async function PaginaRuta({
           className="aspect-[16/9] rounded-[2rem] shadow-taza-lg"
         />
         <Link
-          href="/cafeto/rutas/"
+          href="/cafeto/mapa/"
           className="absolute left-4 top-4 inline-flex h-11 cursor-pointer items-center gap-1.5 rounded-full bg-crema/90 pl-3 pr-4 text-sm font-medium text-espresso backdrop-blur-sm transition-colors duration-200 hover:bg-crema"
         >
           <ChevronLeft className="h-4 w-4" aria-hidden />
-          Rutas
+          Mapa
         </Link>
       </div>
 

@@ -6,18 +6,27 @@ import FavoritoBtn from "./FavoritoBtn";
 
 interface Props {
   cafe: Cafe;
-  /** "columna": para cuadrículas fluidas · "panorama": ancho fijo en filas horizontales */
-  variante?: "columna" | "panorama";
+  /** "columna": cuadrícula fluida · "panorama": ancho fijo en rieles · "destacada": tarjeta ancha 16/9 */
+  variante?: "columna" | "panorama" | "destacada";
   prioridad?: boolean;
+  /** A dónde regresa el perfil (se anexa como ?de=) — solo informativo por ahora. */
+  eyebrow?: string;
 }
 
 export default function CafeCard({
   cafe,
   variante = "columna",
   prioridad = false,
+  eyebrow,
 }: Props) {
   const anchoFijo =
-    variante === "panorama" ? "w-[16.5rem] shrink-0 snap-start sm:w-72" : "";
+    variante === "panorama" ? "w-[8.6rem] shrink-0 snap-start sm:w-40" : "";
+  const aspecto =
+    variante === "destacada"
+      ? "aspect-[16/9.6]"
+      : variante === "panorama"
+        ? "aspect-[4/5.2]"
+        : "aspect-[4/4.9]";
 
   return (
     <article className={`relative ${anchoFijo}`}>
@@ -29,37 +38,57 @@ export default function CafeCard({
           <CafePhoto
             id={cafe.fotos.hero}
             alt={`Foto de ${cafe.nombre}`}
-            ancho={800}
-            sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 90vw"
+            ancho={variante === "destacada" ? 1200 : 640}
+            sizes={
+              variante === "destacada"
+                ? "(min-width: 768px) 640px, 92vw"
+                : "(min-width: 640px) 220px, 45vw"
+            }
             prioridad={prioridad}
             conZoom
-            className="aspect-[4/5] rounded-3xl"
+            className={`${aspecto} ${variante === "destacada" ? "rounded-[1.6rem]" : "rounded-3xl"} shadow-taza`}
+          />
+          <span
+            aria-hidden
+            className={`pointer-events-none absolute inset-0 ${variante === "destacada" ? "rounded-[1.6rem]" : "rounded-3xl"} bg-gradient-to-t from-[#140b04]/75 via-[#140b04]/10 to-transparent`}
           />
           {cafe.nuevo && (
-            <span className="absolute left-3 top-3 rounded-full bg-oro-tinte/95 px-3 py-1 text-xs font-semibold text-oro">
+            <span className="absolute left-2.5 top-2.5 rounded-full bg-oro-tinte/95 px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-wider text-oro">
               Nuevo
             </span>
           )}
-        </div>
-        <div className="px-1 pt-3">
-          <div className="flex items-baseline justify-between gap-3">
-            <h3 className="font-serif text-lg font-semibold leading-snug">
+          <div
+            className={`pointer-events-none absolute inset-x-0 bottom-0 ${variante === "destacada" ? "p-4" : "p-3"} text-white`}
+          >
+            {eyebrow && (
+              <p className="mb-0.5 text-[0.58rem] font-extrabold uppercase tracking-[0.15em] text-[#e8c98a]">
+                {eyebrow}
+              </p>
+            )}
+            <h3
+              className={`font-serif font-semibold leading-tight [text-shadow:0_1px_8px_rgba(0,0,0,0.35)] ${
+                variante === "destacada"
+                  ? "text-2xl"
+                  : variante === "panorama"
+                    ? "text-[0.95rem]"
+                    : "text-lg"
+              }`}
+            >
               {cafe.nombre}
             </h3>
-            <span className="text-sm text-humo">
-              {PRECIO_SIMBOLO[cafe.precio]}
-            </span>
+            <p className="mt-0.5 flex min-w-0 items-center gap-2 text-xs font-medium text-white/85">
+              <span className="truncate">{cafe.zona}</span>
+              <span className="shrink-0 font-bold text-[#e8c98a]">
+                {PRECIO_SIMBOLO[cafe.precio]}
+              </span>
+            </p>
           </div>
-          <p className="mt-0.5 text-sm text-humo">{cafe.zona}</p>
-          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-espresso-2">
-            {cafe.frase}
-          </p>
         </div>
       </Link>
       <FavoritoBtn
         slug={cafe.slug}
         nombre={cafe.nombre}
-        className="absolute right-3 top-3 z-10"
+        className="absolute right-2.5 top-2.5 z-10"
       />
     </article>
   );

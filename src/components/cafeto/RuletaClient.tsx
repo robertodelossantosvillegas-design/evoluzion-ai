@@ -2,16 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Dices, MapPin, RefreshCw } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
+import { MapPin, RefreshCw, X } from "lucide-react";
 import type { Cafe, Mood, Sector } from "@/lib/cafeto/types";
-import { CAFES, ETIQUETA_MOOD, SECTORES } from "@/lib/cafeto/data";
+import { CAFES, ETIQUETA_MOOD, PRECIO_SIMBOLO, SECTORES } from "@/lib/cafeto/data";
 import CafePhoto from "./CafePhoto";
 import FavoritoBtn from "./FavoritoBtn";
 
 const MOODS = Object.entries(ETIQUETA_MOOD) as [Mood, string][];
+const COLORES_RUEDA = ["#b65327", "#8a6117", "#33523b", "#6f4527", "#c9a15a", "#9c4318", "#4d6b52", "#a5744a"];
 
-type Fase = "inicio" | "girando" | "resultado";
+function candidatosDe(mood: Mood | null, sector: Sector | null): Cafe[] {
+  return CAFES.filter(
+    (c) =>
+      (mood === null || c.moods.includes(mood)) &&
+      (sector === null || c.sector === sector),
+  );
+}
 
 function Chip({
   activo,
@@ -27,10 +34,10 @@ function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={activo}
-      className={`shrink-0 cursor-pointer rounded-full px-4 py-2.5 text-sm font-medium transition-colors duration-200 ${
+      className={`shrink-0 cursor-pointer rounded-full border px-4 py-2.5 text-sm font-medium transition-colors duration-200 ${
         activo
-          ? "bg-espresso text-crema"
-          : "bg-crema-2 text-espresso-2 hover:bg-linea"
+          ? "border-oro bg-oro text-[#241811]"
+          : "border-linea bg-lienzo text-espresso-2 hover:border-oro/50"
       }`}
     >
       {children}
@@ -38,64 +45,109 @@ function Chip({
   );
 }
 
-function candidatosDe(mood: Mood | null, sector: Sector | null): Cafe[] {
-  const filtrados = CAFES.filter(
-    (c) =>
-      (mood === null || c.moods.includes(mood)) &&
-      (sector === null || c.sector === sector),
-  );
-  // Los cafés con plan Destacado aparecen con prioridad (doble boleto).
-  return filtrados.flatMap((c) => (c.destacado ? [c, c] : [c]));
-}
-
-function alAzar<T>(lista: T[], excepto?: T): T {
-  const opciones =
-    lista.length > 1 && excepto ? lista.filter((x) => x !== excepto) : lista;
-  return opciones[Math.floor(Math.random() * opciones.length)];
-}
-
 export default function RuletaClient() {
   const [mood, setMood] = useState<Mood | null>(null);
   const [sector, setSector] = useState<Sector | null>(null);
-  const [fase, setFase] = useState<Fase>("inicio");
-  const [actual, setActual] = useState<Cafe | null>(null);
-  const temporizadores = useRef<number[]>([]);
+  const [girando, setGirando] = useState(false);
+  const [ganador, setGanador] = useState<Cafe | null>(null);
+  const anguloRef = useRef(0);
+  const ruedaRef = useRef<SVGGElement | null>(null);
+  const timeoutRef = useRef<number | null>(null);
   const menosMovimiento = useReducedMotion();
 
-  const candidatos = candidatosDe(mood, sector);
-  const unicos = [...new Set(candidatos)];
-
+  /* Toda la interfaz se "tuesta" mientras vives la ruleta. */
   useEffect(() => {
-    const pendientes = temporizadores.current;
-    return () => pendientes.forEach((t) => window.clearTimeout(t));
+    document.body.dataset.escena = "oscura";
+    return () => {
+      delete document.body.dataset.escena;
+    };
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  const candidatos = candidatosDe(mood, sector);
+  const n = candidatos.length;
+  const seg = n > 0 ? 360 / n : 360;
+
   function girar() {
-    if (candidatos.length === 0) return;
-    temporizadores.current.forEach((t) => window.clearTimeout(t));
-    temporizadores.current = [];
-
-    const eleccion = alAzar(candidatos, actual ?? undefined);
-
-    if (menosMovimiento || unicos.length === 1) {
-      setActual(eleccion);
-      setFase("resultado");
+    if (!n || girando) return;
+    const w = Math.floor(Math.random() * n);
+    const elegido = candidatos[w];
+    if (menosMovimiento || n === 1) {
+      setGanador(elegido);
       return;
     }
+    setGirando(true);
+    const g = ruedaRef.current;
+    if (!g) return;
+    const centro = w * seg + seg / 2;
+    const vueltas = 5 + Math.floor(Math.random() * 2);
+    const desvio = (Math.random() - 0.5) * seg * 0.5;
+    const destino =
+      anguloRef.current +
+      360 * vueltas +
+      ((360 - centro - (anguloRef.current % 360) + 720) % 360) +
+      desvio;
+    g.classList.add("girando");
+    requestAnimationFrame(() => {
+      g.style.transform = `rotate(${destino}deg)`;
+    });
+    const terminar = () => {
+      g.removeEventListener("transitionend", terminar);
+      anguloRef.current = destino % 360;
+      setGirando(false);
+      setGanador(elegido);
+    };
+    g.addEventListener("transitionend", terminar);
+    timeoutRef.current = window.setTimeout(terminar, 3900);
+  }
 
-    setFase("girando");
-    // Barajado que se desacelera: rápido al inicio, se asienta al final.
-    const pasos = [0, 110, 230, 360, 510, 690, 910, 1180, 1500];
-    pasos.forEach((espera, i) => {
-      const id = window.setTimeout(() => {
-        if (i < pasos.length - 1) {
-          setActual((previo) => alAzar(unicos, previo ?? undefined));
-        } else {
-          setActual(eleccion);
-          setFase("resultado");
-        }
-      }, espera);
-      temporizadores.current.push(id);
+  function segmentos() {
+    const cx = 150, cy = 150, r = 144;
+    if (n === 1) {
+      return (
+        <>
+          <circle cx={cx} cy={cy} r={r} fill={COLORES_RUEDA[0]} stroke="#120b06" strokeWidth="3" />
+          <text x={cx} y={86} textAnchor="middle" className="fill-[#fffaee] font-serif" fontSize="21" fontWeight="650">
+            {candidatos[0].nombre.slice(0, 1)}
+          </text>
+        </>
+      );
+    }
+    return candidatos.map((cafe, i) => {
+      const a0 = ((-90 + i * seg) * Math.PI) / 180;
+      const a1 = ((-90 + (i + 1) * seg) * Math.PI) / 180;
+      const x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0);
+      const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+      const am = ((-90 + i * seg + seg / 2) * Math.PI) / 180;
+      const tx = cx + r * 0.68 * Math.cos(am), ty = cy + r * 0.68 * Math.sin(am);
+      const rot = -90 + i * seg + seg / 2 + 90;
+      return (
+        <g key={cafe.slug}>
+          <path
+            d={`M${cx},${cy} L${x0.toFixed(1)},${y0.toFixed(1)} A${r},${r} 0 ${seg > 180 ? 1 : 0} 1 ${x1.toFixed(1)},${y1.toFixed(1)} Z`}
+            fill={COLORES_RUEDA[i % COLORES_RUEDA.length]}
+            stroke="#120b06"
+            strokeWidth="2.5"
+          />
+          <text
+            x={tx.toFixed(1)}
+            y={ty.toFixed(1)}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            transform={`rotate(${rot.toFixed(1)} ${tx.toFixed(1)} ${ty.toFixed(1)})`}
+            fontSize="21"
+            fontWeight="650"
+            style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fill: "rgba(255,250,238,0.95)" }}
+          >
+            {cafe.nombre.slice(0, 1)}
+          </text>
+        </g>
+      );
     });
   }
 
@@ -104,159 +156,151 @@ export default function RuletaClient() {
       <fieldset>
         <legend className="text-sm font-medium text-humo">¿Qué plan traes?</legend>
         <div className="sin-scrollbar -mx-5 mt-3 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:flex-wrap md:px-0">
-          <Chip activo={mood === null} onClick={() => setMood(null)}>
+          <Chip activo={mood === null} onClick={() => { setMood(null); setGanador(null); }}>
             Sorpréndeme
           </Chip>
-          {MOODS.map(([id, etiqueta]) => (
-            <Chip key={id} activo={mood === id} onClick={() => setMood(id)}>
-              {etiqueta}
+          {MOODS.map(([id, tx]) => (
+            <Chip key={id} activo={mood === id} onClick={() => { setMood(id); setGanador(null); }}>
+              {tx}
             </Chip>
           ))}
         </div>
       </fieldset>
 
-      <fieldset className="mt-5">
+      <fieldset className="mt-4">
         <legend className="text-sm font-medium text-humo">¿Por dónde andas?</legend>
         <div className="sin-scrollbar -mx-5 mt-3 flex gap-2 overflow-x-auto px-5 pb-1 md:mx-0 md:flex-wrap md:px-0">
-          <Chip activo={sector === null} onClick={() => setSector(null)}>
+          <Chip activo={sector === null} onClick={() => { setSector(null); setGanador(null); }}>
             Donde sea
           </Chip>
           {SECTORES.map((s) => (
-            <Chip
-              key={s.id}
-              activo={sector === s.id}
-              onClick={() => setSector(s.id)}
-            >
+            <Chip key={s.id} activo={sector === s.id} onClick={() => { setSector(s.id); setGanador(null); }}>
               {s.nombre}
             </Chip>
           ))}
         </div>
       </fieldset>
 
-      <div className="mt-10 flex flex-col items-center">
-        {candidatos.length === 0 ? (
-          <p className="w-full max-w-md rounded-3xl bg-crema-2 p-6 text-center text-espresso-2">
-            Ningún café coincide con esa combinación por ahora. Prueba con otra
-            zona u otro plan.
-          </p>
-        ) : (
-          <>
-            <div className="w-full max-w-md" aria-live="polite">
-              <AnimatePresence mode="wait" initial={false}>
-                {fase === "inicio" && (
-                  <motion.div
-                    key="inicio"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex aspect-[4/3] flex-col items-center justify-center rounded-[2rem] border-2 border-dashed border-linea bg-lienzo/60 px-8 text-center"
-                  >
-                    <Dices
-                      className="h-10 w-10 text-terracota"
-                      strokeWidth={1.5}
-                      aria-hidden
-                    />
-                    <p className="mt-4 font-serif text-xl font-medium">
-                      {unicos.length}{" "}
-                      {unicos.length === 1 ? "café en juego" : "cafés en juego"}
-                    </p>
-                    <p className="mt-1 text-sm text-humo">
-                      Gira y deja que el azar tenga buen gusto.
-                    </p>
-                  </motion.div>
-                )}
-
-                {fase === "girando" && actual && (
-                  <motion.div
-                    key={`girando-${actual.slug}`}
-                    initial={{ opacity: 0.4, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0.4, scale: 0.97 }}
-                    transition={{ duration: 0.09 }}
-                    className="overflow-hidden rounded-[2rem] border border-linea bg-lienzo shadow-taza"
-                  >
-                    <CafePhoto
-                      id={actual.fotos.hero}
-                      alt=""
-                      ancho={800}
-                      className="aspect-[16/10]"
-                    />
-                    <div className="px-6 py-4">
-                      <p className="font-serif text-xl font-semibold">
-                        {actual.nombre}
-                      </p>
-                      <p className="text-sm text-humo">{actual.zona}</p>
-                    </div>
-                  </motion.div>
-                )}
-
-                {fase === "resultado" && actual && (
-                  <motion.div
-                    key={`resultado-${actual.slug}`}
-                    initial={{ opacity: 0, scale: 0.94, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ type: "spring", stiffness: 240, damping: 22 }}
-                    className="relative overflow-hidden rounded-[2rem] border border-linea bg-lienzo shadow-taza-lg"
-                  >
-                    <CafePhoto
-                      id={actual.fotos.hero}
-                      alt={`Foto de ${actual.nombre}`}
-                      ancho={800}
-                      className="aspect-[16/10]"
-                    />
-                    <FavoritoBtn
-                      slug={actual.slug}
-                      nombre={actual.nombre}
-                      className="absolute right-4 top-4 z-10"
-                    />
-                    <div className="px-6 pb-6 pt-4 text-center">
-                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracota-2">
-                        Hoy toca
-                      </p>
-                      <p className="mt-1.5 font-serif text-3xl font-semibold tracking-tight">
-                        {actual.nombre}
-                      </p>
-                      <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-humo">
-                        <MapPin className="h-3.5 w-3.5" aria-hidden />
-                        {actual.zona}
-                      </p>
-                      <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-espresso-2">
-                        {actual.frase}
-                      </p>
-                      <Link
-                        href={`/cafeto/cafes/${actual.slug}/`}
-                        className="mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-terracota px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-terracota-2"
-                      >
-                        Ver perfil
-                        <ArrowRight className="h-4 w-4" aria-hidden />
-                      </Link>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
+      {n === 0 ? (
+        <p className="mx-auto mt-10 max-w-md rounded-3xl border-2 border-dashed border-linea p-6 text-center text-espresso-2">
+          Ningún café coincide con esa combinación por ahora. Prueba con otra zona
+          u otro plan.
+        </p>
+      ) : (
+        <div className="mt-8 flex flex-col items-center text-center">
+          <div className="relative w-[min(78vw,300px)]">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute -inset-[14%] rounded-full"
+              style={{ background: "radial-gradient(closest-side, rgba(201,161,90,0.18), transparent 72%)" }}
+            />
+            <span
+              aria-hidden
+              className="absolute -top-2 left-1/2 z-10 h-0 w-0 -translate-x-1/2 border-x-[0.72rem] border-t-[1.15rem] border-x-transparent border-t-oro drop-shadow-[0_3px_5px_rgba(0,0,0,0.45)]"
+            />
+            <svg
+              viewBox="0 0 300 300"
+              role="img"
+              aria-label={`Ruleta con ${n} cafés`}
+              className="relative block h-auto w-full drop-shadow-[0_18px_34px_rgba(0,0,0,0.45)]"
+            >
+              <circle cx="150" cy="150" r="149" fill="#120b06" />
+              <g ref={ruedaRef} className="g-rueda">
+                {segmentos()}
+              </g>
+              <circle cx="150" cy="150" r="146" fill="none" stroke="rgba(201,161,90,0.5)" strokeWidth="2" />
+            </svg>
             <button
               type="button"
               onClick={girar}
-              disabled={fase === "girando"}
-              className="mt-8 inline-flex h-14 cursor-pointer items-center gap-2.5 rounded-full bg-espresso px-8 text-base font-medium text-crema shadow-taza transition-all duration-200 hover:bg-espresso/90 disabled:cursor-default disabled:opacity-60"
+              disabled={girando}
+              className="absolute left-1/2 top-1/2 aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full font-serif text-sm font-bold tracking-[0.14em] text-oro transition-transform active:scale-95 disabled:cursor-default disabled:opacity-85"
+              style={{
+                background: "radial-gradient(circle at 32% 28%, #3a2818, #1c1108 78%)",
+                boxShadow: "0 0 0 5px rgba(201,161,90,0.55), 0 8px 22px rgba(0,0,0,0.5)",
+              }}
             >
-              {fase === "resultado" ? (
-                <>
-                  <RefreshCw className="h-5 w-5" aria-hidden />
-                  Girar otra vez
-                </>
-              ) : (
-                <>
-                  <Dices className="h-5 w-5" aria-hidden />
-                  Girar la ruleta
-                </>
-              )}
+              {girando ? "…" : "GIRAR"}
             </button>
-          </>
-        )}
-      </div>
+          </div>
+          <p className="mx-auto mt-5 max-w-xs text-sm leading-relaxed text-humo">
+            {n} {n === 1 ? "café" : "cafés"} en la rueda. Toca <strong>girar</strong> y
+            deja que el azar tenga buen gusto.
+          </p>
+        </div>
+      )}
+
+      {ganador && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center md:items-center">
+          <button
+            type="button"
+            aria-label="Cerrar resultado"
+            onClick={() => setGanador(null)}
+            className="absolute inset-0 bg-black/55 backdrop-blur-[3px]"
+          />
+          <div
+            role="dialog"
+            aria-label="Resultado de la ruleta"
+            className="relative z-10 w-full max-w-md overflow-hidden rounded-t-[2rem] bg-lienzo shadow-taza-lg md:rounded-[2rem]"
+          >
+            <div className="relative">
+              <CafePhoto
+                id={ganador.fotos.hero}
+                alt={`Foto de ${ganador.nombre}`}
+                ancho={900}
+                className="aspect-[16/8.5]"
+              />
+              <FavoritoBtn
+                slug={ganador.slug}
+                nombre={ganador.nombre}
+                className="absolute right-3 top-3 z-10"
+              />
+              <button
+                type="button"
+                onClick={() => setGanador(null)}
+                aria-label="Cerrar"
+                className="absolute left-3 top-3 z-10 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-espresso/40 text-white backdrop-blur-sm"
+              >
+                <X className="h-4 w-4" aria-hidden />
+              </button>
+            </div>
+            <div className="p-5 text-center">
+              <p className="text-[0.64rem] font-extrabold uppercase tracking-[0.2em] text-oro">
+                Hoy toca
+              </p>
+              <h2 className="mt-1 font-serif text-3xl font-semibold tracking-tight">
+                {ganador.nombre}
+              </h2>
+              <p className="mt-0.5 flex items-center justify-center gap-1.5 text-sm text-humo">
+                <MapPin className="h-3.5 w-3.5" aria-hidden />
+                {ganador.zona} · {PRECIO_SIMBOLO[ganador.precio]}
+              </p>
+              <p className="mx-auto mt-2.5 max-w-sm text-sm leading-relaxed text-espresso-2">
+                {ganador.frase}
+              </p>
+              <div className="mt-5 flex gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGanador(null);
+                    window.setTimeout(girar, menosMovimiento ? 0 : 320);
+                  }}
+                  className="flex-1 cursor-pointer rounded-full bg-crema-2 px-4 py-3.5 text-sm font-bold text-espresso transition-colors hover:bg-linea"
+                >
+                  <RefreshCw className="mr-1.5 inline h-4 w-4" aria-hidden />
+                  Otra vuelta
+                </button>
+                <Link
+                  href={`/cafeto/cafes/${ganador.slug}/`}
+                  className="flex-1 cursor-pointer rounded-full bg-terracota px-4 py-3.5 text-sm font-bold text-white transition-colors hover:bg-terracota-2"
+                >
+                  Ver perfil
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

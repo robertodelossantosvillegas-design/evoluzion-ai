@@ -3,9 +3,11 @@ import type {
   Cafe,
   Coleccion,
   Mood,
+  PostComunidad,
   Reto,
   Ruta,
   Sector,
+  Zona,
 } from "./types";
 
 /** URL de foto (Unsplash) al ancho pedido. */
@@ -14,12 +16,20 @@ export function fotoUrl(id: string, ancho: number): string {
 }
 
 export const ETIQUETA_MOOD: Record<Mood, string> = {
-  "para-trabajar": "Para trabajar",
+  "para-trabajar": "Para chambear",
   "para-una-cita": "Para una cita",
-  "con-amigos": "Con amigos",
-  tranquilo: "Tranquilo",
+  "con-amigos": "Con la banda",
+  tranquilo: "En calma",
   "al-aire-libre": "Al aire libre",
 };
+
+/* Gradientes cálidos para avatares y respaldos visuales. */
+export const TONOS_CALIDOS = [
+  "linear-gradient(150deg,#caa06b 0%,#a5744a 48%,#6f4527 100%)",
+  "linear-gradient(150deg,#b9bd9d 0%,#8b9474 48%,#525f42 100%)",
+  "linear-gradient(150deg,#d9b491 0%,#b07e52 48%,#7c4e2a 100%)",
+  "linear-gradient(150deg,#b79a86 0%,#8a6a55 48%,#4f3826 100%)",
+];
 
 export const ETIQUETA_AMENIDAD: Record<Amenidad, string> = {
   wifi: "Wifi",
@@ -415,9 +425,15 @@ export const COLECCIONES: Coleccion[] = [
   },
   {
     slug: "nuevos-este-mes",
-    titulo: "Nuevos este mes",
+    titulo: "De estreno",
     bajada: "Recién abiertos y ya con razones para volver.",
     cafes: ["obsidiana", "jardin-cuatro", "alba-y-grano"],
+  },
+  {
+    slug: "los-infalibles",
+    titulo: "Los infalibles",
+    bajada: "Los que nunca fallan, a cualquier hora.",
+    cafes: ["madrugada", "cerro-verde", "el-solar", "punto-y-coma", "la-vereda"],
   },
   {
     slug: "para-una-cita",
@@ -566,6 +582,64 @@ export const RETOS: Reto[] = [
     meta: 3,
     cafes: ["casa-almendra", "jardin-cuatro", "alba-y-grano"],
   },
+];
+
+/**
+ * Rumbos: la ciudad se navega por barrio, como se recomienda un café
+ * en la vida real. Las zonas "proximamente" muestran a dónde crece Cafeto.
+ */
+export const ZONAS: Zona[] = [
+  { slug: "barrio-antiguo", nombre: "Barrio Antiguo", abrev: "BA", cafes: ["la-vereda", "el-solar"] },
+  { slug: "san-pedro", nombre: "San Pedro", abrev: "SP", cafes: ["casa-almendra", "jardin-cuatro", "alba-y-grano"] },
+  { slug: "centro", nombre: "Centro", abrev: "CE", cafes: ["norte-tostadores", "madrugada"] },
+  { slug: "cumbres", nombre: "Cumbres", abrev: "CU", cafes: ["cerro-verde"] },
+  { slug: "san-jeronimo", nombre: "San Jerónimo", abrev: "SJ", cafes: ["obsidiana"] },
+  { slug: "la-purisima", nombre: "La Purísima", abrev: "LP", cafes: ["la-tejedora"] },
+  { slug: "tec", nombre: "Tec", abrev: "TEC", cafes: ["punto-y-coma"] },
+  { slug: "contry", nombre: "Contry", abrev: "CO", cafes: ["faro-sur"] },
+  { slug: "san-nicolas", nombre: "San Nicolás", abrev: "SN", cafes: [], proximamente: true },
+  { slug: "guadalupe", nombre: "Guadalupe", abrev: "GP", cafes: [], proximamente: true },
+];
+
+export function getZona(slug: string): Zona | undefined {
+  return ZONAS.find((z) => z.slug === slug);
+}
+
+export function cafesDeZona(zona: Zona): Cafe[] {
+  return zona.cafes.map((s) => getCafe(s)).filter((c): c is Cafe => Boolean(c));
+}
+
+/** Posiciones en el mapa estilizado de Monterrey (viewBox 0 0 400 460). */
+export const COORDS_MAPA: Record<string, [number, number]> = {
+  "cerro-verde": [96, 96],
+  obsidiana: [84, 208],
+  bruma: [152, 196],
+  "la-tejedora": [190, 168],
+  "norte-tostadores": [232, 176],
+  madrugada: [214, 206],
+  "la-vereda": [268, 206],
+  "el-solar": [292, 228],
+  "casa-almendra": [142, 320],
+  "jardin-cuatro": [104, 352],
+  "alba-y-grano": [196, 330],
+  "punto-y-coma": [252, 338],
+  "faro-sur": [306, 376],
+};
+
+/** Semilla del feed: momentos, no reseñas. */
+export const POSTS_SEMILLA: PostComunidad[] = [
+  { id: "p1", tipo: "checkin", quien: "Andrea", tono: 2, cafe: "la-vereda", hace: "hace 20 min", sello: true, antojosBase: 5,
+    texto: "El pan de elote no era leyenda. Patio para quedarse toda la tarde." },
+  { id: "p2", tipo: "cafe", quien: "Obsidiana", tono: 3, cafe: "obsidiana", hace: "hace 2 h", conFoto: true, antojosBase: 11,
+    texto: "Barra de temporada nueva: capuchino de cacao con chile. Del 10 al 31 de julio." },
+  { id: "p3", tipo: "insignia", quien: "Luis", tono: 1, hace: "hace 5 h", insignia: "Catador de métodos", antojosBase: 7,
+    texto: "Norte, Bruma y Obsidiana en una semana. Se dice fácil." },
+  { id: "p4", tipo: "checkin", quien: "Marifer", tono: 0, cafe: "jardin-cuatro", hace: "ayer", sello: true, conFoto: true, antojosBase: 14,
+    texto: "Encontramos la puerta verde. No les digo dónde es… ah no, sí: Casco de San Pedro." },
+  { id: "p5", tipo: "checkin", quien: "Diego", tono: 3, cafe: "punto-y-coma", hace: "ayer", antojosBase: 4,
+    texto: "Refill infinito + enchufes. Aquí se terminó la tesis, lo juro." },
+  { id: "p6", tipo: "cafe", quien: "El Solar", tono: 1, cafe: "el-solar", hace: "hace 2 días", antojosBase: 9,
+    texto: "Este sábado: mercadito de productores desde las 10:00. Traigan a sus perros." },
 ];
 
 export function getCafe(slug: string): Cafe | undefined {

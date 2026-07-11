@@ -76,6 +76,31 @@ export interface Ruta {
   paradas: ParadaRuta[];
 }
 
+export interface Zona {
+  slug: string;
+  nombre: string;
+  abrev: string;
+  cafes: string[];
+  proximamente?: boolean;
+}
+
+export type TipoPost = "checkin" | "insignia" | "cafe";
+
+export interface PostComunidad {
+  id: string;
+  tipo: TipoPost;
+  quien: string;
+  /** Índice del gradiente cálido para el avatar. */
+  tono: number;
+  cafe?: string;
+  hace: string;
+  texto?: string;
+  conFoto?: boolean;
+  sello?: boolean;
+  insignia?: string;
+  antojosBase?: number;
+}
+
 export type TipoReto = "visitas" | "favoritos" | "cafes";
 
 export interface Reto {

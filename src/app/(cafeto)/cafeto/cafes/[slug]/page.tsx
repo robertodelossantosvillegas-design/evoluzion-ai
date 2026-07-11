@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft, Clock, Coffee, MapPin, Navigation } from "lucide-react";
+import FavoritoBtn from "@/components/cafeto/FavoritoBtn";
 import {
   CAFES,
   cafesRelacionados,
@@ -59,41 +60,50 @@ export default async function PerfilCafe({
             sizes="(min-width: 1152px) 1088px, 92vw"
             className="aspect-[4/3] rounded-[2rem] shadow-taza-lg sm:aspect-[16/9]"
           />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-b from-[#140b04]/35 via-transparent to-[#140b04]/25"
+          />
           <Link
             href="/cafeto/"
-            className="absolute left-4 top-4 inline-flex h-11 cursor-pointer items-center gap-1.5 rounded-full bg-crema/90 pl-3 pr-4 text-sm font-medium text-espresso backdrop-blur-sm transition-colors duration-200 hover:bg-crema"
+            aria-label="Volver a Descubre"
+            className="absolute left-4 top-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-espresso/40 text-white backdrop-blur-md transition-transform duration-150 active:scale-90"
           >
-            <ChevronLeft className="h-4 w-4" aria-hidden />
-            Descubre
+            <ChevronLeft className="h-5 w-5" aria-hidden />
           </Link>
+          <FavoritoBtn
+            slug={cafe.slug}
+            nombre={cafe.nombre}
+            className="absolute right-4 top-4 z-10"
+          />
           {cafe.nuevo && (
-            <span className="absolute right-4 top-4 rounded-full bg-oro-tinte/95 px-3.5 py-1.5 text-sm font-semibold text-oro">
+            <span className="absolute left-[4.4rem] top-[1.35rem] rounded-full bg-oro-tinte/95 px-3 py-1 text-xs font-bold uppercase tracking-wider text-oro">
               Nuevo
             </span>
           )}
         </div>
 
-        <div className="mt-8 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="flex items-center gap-2 text-sm font-medium text-bosque">
-              <MapPin className="h-4 w-4" aria-hidden />
-              {cafe.zona}, {cafe.ciudad}
-              <span aria-hidden className="text-linea">
-                ·
-              </span>
-              <span aria-label={`Precio: ${PRECIO_SIMBOLO[cafe.precio]}`}>
-                {PRECIO_SIMBOLO[cafe.precio]}
-              </span>
-            </p>
-            <h1 className="mt-2 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
-              {cafe.nombre}
-            </h1>
+        <div className="mt-7">
+          <p className="flex items-center gap-2 text-sm font-medium text-bosque">
+            <MapPin className="h-4 w-4" aria-hidden />
+            {cafe.zona}, {cafe.ciudad}
+            <span aria-hidden className="text-linea">
+              ·
+            </span>
+            <span aria-label={`Precio: ${PRECIO_SIMBOLO[cafe.precio]}`}>
+              {PRECIO_SIMBOLO[cafe.precio]}
+            </span>
+          </p>
+          <h1 className="mt-2 font-serif text-4xl font-semibold tracking-tight md:text-5xl">
+            {cafe.nombre}
+          </h1>
+          <div className="mt-5 md:max-w-xl">
+            <PerfilAcciones
+              slug={cafe.slug}
+              nombre={cafe.nombre}
+              frase={cafe.frase}
+            />
           </div>
-          <PerfilAcciones
-            slug={cafe.slug}
-            nombre={cafe.nombre}
-            frase={cafe.frase}
-          />
         </div>
 
         <div className="mt-10 grid gap-10 md:grid-cols-[1.55fr_1fr] md:gap-14">

@@ -4,13 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Bookmark,
+  QrCode,
   Check,
   ChevronLeft,
   CreditCard,
   Dices,
   Eye,
   Info,
-  Map,
   Sparkles,
 } from "lucide-react";
 import type { Amenidad } from "@/lib/cafeto/types";
@@ -147,10 +147,11 @@ export default function PanelClient() {
             detalle="con prioridad de plan Destacado"
           />
           <TarjetaMetrica
-            icono={Map}
-            etiqueta="rutas que te incluyen"
-            valor="1"
-            detalle="«Sábado en San Pedro», parada 1"
+            icono={QrCode}
+            etiqueta="visitas verificadas por QR"
+            valor="23"
+            detalle="+9 esta semana"
+            positivo
           />
         </div>
 

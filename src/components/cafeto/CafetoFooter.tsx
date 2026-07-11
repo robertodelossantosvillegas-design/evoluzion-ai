@@ -34,13 +34,13 @@ export default function CafetoFooter() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="transition-colors hover:text-terracota-2" href="/cafeto/rutas/">
-                    Rutas
+                  <Link className="transition-colors hover:text-terracota-2" href="/cafeto/mapa/">
+                    Mapa del café
                   </Link>
                 </li>
                 <li>
-                  <Link className="transition-colors hover:text-terracota-2" href="/cafeto/retos/">
-                    Retos
+                  <Link className="transition-colors hover:text-terracota-2" href="/cafeto/comunidad/">
+                    Comunidad
                   </Link>
                 </li>
               </ul>

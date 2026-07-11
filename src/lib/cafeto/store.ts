@@ -1,13 +1,15 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from "react";
+import type { PostComunidad } from "./types";
 
 const EVENTO = "cafeto:sync";
 const VACIA: string[] = [];
+const SIN_POSTS: PostComunidad[] = [];
 
 /* Instantáneas cacheadas por clave: useSyncExternalStore exige que
    getSnapshot devuelva el mismo objeto mientras el dato no cambie. */
-const cache = new Map<string, { crudo: string | null; valor: string[] }>();
+const cache = new Map<string, { crudo: string | null; valor: unknown }>();
 
 function suscribir(alCambiar: () => void) {
   window.addEventListener(EVENTO, alCambiar);
@@ -18,27 +20,29 @@ function suscribir(alCambiar: () => void) {
   };
 }
 
-function leerLista(clave: string): string[] {
+function leerCrudo<T>(clave: string, porDefecto: T): T {
   let crudo: string | null = null;
   try {
     crudo = window.localStorage.getItem(clave);
   } catch {
-    return VACIA;
+    return porDefecto;
   }
   const guardado = cache.get(clave);
-  if (guardado && guardado.crudo === crudo) return guardado.valor;
+  if (guardado && guardado.crudo === crudo) return guardado.valor as T;
 
-  let valor: string[];
+  let valor: T;
   try {
-    valor = crudo ? (JSON.parse(crudo) as string[]) : VACIA;
+    valor = crudo ? (JSON.parse(crudo) as T) : porDefecto;
   } catch {
-    valor = VACIA;
+    valor = porDefecto;
   }
   cache.set(clave, { crudo, valor });
   return valor;
 }
 
-function escribir(clave: string, valor: string[]) {
+const leerLista = (clave: string) => leerCrudo<string[]>(clave, VACIA);
+
+function escribir(clave: string, valor: unknown) {
   try {
     window.localStorage.setItem(clave, JSON.stringify(valor));
   } catch {
@@ -96,6 +100,48 @@ export function useVisitados() {
     fueVisitado: (slug: string) => lista.includes(slug),
     listo,
   };
+}
+
+/** Sellos QR: visitas verificadas escaneando el código de la mesa. */
+export function useSellos() {
+  const { lista, listo } = useListaLocal("cafeto:sellos");
+  const sellar = useCallback((slug: string) => {
+    const actual = leerLista("cafeto:sellos");
+    if (!actual.includes(slug)) escribir("cafeto:sellos", [...actual, slug]);
+    const visitas = leerLista("cafeto:visitados");
+    if (!visitas.includes(slug)) escribir("cafeto:visitados", [...visitas, slug]);
+  }, []);
+  return { sellos: lista, sellar, tieneSello: (s: string) => lista.includes(s), listo };
+}
+
+/** Reacción "se me antoja" por post. */
+export function useAntojos() {
+  const { lista, alternar, listo } = useListaLocal("cafeto:antojos");
+  return { antojos: lista, alternarAntojo: alternar, meAntoja: (id: string) => lista.includes(id), listo };
+}
+
+/** Publicaciones propias del feed (check-ins), las más nuevas primero. */
+export function usePostsLocales() {
+  const posts = useSyncExternalStore(
+    suscribir,
+    () => leerCrudo<PostComunidad[]>("cafeto:posts", SIN_POSTS),
+    () => SIN_POSTS,
+  );
+  const publicarCheckin = useCallback((cafeSlug: string, conSello: boolean) => {
+    const actuales = leerCrudo<PostComunidad[]>("cafeto:posts", SIN_POSTS);
+    const nuevo: PostComunidad = {
+      id: `u${Date.now()}`,
+      tipo: "checkin",
+      quien: "Tú",
+      tono: 2,
+      cafe: cafeSlug,
+      hace: "ahora",
+      sello: conSello,
+      antojosBase: 0,
+    };
+    escribir("cafeto:posts", [nuevo, ...actuales].slice(0, 20));
+  }, []);
+  return { posts, publicarCheckin };
 }
 
 /** Paradas completadas por ruta: se guardan como "rutaSlug/cafeSlug". */
